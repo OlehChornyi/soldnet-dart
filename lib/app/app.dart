@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soldnet/app/app_router.dart';
+import 'package:soldnet/presentation/theme/app_colors.dart';
+import 'package:soldnet/presentation/theme/app_text_styles.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -30,6 +32,8 @@ class RedirectionPage extends ConsumerStatefulWidget {
 }
 
 class _RedirectionPageState extends ConsumerState<RedirectionPage> {
+  bool isAppNameShown = false;
+
   @override
   void initState() {
     super.initState();
@@ -38,6 +42,7 @@ class _RedirectionPageState extends ConsumerState<RedirectionPage> {
 
   void _redirect() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      setState(() => isAppNameShown = true);
       // final userNotirier = ref.read(storeUserProvider.notifier);
       // final token = await userNotirier.getTokenFromSharedPreferences();
       // await Future.delayed(Duration(seconds: 2));
@@ -51,20 +56,53 @@ class _RedirectionPageState extends ConsumerState<RedirectionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      // backgroundColor: AppColors.black,
+      backgroundColor: AppColors.bg,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // SvgPicture.asset(
-            //   'assets/icons/common/pear.svg',
-            //   width: 96,
-            //   height: 96,
-            //   colorFilter: ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
-            // ),
-            Text(
-              'SoldNet',
+            AnimatedOpacity(
+              duration: Duration(seconds: 2),
+              opacity: isAppNameShown ? 1 : 0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                child: Image.asset('assets/images/redirection_page/logo.png'),
+              ),
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  AnimatedSize(
+                    duration: Duration(seconds: 1),
+                    child: SizedBox(
+                      width: isAppNameShown ? 0 : screenWidth,
+                    ),
+                  ),
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      SizedBox(
+                          width: screenWidth,
+                          child: Image.asset(
+                              'assets/images/redirection_page/khaki.png')),
+                      Transform.rotate(
+                        angle: -85,
+                        child: Text(
+                          'SoldNet',
+                          style: AppTextStyles.s32w700(color: AppColors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
