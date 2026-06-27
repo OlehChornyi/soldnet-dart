@@ -1,4 +1,7 @@
 import 'package:flutter/widgets.dart';
+import 'package:soldnet/presentation/theme/app_colors.dart';
+import 'package:soldnet/presentation/theme/app_text_styles.dart';
+import 'package:soldnet/presentation/widgets/app/animations/app_animations_fade_in_list.dart';
 
 class HomeContainer extends StatefulWidget {
   const HomeContainer({super.key});
@@ -41,24 +44,35 @@ class _HomeContainerState extends State<HomeContainer> {
           SizedBox(
             height: paddingTop + 12,
           ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+          AppFadeInList<HomeItemRecord>(
             padding: EdgeInsets.zero,
-            itemCount: homeItems.length,
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 12,
-            ),
-            itemBuilder: (context, index) {
+            items: homeItems,
+            itemBuilder: (context, item, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
                   width: screenWidth - 32,
                   height: (screenWidth - 32) / 4,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       image: DecorationImage(
                           image: AssetImage(homeItems[index].bgImage))),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                          color: AppColors.black.withAlpha(150),
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Text(
+                        homeItems[index].label,
+                        style: AppTextStyles.s20w600(color: AppColors.white),
+                      ),
+                    ),
+                  ),
                 ),
               );
             },

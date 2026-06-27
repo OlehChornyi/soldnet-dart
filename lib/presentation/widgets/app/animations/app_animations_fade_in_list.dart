@@ -63,6 +63,8 @@ class _AppFadeInListState<T> extends State<AppFadeInList<T>> {
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return ListView.separated(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       key: ValueKey(widget.items.length),
       padding: widget.padding,
       controller: widget.controller,
