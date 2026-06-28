@@ -3,3 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soldnet/app/app.dart';
 
 void main() => runApp(ProviderScope(child: const App()));
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.06.28 | Add sounds to the app.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
