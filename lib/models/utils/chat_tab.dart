@@ -1,0 +1,1 @@
+enum ChatTab { groups, dialog }
