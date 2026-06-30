@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soldnet/models/utils/chat_tab.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_action_buttons.dart';
+import 'package:soldnet/presentation/widgets/chat/chat_header.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_text_field.dart';
 import 'package:soldnet/stores/store_chat.dart';
 
@@ -34,6 +35,13 @@ class _ChatContainerState extends ConsumerState<ChatContainer> {
     return SizedBox(
       child: Stack(
         children: [
+          AnimatedPositioned(
+              duration: Duration(milliseconds: 500),
+              width: screenWidth - 92,
+              height: 106,
+              left: _areActionButtonsVisible ? 16 : -screenWidth,
+              top: paddingTop + 8,
+              child: ChatHeader()),
           AnimatedPositioned(
               duration: Duration(milliseconds: 300),
               width: 52,
