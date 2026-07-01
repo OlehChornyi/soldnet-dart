@@ -43,7 +43,7 @@ class _AppNavBarItemState extends ConsumerState<AppNavBarItem> {
                   height: 38,
                   decoration: BoxDecoration(
                     color: widget.item.key == location
-                        ? AppColors.selectedNavBarItem
+                        ? AppColors.active
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(6),
                   ),
@@ -52,7 +52,11 @@ class _AppNavBarItemState extends ConsumerState<AppNavBarItem> {
                 const SizedBox(height: 4),
                 Text(
                   widget.item.label,
-                  style: AppTextStyles.s12w500(),
+                  style: AppTextStyles.s12w500(
+                    color: widget.item.key == location
+                        ? AppColors.bgLight
+                        : Colors.black,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],
