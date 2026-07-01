@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soldnet/models/utils/chat_tab.dart';
+import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_action_buttons.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_header.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_text_field.dart';
@@ -29,6 +30,7 @@ class _ChatContainerState extends ConsumerState<ChatContainer> {
     final paddingTop = MediaQuery.of(context).padding.top;
     final paddingBottom = MediaQuery.of(context).padding.bottom;
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     final chatState = ref.watch(storeChatProvider);
 
@@ -52,8 +54,21 @@ class _ChatContainerState extends ConsumerState<ChatContainer> {
           AnimatedPositioned(
               duration: Duration(milliseconds: 300),
               width: screenWidth - 32,
+              height: screenHeight - paddingBottom - paddingTop - 184,
+              right: chatState.tab == ChatTab.dialog ? 16 : -screenWidth,
+              bottom: paddingBottom + 64,
+              child: Container(
+                height: 200,
+                width: screenWidth - 32,
+                decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(12)),
+              )),
+          AnimatedPositioned(
+              duration: Duration(milliseconds: 300),
+              width: screenWidth - 32,
               height: 48,
-              left: chatState.tab == ChatTab.dialog ? 16 : -screenWidth,
+              right: chatState.tab == ChatTab.dialog ? 16 : -screenWidth,
               bottom: paddingBottom + 8,
               child: ChatTextField())
         ],
