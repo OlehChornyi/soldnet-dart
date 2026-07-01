@@ -11,5 +11,6 @@ void main() => runApp(ProviderScope(child: const App()));
 //            | DONE. 2. Profile: minimal profile.
 //     =D     | 3. Chat: textChat, audioCall, videoCall, groups.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// 2026.07.01 | Create animation on chat screen.
+// 2026.07.01 | DONE. 1. Create animation on chat screen.
+//            | DONE. 2. Change app icon and splashScreen.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

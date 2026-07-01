@@ -50,3 +50,15 @@ flutter:
     - assets/icons/general/
     - assets/icons/profile/
     - assets/sounds/guns/
+
+flutter_launcher_icons:
+  image_path: "assets/images/app_icon/icon.png" 
+  android: true
+  ios: true
+  remove_alpha_ios: true
+
+flutter_native_splash:
+  color: "#A5AB90"
+  image: "assets/images/splash_screen/splash.png"
+  android: true
+  ios: true
