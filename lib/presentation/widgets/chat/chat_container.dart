@@ -35,52 +35,50 @@ class _ChatContainerState extends ConsumerState<ChatContainer> {
 
     final chatState = ref.watch(storeChatProvider);
 
-    return SizedBox(
-      child: Stack(
-        children: [
-          AnimatedPositioned(
-              duration: Duration(milliseconds: 500),
-              width: screenWidth - 92,
-              height: 106,
-              left: _areActionButtonsVisible ? 16 : -screenWidth,
-              top: paddingTop + 8,
-              child: ChatHeader()),
-          AnimatedPositioned(
-              duration: Duration(milliseconds: 300),
-              width: 52,
-              height: 106,
-              right: _areActionButtonsVisible ? 16 : -68,
-              top: paddingTop + 8,
-              child: ChatActionButtons()),
-          AnimatedPositioned(
-              duration: Duration(milliseconds: 500),
-              width: screenWidth - 32,
-              height: screenHeight - paddingTop - 122,
-              left: _areActionButtonsVisible && chatState.tab != ChatTab.dialog
-                  ? 16
-                  : -screenWidth,
-              top: paddingTop + 122,
-              child: ChatGroups()),
-          AnimatedPositioned(
-              duration: Duration(milliseconds: 500),
-              width: screenWidth - 32,
-              height: screenHeight - paddingBottom - paddingTop - 184,
-              right: _areActionButtonsVisible && chatState.tab == ChatTab.dialog
-                  ? 16
-                  : -screenWidth,
-              bottom: paddingBottom + 64,
-              child: ChatDialog()),
-          AnimatedPositioned(
-              duration: Duration(milliseconds: 500),
-              width: screenWidth - 32,
-              height: 48,
-              right: _areActionButtonsVisible && chatState.tab == ChatTab.dialog
-                  ? 16
-                  : -screenWidth,
-              bottom: paddingBottom + 8,
-              child: ChatTextField())
-        ],
-      ),
+    return Stack(
+      children: [
+        AnimatedPositioned(
+            duration: Duration(milliseconds: 500),
+            width: screenWidth - 92,
+            height: 106,
+            left: _areActionButtonsVisible ? 16 : -screenWidth,
+            top: paddingTop + 8,
+            child: ChatHeader()),
+        AnimatedPositioned(
+            duration: Duration(milliseconds: 300),
+            width: 52,
+            height: 106,
+            right: _areActionButtonsVisible ? 16 : -68,
+            top: paddingTop + 8,
+            child: ChatActionButtons()),
+        AnimatedPositioned(
+            duration: Duration(milliseconds: 500),
+            width: screenWidth - 32,
+            height: screenHeight - paddingTop - 122,
+            left: _areActionButtonsVisible && chatState.tab != ChatTab.dialog
+                ? 16
+                : -screenWidth,
+            top: paddingTop + 122,
+            child: ChatGroups()),
+        AnimatedPositioned(
+            duration: Duration(milliseconds: 500),
+            width: screenWidth - 32,
+            height: screenHeight - paddingBottom - paddingTop - 184,
+            right: _areActionButtonsVisible && chatState.tab == ChatTab.dialog
+                ? 16
+                : -screenWidth,
+            bottom: paddingBottom + 64,
+            child: ChatDialog()),
+        AnimatedPositioned(
+            duration: Duration(milliseconds: 500),
+            width: screenWidth - 32,
+            height: 48,
+            right: _areActionButtonsVisible && chatState.tab == ChatTab.dialog
+                ? 16
+                : -screenWidth,
+            bottom: paddingBottom + 8,
+            child: ChatTextField())
+      ],
     );
   }
 }

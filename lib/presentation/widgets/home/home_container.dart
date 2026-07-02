@@ -1,169 +1,72 @@
-import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:soldnet/models/utils/home_tab.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
-import 'package:soldnet/presentation/theme/app_text_styles.dart';
-import 'package:soldnet/presentation/widgets/app/animations/app_animations_fade_in_list.dart';
+import 'package:soldnet/presentation/widgets/home/home_details.dart';
+import 'package:soldnet/presentation/widgets/home/home_sections.dart';
+import 'package:soldnet/stores/store_home.dart';
 
-class HomeContainer extends StatefulWidget {
+class HomeContainer extends ConsumerStatefulWidget {
   const HomeContainer({super.key});
 
   @override
-  State<HomeContainer> createState() => _HomeContainerState();
+  ConsumerState<HomeContainer> createState() => _HomeContainerState();
 }
 
-class _HomeContainerState extends State<HomeContainer> {
-  final _scrollController = ScrollController();
-  bool _isUserReachedPageBottom = false;
-
+class _HomeContainerState extends ConsumerState<HomeContainer> {
   @override
   void initState() {
     super.initState();
-
-    _scrollController.addListener(() {
-      if (_scrollController.position.atEdge) {
-        if (_scrollController.position.pixels ==
-            _scrollController.position.maxScrollExtent) {
-          setState(() => _isUserReachedPageBottom = true);
-        }
-        if (_scrollController.position.pixels ==
-            _scrollController.position.minScrollExtent) {
-          setState(() => _isUserReachedPageBottom = false);
-        }
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final paddingTop = MediaQuery.of(context).padding.top;
+    final paddingBottom = MediaQuery.of(context).padding.bottom;
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
-    return SingleChildScrollView(
-      controller: _scrollController,
-      child: Column(
-        children: [
-          SizedBox(
-            height: paddingTop + 12,
-          ),
-          AppFadeInList<HomeItemRecord>(
-            padding: EdgeInsets.zero,
-            items: homeItems,
-            itemBuilder: (context, item, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: FlipCard(
-                  back: Container(
-                    width: screenWidth - 32,
-                    height: (screenWidth - 32) / 4,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
+    final homeState = ref.watch(storeHomeProvider);
+    final homeNotifier = ref.read(storeHomeProvider.notifier);
+
+    return Stack(
+      children: [
+        AnimatedPositioned(
+            duration: Duration(milliseconds: 500),
+            width: screenWidth,
+            height: screenHeight,
+            left: homeState.tab == HomeTab.sections ? 0 : -screenWidth,
+            child: HomeSections()),
+        AnimatedPositioned(
+            duration: Duration(milliseconds: 500),
+            width: screenWidth,
+            height: screenHeight,
+            right: homeState.tab == HomeTab.details ? 0 : -screenWidth,
+            child: HomeDetails()),
+        AnimatedPositioned(
+            duration: Duration(milliseconds: 500),
+            width: 52,
+            height: 48,
+            right: homeState.tab == HomeTab.details ? 16 : -68,
+            bottom: paddingBottom + 8,
+            child: GestureDetector(
+              onTap: () => homeNotifier.setTab(HomeTab.sections),
+              child: Container(
+                  width: 52,
+                  height: 48,
+                  decoration: BoxDecoration(
                       color: AppColors.black,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: [
-                            SvgPicture.asset('assets/icons/general/mg.svg'),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width: screenWidth - 104,
-                                  child: Text(
-                                    homeItems[index].label,
-                                    style: AppTextStyles.s20w600(
-                                        color: AppColors.white),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  '[свайпніть ліворуч]',
-                                  style: AppTextStyles.s12w500(
-                                      color: AppColors.grey170),
-                                ),
-                              ],
-                            )
-                          ],
-                        )),
-                  ),
-                  front: Container(
-                    width: screenWidth - 32,
-                    height: (screenWidth - 32) / 4,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        image: DecorationImage(
-                            image: AssetImage(homeItems[index].bgImage))),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: AppColors.black.withAlpha(150),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Center(
-                          child: Icon(
-                            Icons.ads_click,
-                            color: AppColors.white,
-                          ),
-                        ),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.white,
                       ),
                     ),
-                  ),
-                ),
-              );
-            },
-          ),
-          AnimatedOpacity(
-            duration: Duration(milliseconds: 500),
-            opacity: _isUserReachedPageBottom ? 1 : 0,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, top: 100),
-              child: Image.asset(
-                'assets/images/redirection_page/kitty.png',
-                height: 200,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 200,
-          ),
-        ],
-      ),
+                  )),
+            )),
+      ],
     );
   }
 }
-
-typedef HomeItemRecord = ({String label, String bgImage});
-
-List<HomeItemRecord> get homeItems => [
-      (label: 'Ресурси', bgImage: 'assets/images/prints/snake.png'),
-      (
-        label: 'Державні програми підтримки ветеранів',
-        bgImage: 'assets/images/prints/zebra.png'
-      ),
-      (
-        label: 'Бізнеси засновані ветеранами',
-        bgImage: 'assets/images/prints/tiger.png'
-      ),
-      (label: 'Волонтерство', bgImage: 'assets/images/prints/cheeta.png'),
-      (
-        label: "Цивільне суспільство [кар'єра]",
-        bgImage: 'assets/images/prints/leopard.png'
-      ),
-      (
-        label: 'Саморозвиток [особистісне зростання]',
-        bgImage: 'assets/images/prints/leaves.png'
-      ),
-    ];

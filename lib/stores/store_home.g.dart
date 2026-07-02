@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'store_chat.dart';
+part of 'store_home.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,49 +9,49 @@ part of 'store_chat.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(StoreChat)
-final storeChatProvider = StoreChatProvider._();
+@ProviderFor(StoreHome)
+final storeHomeProvider = StoreHomeProvider._();
 
-final class StoreChatProvider
-    extends $NotifierProvider<StoreChat, StoreChatModel> {
-  StoreChatProvider._()
+final class StoreHomeProvider
+    extends $NotifierProvider<StoreHome, StoreHomeModel> {
+  StoreHomeProvider._()
       : super(
           from: null,
           argument: null,
           retry: null,
-          name: r'storeChatProvider',
+          name: r'storeHomeProvider',
           isAutoDispose: false,
           dependencies: null,
           $allTransitiveDependencies: null,
         );
 
   @override
-  String debugGetCreateSourceHash() => _$storeChatHash();
+  String debugGetCreateSourceHash() => _$storeHomeHash();
 
   @$internal
   @override
-  StoreChat create() => StoreChat();
+  StoreHome create() => StoreHome();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(StoreChatModel value) {
+  Override overrideWithValue(StoreHomeModel value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<StoreChatModel>(value),
+      providerOverride: $SyncValueProvider<StoreHomeModel>(value),
     );
   }
 }
 
-String _$storeChatHash() => r'9e6a5e8bf256a403959deddd051dc6f2f63ca142';
+String _$storeHomeHash() => r'a03104e513684eebab1208ed169b6ff291de1894';
 
-abstract class _$StoreChat extends $Notifier<StoreChatModel> {
-  StoreChatModel build();
+abstract class _$StoreHome extends $Notifier<StoreHomeModel> {
+  StoreHomeModel build();
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
-    final ref = this.ref as $Ref<StoreChatModel, StoreChatModel>;
+    final ref = this.ref as $Ref<StoreHomeModel, StoreHomeModel>;
     final element = ref.element as $ClassProviderElement<
-        AnyNotifier<StoreChatModel, StoreChatModel>,
-        StoreChatModel,
+        AnyNotifier<StoreHomeModel, StoreHomeModel>,
+        StoreHomeModel,
         Object?,
         Object?>;
     return element.handleCreate(ref, build);
