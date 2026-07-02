@@ -14,6 +14,16 @@ class AppTextStyles {
     );
   }
 
+  static TextStyle s16w400({Color? color}) {
+    return TextStyle(
+      fontSize: 16,
+      fontFamily: _primaryFont,
+      fontWeight: FontWeight.w400,
+      color: color ?? AppColors.black,
+      height: 1,
+    );
+  }
+
   static TextStyle s16w500({Color? color}) {
     return TextStyle(
       fontSize: 16,
