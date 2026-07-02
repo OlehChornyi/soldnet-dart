@@ -18,13 +18,38 @@ class ChatGroups extends StatelessWidget {
       itemBuilder: (context, index) {
         return Container(
           width: screenWidth - 32,
-          height: 100,
+          height: 88,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: AppColors.white,
+            color: AppColors.activeBrown,
           ),
-          child: Text('Чат № : $index'),
+          child: Row(
+            children: [
+              Container(
+                width: 72,
+                height: 72,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: AppColors.white),
+                child: Center(
+                  child: Icon(
+                    Icons.person_rounded,
+                    size: 48,
+                    color: AppColors.bgLight,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 12,
+              ),
+              Text('Чат № : $index'),
+              const Spacer(),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: AppColors.primary,
+              )
+            ],
+          ),
         );
       },
     );

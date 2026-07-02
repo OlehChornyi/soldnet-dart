@@ -3,6 +3,7 @@ import 'dart:ui';
 class AppColors {
   static const Color primary = Color.fromRGBO(94, 107, 73, 1);
   static const Color active = Color.fromRGBO(147, 164, 120, 1);
+  static const Color activeBrown = Color.fromRGBO(248, 216, 187, 1);
   static const Color error = Color.fromRGBO(192, 7, 7, 1);
   static const Color bg = Color.fromRGBO(165, 171, 144, 1);
   static const Color bgLight = Color.fromRGBO(234, 239, 214, 1);
