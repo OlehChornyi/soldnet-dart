@@ -54,7 +54,7 @@ class _HomeContainerState extends ConsumerState<HomeContainer> {
                   width: 52,
                   height: 48,
                   decoration: BoxDecoration(
-                      color: AppColors.black,
+                      color: AppColors.action2Active,
                       borderRadius: BorderRadius.circular(8)),
                   child: Center(
                     child: Padding(
