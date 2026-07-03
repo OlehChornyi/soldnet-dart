@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
 import 'package:soldnet/presentation/widgets/home/home_details_item.dart';
@@ -27,10 +28,30 @@ class HomeDetails extends ConsumerWidget {
             decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(12)),
-            child: Text(
-              homeState.selectedSection?.label ?? '',
-              style: AppTextStyles.s20w600(color: AppColors.white),
-              textAlign: TextAlign.center,
+            child: Column(
+              children: [
+                Text(
+                  homeState.selectedSection?.label ?? '',
+                  style: AppTextStyles.s20w600(color: AppColors.bgLight),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    for (int i = 0; i < 9; i++) ...{
+                      if (i != 9) const SizedBox(width: 8),
+                      SvgPicture.asset(
+                        'assets/icons/home/icon_${i + 1}.svg',
+                        colorFilter: ColorFilter.mode(
+                            AppColors.bgLight, BlendMode.srcIn),
+                      )
+                    }
+                  ],
+                )
+              ],
             ),
           ),
         ),

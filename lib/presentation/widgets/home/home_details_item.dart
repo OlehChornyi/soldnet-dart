@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:soldnet/models/data/home_sections.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
@@ -30,8 +31,8 @@ class HomeDetailsItem extends StatelessWidget {
         children: [
           Container(
             width: screenWidth - 32,
-            constraints: BoxConstraints(minHeight: 40),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            constraints: BoxConstraints(minHeight: 36),
+            padding: const EdgeInsets.only(right: 16),
             decoration: BoxDecoration(
                 color: AppColors.black,
                 borderRadius: BorderRadius.only(
@@ -39,10 +40,30 @@ class HomeDetailsItem extends StatelessWidget {
                     topRight: Radius.circular(10))),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text(
-                detail.label,
-                textAlign: TextAlign.left,
-                style: AppTextStyles.s16w700(color: AppColors.white),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6),
+                child: Row(
+                  children: [
+                    const SizedBox(width: 4),
+                    SvgPicture.asset(
+                      'assets/icons/home/target.svg',
+                      colorFilter: ColorFilter.mode(
+                        AppColors.white,
+                        BlendMode.srcIn,
+                      ),
+                      width: 18,
+                    ),
+                    const SizedBox(width: 4),
+                    SizedBox(
+                      width: screenWidth - 76,
+                      child: Text(
+                        detail.label,
+                        textAlign: TextAlign.left,
+                        style: AppTextStyles.s16w700(color: AppColors.white),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
