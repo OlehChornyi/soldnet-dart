@@ -21,6 +21,7 @@ class HomeSectionsBack extends ConsumerWidget {
     return GestureDetector(
       onHorizontalDragEnd: (details) {
         if (details.primaryVelocity! < 0) {
+          homeNotifier.setSelectedSection(homeSections[index]);
           homeNotifier.setTab(HomeTab.details);
         }
       },

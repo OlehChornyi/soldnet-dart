@@ -41,7 +41,7 @@ final class StoreHomeProvider
   }
 }
 
-String _$storeHomeHash() => r'a03104e513684eebab1208ed169b6ff291de1894';
+String _$storeHomeHash() => r'8e58b0880a63ead55e343aee2551d9890229e5ad';
 
 abstract class _$StoreHome extends $Notifier<StoreHomeModel> {
   StoreHomeModel build();

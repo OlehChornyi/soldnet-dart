@@ -15,6 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$StoreHomeModel {
   HomeTab get tab;
+  HomeSection? get selectedSection;
 
   /// Create a copy of StoreHomeModel
   /// with the given fields replaced by the non-null parameter values.
@@ -29,15 +30,17 @@ mixin _$StoreHomeModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is StoreHomeModel &&
-            (identical(other.tab, tab) || other.tab == tab));
+            (identical(other.tab, tab) || other.tab == tab) &&
+            (identical(other.selectedSection, selectedSection) ||
+                other.selectedSection == selectedSection));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tab);
+  int get hashCode => Object.hash(runtimeType, tab, selectedSection);
 
   @override
   String toString() {
-    return 'StoreHomeModel(tab: $tab)';
+    return 'StoreHomeModel(tab: $tab, selectedSection: $selectedSection)';
   }
 }
 
@@ -47,7 +50,7 @@ abstract mixin class $StoreHomeModelCopyWith<$Res> {
           StoreHomeModel value, $Res Function(StoreHomeModel) _then) =
       _$StoreHomeModelCopyWithImpl;
   @useResult
-  $Res call({HomeTab tab});
+  $Res call({HomeTab tab, HomeSection? selectedSection});
 }
 
 /// @nodoc
@@ -64,12 +67,17 @@ class _$StoreHomeModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? tab = null,
+    Object? selectedSection = freezed,
   }) {
     return _then(_self.copyWith(
       tab: null == tab
           ? _self.tab
           : tab // ignore: cast_nullable_to_non_nullable
               as HomeTab,
+      selectedSection: freezed == selectedSection
+          ? _self.selectedSection
+          : selectedSection // ignore: cast_nullable_to_non_nullable
+              as HomeSection?,
     ));
   }
 }
@@ -167,13 +175,13 @@ extension StoreHomeModelPatterns on StoreHomeModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(HomeTab tab)? $default, {
+    TResult Function(HomeTab tab, HomeSection? selectedSection)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _StoreHomeModel() when $default != null:
-        return $default(_that.tab);
+        return $default(_that.tab, _that.selectedSection);
       case _:
         return orElse();
     }
@@ -194,12 +202,12 @@ extension StoreHomeModelPatterns on StoreHomeModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(HomeTab tab) $default,
+    TResult Function(HomeTab tab, HomeSection? selectedSection) $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreHomeModel():
-        return $default(_that.tab);
+        return $default(_that.tab, _that.selectedSection);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -219,12 +227,12 @@ extension StoreHomeModelPatterns on StoreHomeModel {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(HomeTab tab)? $default,
+    TResult? Function(HomeTab tab, HomeSection? selectedSection)? $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreHomeModel() when $default != null:
-        return $default(_that.tab);
+        return $default(_that.tab, _that.selectedSection);
       case _:
         return null;
     }
@@ -234,10 +242,12 @@ extension StoreHomeModelPatterns on StoreHomeModel {
 /// @nodoc
 
 class _StoreHomeModel implements StoreHomeModel {
-  const _StoreHomeModel({required this.tab});
+  const _StoreHomeModel({required this.tab, this.selectedSection});
 
   @override
   final HomeTab tab;
+  @override
+  final HomeSection? selectedSection;
 
   /// Create a copy of StoreHomeModel
   /// with the given fields replaced by the non-null parameter values.
@@ -252,15 +262,17 @@ class _StoreHomeModel implements StoreHomeModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _StoreHomeModel &&
-            (identical(other.tab, tab) || other.tab == tab));
+            (identical(other.tab, tab) || other.tab == tab) &&
+            (identical(other.selectedSection, selectedSection) ||
+                other.selectedSection == selectedSection));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tab);
+  int get hashCode => Object.hash(runtimeType, tab, selectedSection);
 
   @override
   String toString() {
-    return 'StoreHomeModel(tab: $tab)';
+    return 'StoreHomeModel(tab: $tab, selectedSection: $selectedSection)';
   }
 }
 
@@ -272,7 +284,7 @@ abstract mixin class _$StoreHomeModelCopyWith<$Res>
       __$StoreHomeModelCopyWithImpl;
   @override
   @useResult
-  $Res call({HomeTab tab});
+  $Res call({HomeTab tab, HomeSection? selectedSection});
 }
 
 /// @nodoc
@@ -289,12 +301,17 @@ class __$StoreHomeModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? tab = null,
+    Object? selectedSection = freezed,
   }) {
     return _then(_StoreHomeModel(
       tab: null == tab
           ? _self.tab
           : tab // ignore: cast_nullable_to_non_nullable
               as HomeTab,
+      selectedSection: freezed == selectedSection
+          ? _self.selectedSection
+          : selectedSection // ignore: cast_nullable_to_non_nullable
+              as HomeSection?,
     ));
   }
 }
