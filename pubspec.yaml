@@ -26,6 +26,7 @@ dependencies:
   connectivity_plus: ^7.1.1
   flip_card: ^0.7.0
   audioplayers: ^6.8.1
+  carousel_slider: ^5.1.2
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +48,7 @@ flutter:
     - assets/images/redirection_page/
     - assets/images/profile/
     - assets/images/chat/
+    - assets/images/home/
     - assets/icons/
     - assets/icons/general/
     - assets/icons/profile/

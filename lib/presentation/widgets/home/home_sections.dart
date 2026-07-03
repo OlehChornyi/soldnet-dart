@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:soldnet/models/data/home_sections.dart';
@@ -15,6 +16,14 @@ class HomeSections extends StatefulWidget {
 class _HomeSectionsState extends State<HomeSections> {
   final _scrollController = ScrollController();
   bool _isUserReachedPageBottom = false;
+
+  final List<String> cItems = [
+    'assets/images/home/kitty.png',
+    'assets/images/home/pegas.png',
+    'assets/images/home/draco.png',
+    'assets/images/home/unicorn.png',
+    'assets/images/home/draco_2.png',
+  ];
 
   @override
   void initState() {
@@ -37,6 +46,7 @@ class _HomeSectionsState extends State<HomeSections> {
   @override
   Widget build(BuildContext context) {
     final paddingTop = MediaQuery.of(context).padding.top;
+    final paddingBottom = MediaQuery.of(context).padding.bottom;
 
     return SingleChildScrollView(
       controller: _scrollController,
@@ -58,19 +68,25 @@ class _HomeSectionsState extends State<HomeSections> {
             },
           ),
           AnimatedOpacity(
-            duration: Duration(milliseconds: 500),
-            opacity: _isUserReachedPageBottom ? 1 : 0,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, top: 100),
-              child: Image.asset(
-                'assets/images/redirection_page/kitty.png',
-                height: 200,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 200,
-          ),
+              duration: Duration(milliseconds: 500),
+              opacity: _isUserReachedPageBottom ? 1 : 0,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    height: 200,
+                    viewportFraction: 0.45,
+                    enlargeCenterPage: true,
+                  ),
+                  items: cItems.map((item) {
+                    return Image.asset(
+                      item,
+                      height: 200,
+                    );
+                  }).toList(),
+                ),
+              )),
+          SizedBox(height: paddingBottom + 48),
         ],
       ),
     );
