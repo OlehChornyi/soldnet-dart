@@ -1,21 +1,18 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:soldnet/models/utils/home_tab.dart';
-import 'package:soldnet/presentation/theme/app_colors.dart';
-import 'package:soldnet/presentation/theme/app_text_styles.dart';
+import 'package:soldnet/models/data/home_sections.dart';
 import 'package:soldnet/presentation/widgets/app/animations/app_animations_fade_in_list.dart';
-import 'package:soldnet/stores/store_home.dart';
+import 'package:soldnet/presentation/widgets/home/home_sections_back.dart';
+import 'package:soldnet/presentation/widgets/home/home_sections_front.dart';
 
-class HomeSections extends ConsumerStatefulWidget {
+class HomeSections extends StatefulWidget {
   const HomeSections({super.key});
 
   @override
-  ConsumerState<HomeSections> createState() => _HomeSectionsState();
+  State<HomeSections> createState() => _HomeSectionsState();
 }
 
-class _HomeSectionsState extends ConsumerState<HomeSections> {
+class _HomeSectionsState extends State<HomeSections> {
   final _scrollController = ScrollController();
   bool _isUserReachedPageBottom = false;
 
@@ -40,9 +37,6 @@ class _HomeSectionsState extends ConsumerState<HomeSections> {
   @override
   Widget build(BuildContext context) {
     final paddingTop = MediaQuery.of(context).padding.top;
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    final homeNotifier = ref.read(storeHomeProvider.notifier);
 
     return SingleChildScrollView(
       controller: _scrollController,
@@ -51,89 +45,15 @@ class _HomeSectionsState extends ConsumerState<HomeSections> {
           SizedBox(
             height: paddingTop + 12,
           ),
-          AppFadeInList<HomeItemRecord>(
+          AppFadeInList<HomeSection>(
             padding: EdgeInsets.zero,
-            items: homeItems,
+            items: homeSections,
             itemBuilder: (context, item, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: FlipCard(
-                  back: GestureDetector(
-                    onHorizontalDragEnd: (details) {
-                      if (details.primaryVelocity! < 0) {
-                        homeNotifier.setTab(HomeTab.details);
-                      }
-                    },
-                    child: Container(
-                      width: screenWidth - 32,
-                      height: (screenWidth - 32) / 4,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: AppColors.black,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            children: [
-                              SvgPicture.asset('assets/icons/general/mg.svg'),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: screenWidth - 104,
-                                    child: Text(
-                                      homeItems[index].label,
-                                      style: AppTextStyles.s20w600(
-                                          color: AppColors.white),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 4,
-                                  ),
-                                  Text(
-                                    '[свайпніть ліворуч]',
-                                    style: AppTextStyles.s12w500(
-                                        color: AppColors.grey170),
-                                  ),
-                                ],
-                              )
-                            ],
-                          )),
-                    ),
-                  ),
-                  front: Container(
-                    width: screenWidth - 32,
-                    height: (screenWidth - 32) / 4,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        image: DecorationImage(
-                            image: AssetImage(homeItems[index].bgImage))),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: AppColors.black.withAlpha(150),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Center(
-                          child: Icon(
-                            Icons.ads_click,
-                            color: AppColors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                    back: HomeSectionsBack(index: index),
+                    front: HomeSectionsFront(index: index)),
               );
             },
           ),
@@ -156,26 +76,3 @@ class _HomeSectionsState extends ConsumerState<HomeSections> {
     );
   }
 }
-
-typedef HomeItemRecord = ({String label, String bgImage});
-
-List<HomeItemRecord> get homeItems => [
-      (label: 'Ресурси', bgImage: 'assets/images/prints/snake.png'),
-      (
-        label: 'Державні програми підтримки ветеранів',
-        bgImage: 'assets/images/prints/zebra.png'
-      ),
-      (
-        label: 'Бізнеси засновані ветеранами',
-        bgImage: 'assets/images/prints/tiger.png'
-      ),
-      (label: 'Волонтерство', bgImage: 'assets/images/prints/cheeta.png'),
-      (
-        label: "Цивільне суспільство [кар'єра]",
-        bgImage: 'assets/images/prints/leopard.png'
-      ),
-      (
-        label: 'Саморозвиток [особистісне зростання]',
-        bgImage: 'assets/images/prints/leaves.png'
-      ),
-    ];
