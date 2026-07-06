@@ -73,7 +73,6 @@ class StoreUser extends _$StoreUser {
 
   Future<void> getUserAccount() async {
     final response = await ref.read(requestUsersAccountGetProvider.future);
-
     state = state.copyWith(user: response.user);
   }
 }

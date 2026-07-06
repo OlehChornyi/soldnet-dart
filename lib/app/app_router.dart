@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:soldnet/app/app.dart';
 import 'package:soldnet/presentation/pages/chat_page.dart' show ChatPage;
 import 'package:soldnet/presentation/pages/home_page.dart';
+import 'package:soldnet/presentation/pages/login_page.dart';
 import 'package:soldnet/presentation/pages/profile_page.dart';
 import 'package:soldnet/presentation/widgets/app/nav_bar/app_nav_bar.dart';
 
@@ -17,6 +18,7 @@ class ScreenPaths {
   static String home = '/home';
   static String chat = '/chat';
   static String profile = '/profile';
+  static String login = '/login';
 }
 
 final GoRouter router = GoRouter(
@@ -40,6 +42,7 @@ final GoRouter router = GoRouter(
         AppRoute(ScreenPaths.profile, (_) => ProfilePage(), noTransition: true),
       ],
     ),
+    AppRoute(ScreenPaths.login, (_) => const LoginPage()),
   ],
 );
 
