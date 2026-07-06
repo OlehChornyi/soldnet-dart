@@ -17,3 +17,16 @@ void main() => runApp(ProviderScope(child: const App()));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.07.04 | Write step by step guide of what should be done.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.07.06 | SERVER DEVELOPMENT AND INTEGRATION:
+//            | 1. Authorization.
+//            | 2. Chat: find ws or rest api.
+//            | 3. Implement ws or rest api.
+//            | 4. Images: integrate to profile and chat.
+//            | 5. Videos: integrate to chat.
+//            | - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//            | AUDIO and VIDEO CALL:
+//            | 1. Find how audio calls are done and ask OpenIA.
+//            | 2. Implement audio calls in web and mobile applications.
+//            | 3. Find how video calls are done and ask OpenIA.
+//            | 4. Implement video calls in web and mobile applications.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
