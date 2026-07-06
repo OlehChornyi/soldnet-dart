@@ -32,7 +32,7 @@ mixin _$StoreUserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is StoreUserModel &&
-            const DeepCollectionEquality().equals(other.user, user) &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.serverMessage, serverMessage) ||
                 other.serverMessage == serverMessage) &&
@@ -42,11 +42,7 @@ mixin _$StoreUserModel {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(user),
-      token,
-      serverMessage,
-      isServerMessageShown);
+      runtimeType, user, token, serverMessage, isServerMessageShown);
 
   @override
   String toString() {
@@ -65,6 +61,8 @@ abstract mixin class $StoreUserModelCopyWith<$Res> {
       String token,
       String serverMessage,
       bool isServerMessageShown});
+
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -103,6 +101,20 @@ class _$StoreUserModelCopyWithImpl<$Res>
           : isServerMessageShown // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
+  }
+
+  /// Create a copy of StoreUserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get user {
+    if (_self.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_self.user!, (value) {
+      return _then(_self.copyWith(user: value));
+    });
   }
 }
 
@@ -303,7 +315,7 @@ class _StoreUserModel implements StoreUserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _StoreUserModel &&
-            const DeepCollectionEquality().equals(other.user, user) &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.serverMessage, serverMessage) ||
                 other.serverMessage == serverMessage) &&
@@ -313,11 +325,7 @@ class _StoreUserModel implements StoreUserModel {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(user),
-      token,
-      serverMessage,
-      isServerMessageShown);
+      runtimeType, user, token, serverMessage, isServerMessageShown);
 
   @override
   String toString() {
@@ -338,6 +346,9 @@ abstract mixin class _$StoreUserModelCopyWith<$Res>
       String token,
       String serverMessage,
       bool isServerMessageShown});
+
+  @override
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -376,6 +387,20 @@ class __$StoreUserModelCopyWithImpl<$Res>
           : isServerMessageShown // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
+  }
+
+  /// Create a copy of StoreUserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get user {
+    if (_self.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_self.user!, (value) {
+      return _then(_self.copyWith(user: value));
+    });
   }
 }
 
