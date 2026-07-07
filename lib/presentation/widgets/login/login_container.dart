@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:soldnet/app/app_router.dart';
 import 'package:soldnet/models/utils/login_tab.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
@@ -67,7 +69,7 @@ class _LoginContainerState extends ConsumerState<LoginContainer> {
                   text: userState.loginTab == LoginTab.signup
                       ? 'Зареєструвати акаунт'
                       : 'Увійти в існуючий',
-                  onTap: () {}),
+                  onTap: () => context.go(ScreenPaths.home)),
               const SizedBox(height: 24),
               Text(
                 'SoldNet',
