@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
 import 'package:soldnet/presentation/widgets/app/button/app_button_circle.dart';
+import 'package:soldnet/presentation/widgets/login/login_button.dart';
 
 class LoginContainer extends StatelessWidget {
   const LoginContainer({super.key});
@@ -20,7 +21,18 @@ class LoginContainer extends StatelessWidget {
             ),
             Image.asset('assets/images/home/draco.png'),
             Row(
-              children: [],
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LoginButton(
+                  isSignUpButton: true,
+                ),
+                LoginButton(
+                  isSignUpButton: false,
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 12,
             ),
             Text(
               'SoldNet',

@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soldnet/models/entities/user.dart';
+import 'package:soldnet/models/utils/login_tab.dart';
 import 'package:soldnet/services/api/requests/request_users_account_get.dart';
 import 'package:soldnet/services/api/requests/request_users_sign_in.dart';
 import 'package:soldnet/services/api/requests/request_users_sign_up.dart';
@@ -12,6 +13,7 @@ part 'store_user.freezed.dart';
 @freezed
 abstract class StoreUserModel with _$StoreUserModel {
   const factory StoreUserModel({
+    required LoginTab loginTab,
     required User? user,
     required String token,
     required String serverMessage,
@@ -23,6 +25,7 @@ abstract class StoreUserModel with _$StoreUserModel {
 class StoreUser extends _$StoreUser {
   @override
   StoreUserModel build() => StoreUserModel(
+        loginTab: LoginTab.signup,
         user: null,
         token: '',
         serverMessage: '',
@@ -74,5 +77,9 @@ class StoreUser extends _$StoreUser {
   Future<void> getUserAccount() async {
     final response = await ref.read(requestUsersAccountGetProvider.future);
     state = state.copyWith(user: response.user);
+  }
+
+  void setLoginTab(LoginTab tab) {
+    state = state.copyWith(loginTab: tab);
   }
 }

@@ -14,6 +14,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$StoreUserModel {
+  LoginTab get loginTab;
   User? get user;
   String get token;
   String get serverMessage;
@@ -32,6 +33,8 @@ mixin _$StoreUserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is StoreUserModel &&
+            (identical(other.loginTab, loginTab) ||
+                other.loginTab == loginTab) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.serverMessage, serverMessage) ||
@@ -42,11 +45,11 @@ mixin _$StoreUserModel {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, user, token, serverMessage, isServerMessageShown);
+      runtimeType, loginTab, user, token, serverMessage, isServerMessageShown);
 
   @override
   String toString() {
-    return 'StoreUserModel(user: $user, token: $token, serverMessage: $serverMessage, isServerMessageShown: $isServerMessageShown)';
+    return 'StoreUserModel(loginTab: $loginTab, user: $user, token: $token, serverMessage: $serverMessage, isServerMessageShown: $isServerMessageShown)';
   }
 }
 
@@ -57,7 +60,8 @@ abstract mixin class $StoreUserModelCopyWith<$Res> {
       _$StoreUserModelCopyWithImpl;
   @useResult
   $Res call(
-      {User? user,
+      {LoginTab loginTab,
+      User? user,
       String token,
       String serverMessage,
       bool isServerMessageShown});
@@ -78,12 +82,17 @@ class _$StoreUserModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? loginTab = null,
     Object? user = freezed,
     Object? token = null,
     Object? serverMessage = null,
     Object? isServerMessageShown = null,
   }) {
     return _then(_self.copyWith(
+      loginTab: null == loginTab
+          ? _self.loginTab
+          : loginTab // ignore: cast_nullable_to_non_nullable
+              as LoginTab,
       user: freezed == user
           ? _self.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -211,16 +220,16 @@ extension StoreUserModelPatterns on StoreUserModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(User? user, String token, String serverMessage,
-            bool isServerMessageShown)?
+    TResult Function(LoginTab loginTab, User? user, String token,
+            String serverMessage, bool isServerMessageShown)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _StoreUserModel() when $default != null:
-        return $default(_that.user, _that.token, _that.serverMessage,
-            _that.isServerMessageShown);
+        return $default(_that.loginTab, _that.user, _that.token,
+            _that.serverMessage, _that.isServerMessageShown);
       case _:
         return orElse();
     }
@@ -241,15 +250,15 @@ extension StoreUserModelPatterns on StoreUserModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(User? user, String token, String serverMessage,
-            bool isServerMessageShown)
+    TResult Function(LoginTab loginTab, User? user, String token,
+            String serverMessage, bool isServerMessageShown)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreUserModel():
-        return $default(_that.user, _that.token, _that.serverMessage,
-            _that.isServerMessageShown);
+        return $default(_that.loginTab, _that.user, _that.token,
+            _that.serverMessage, _that.isServerMessageShown);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -269,15 +278,15 @@ extension StoreUserModelPatterns on StoreUserModel {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(User? user, String token, String serverMessage,
-            bool isServerMessageShown)?
+    TResult? Function(LoginTab loginTab, User? user, String token,
+            String serverMessage, bool isServerMessageShown)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreUserModel() when $default != null:
-        return $default(_that.user, _that.token, _that.serverMessage,
-            _that.isServerMessageShown);
+        return $default(_that.loginTab, _that.user, _that.token,
+            _that.serverMessage, _that.isServerMessageShown);
       case _:
         return null;
     }
@@ -288,11 +297,14 @@ extension StoreUserModelPatterns on StoreUserModel {
 
 class _StoreUserModel implements StoreUserModel {
   const _StoreUserModel(
-      {required this.user,
+      {required this.loginTab,
+      required this.user,
       required this.token,
       required this.serverMessage,
       required this.isServerMessageShown});
 
+  @override
+  final LoginTab loginTab;
   @override
   final User? user;
   @override
@@ -315,6 +327,8 @@ class _StoreUserModel implements StoreUserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _StoreUserModel &&
+            (identical(other.loginTab, loginTab) ||
+                other.loginTab == loginTab) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.serverMessage, serverMessage) ||
@@ -325,11 +339,11 @@ class _StoreUserModel implements StoreUserModel {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, user, token, serverMessage, isServerMessageShown);
+      runtimeType, loginTab, user, token, serverMessage, isServerMessageShown);
 
   @override
   String toString() {
-    return 'StoreUserModel(user: $user, token: $token, serverMessage: $serverMessage, isServerMessageShown: $isServerMessageShown)';
+    return 'StoreUserModel(loginTab: $loginTab, user: $user, token: $token, serverMessage: $serverMessage, isServerMessageShown: $isServerMessageShown)';
   }
 }
 
@@ -342,7 +356,8 @@ abstract mixin class _$StoreUserModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {User? user,
+      {LoginTab loginTab,
+      User? user,
       String token,
       String serverMessage,
       bool isServerMessageShown});
@@ -364,12 +379,17 @@ class __$StoreUserModelCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
+    Object? loginTab = null,
     Object? user = freezed,
     Object? token = null,
     Object? serverMessage = null,
     Object? isServerMessageShown = null,
   }) {
     return _then(_StoreUserModel(
+      loginTab: null == loginTab
+          ? _self.loginTab
+          : loginTab // ignore: cast_nullable_to_non_nullable
+              as LoginTab,
       user: freezed == user
           ? _self.user
           : user // ignore: cast_nullable_to_non_nullable
