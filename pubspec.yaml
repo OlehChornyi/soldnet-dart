@@ -54,6 +54,7 @@ flutter:
     - assets/icons/general/
     - assets/icons/profile/
     - assets/icons/home/
+    - assets/icons/common/
     - assets/sounds/guns/
 
 flutter_launcher_icons:

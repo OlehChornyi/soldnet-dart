@@ -26,7 +26,9 @@ class AppButtonAction extends StatelessWidget {
           color: buttonColor ?? AppColors.primary,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Center(child: Text(text, style: AppTextStyles.s16w500())),
+        child: Center(
+            child: Text(text,
+                style: AppTextStyles.s16w500(color: AppColors.white))),
       ),
     );
   }
