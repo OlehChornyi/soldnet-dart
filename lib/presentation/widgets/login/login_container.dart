@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:soldnet/presentation/theme/app_colors.dart';
+import 'package:soldnet/presentation/theme/app_text_styles.dart';
+import 'package:soldnet/presentation/widgets/app/button/app_button_circle.dart';
 
 class LoginContainer extends StatelessWidget {
   const LoginContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    final paddingTop = MediaQuery.of(context).padding.top;
+
+    return Scaffold(
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: paddingTop + 24,
+            ),
+            Image.asset('assets/images/home/draco.png'),
+            Row(
+              children: [],
+            ),
+            Text(
+              'SoldNet',
+              style: AppTextStyles.s20w600(color: AppColors.primary),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

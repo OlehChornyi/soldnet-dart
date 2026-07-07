@@ -6,6 +6,7 @@ import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
 import 'package:soldnet/presentation/theme/app_theme.dart';
 import 'package:soldnet/presentation/widgets/app/button/app_button_outlined.dart';
+import 'package:soldnet/stores/store_user.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -49,6 +50,18 @@ class _RedirectionPageState extends ConsumerState<RedirectionPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       setState(() => _isAppNameShown = true);
     });
+  }
+
+  Future<void> _onRedirectionButtonTap() async {
+    // await _player
+    //     .play(AssetSource('sounds/guns/revolver.wav'));
+    final userNotifier = ref.read(storeUserProvider.notifier);
+    final token = await userNotifier.getTokenFromSharedPreferences();
+    if (token.isNotEmpty) {
+      router.go(ScreenPaths.home);
+    } else {
+      router.go(ScreenPaths.login);
+    }
   }
 
   @override
@@ -110,13 +123,7 @@ class _RedirectionPageState extends ConsumerState<RedirectionPage> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: AppButtonOutlined(
-                    text: 'Go Go Go',
-                    onTap: () async {
-                      // await _player
-                      //     .play(AssetSource('sounds/guns/revolver.wav'));
-
-                      router.go(ScreenPaths.home);
-                    }),
+                    text: 'Go Go Go', onTap: _onRedirectionButtonTap),
               ),
             )
           ],
