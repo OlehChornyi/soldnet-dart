@@ -38,6 +38,11 @@ class StoreUser extends _$StoreUser {
     return token;
   }
 
+  Future<void> logOut() async {
+    await SharedPrefs.saveAuthToken('');
+    state = state.copyWith(token: 'token');
+  }
+
   Future<void> signUp(String email, String password) async {
     final response = await ref.read(
       requestSignUpProvider(
