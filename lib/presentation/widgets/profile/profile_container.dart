@@ -19,6 +19,7 @@ class ProfileContainer extends StatelessWidget {
         const ProfileBody(),
         const SizedBox(height: 12),
         const ProfileScroll(),
+        const SizedBox(height: 24),
         const ProfileLogout()
       ],
     );
