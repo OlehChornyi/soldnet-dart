@@ -20,6 +20,7 @@ class _ProfileScrollState extends ConsumerState<ProfileScroll> {
   final double _speed = 20;
   final double _itemWidth = 80;
   final int _repetition = 100;
+  bool _isScrollShown = false;
 
   @override
   void initState() {
@@ -29,6 +30,9 @@ class _ProfileScrollState extends ConsumerState<ProfileScroll> {
     );
 
     _ticker = Ticker(_tick)..start();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() => _isScrollShown = true);
+    });
   }
 
   void _tick(Duration elapsed) {
@@ -47,41 +51,62 @@ class _ProfileScrollState extends ConsumerState<ProfileScroll> {
   @override
   Widget build(BuildContext context) {
     final chatNotifier = ref.read(storeChatProvider.notifier);
+    final screenWidth = MediaQuery.of(context).size.width;
 
-    return SizedBox(
-      height: 48,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.zero,
-        controller: _controller,
-        itemBuilder: (context, index) {
-          final bg = DialogBg.values[index % scrollOptions.length];
-          final option = scrollOptions[index % scrollOptions.length];
-          return FlipCard(
-            onFlipDone: (isFront) =>
-                isFront ? chatNotifier.setDialogBg(bg) : null,
-            back: Container(
-              width: 60,
-              height: 60,
-              color: AppColors.black,
-              child: Center(
-                child: SvgPicture.asset(
-                  option.back,
-                  colorFilter:
-                      ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-                ),
-              ),
+    return Column(
+      children: [
+        const Divider(
+          indent: 16,
+          endIndent: 16,
+          color: AppColors.primary,
+        ),
+        AnimatedContainer(
+          duration: Duration(seconds: 1),
+          width: screenWidth,
+          height: _isScrollShown ? 48 : 0,
+          child: SizedBox(
+            height: 48,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.zero,
+              controller: _controller,
+              itemBuilder: (context, index) {
+                final bg = DialogBg.values[index % scrollOptions.length];
+                final option = scrollOptions[index % scrollOptions.length];
+                return FlipCard(
+                  onFlipDone: (isFront) =>
+                      isFront ? chatNotifier.setDialogBg(bg) : null,
+                  back: Container(
+                    width: 60,
+                    height: 60,
+                    color: AppColors.black,
+                    child: Center(
+                      child: SvgPicture.asset(
+                        option.back,
+                        colorFilter:
+                            ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+                      ),
+                    ),
+                  ),
+                  front: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        image:
+                            DecorationImage(image: AssetImage(option.front))),
+                  ),
+                );
+              },
             ),
-            front: Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  image: DecorationImage(image: AssetImage(option.front))),
-            ),
-          );
-        },
-      ),
+          ),
+        ),
+        const Divider(
+          indent: 16,
+          endIndent: 16,
+          color: AppColors.primary,
+        ),
+      ],
     );
   }
 }
