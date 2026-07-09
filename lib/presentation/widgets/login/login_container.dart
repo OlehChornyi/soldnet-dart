@@ -27,6 +27,8 @@ class _LoginContainerState extends ConsumerState<LoginContainer> {
   @override
   Widget build(BuildContext context) {
     final userState = ref.watch(storeUserProvider);
+    final userNotifier = ref.read(storeUserProvider.notifier);
+
     final paddingTop = MediaQuery.of(context).padding.top;
     final paddingBottom = MediaQuery.of(context).padding.bottom;
 
@@ -69,7 +71,11 @@ class _LoginContainerState extends ConsumerState<LoginContainer> {
                   text: userState.loginTab == LoginTab.signup
                       ? 'Зареєструвати акаунт'
                       : 'Увійти в існуючий',
-                  onTap: () => context.go(ScreenPaths.home)),
+                  onTap: () async {
+                    // await userNotifier.signUp(_emailController.text.trim(),
+                    //     _passwordController.text.trim());
+                    context.go(ScreenPaths.home);
+                  }),
               const SizedBox(height: 24),
               Text(
                 'SoldNet',

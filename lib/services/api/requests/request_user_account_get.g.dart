@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'request_users_account_get.dart';
+part of 'request_user_account_get.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_ResponseUsersAccountGet _$ResponseUsersAccountGetFromJson(
+_ResponseUserAccountGet _$ResponseUserAccountGetFromJson(
         Map<String, dynamic> json) =>
-    _ResponseUsersAccountGet(
+    _ResponseUserAccountGet(
       message: json['message'] as String?,
       user: json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$ResponseUsersAccountGetToJson(
-        _ResponseUsersAccountGet instance) =>
+Map<String, dynamic> _$ResponseUserAccountGetToJson(
+        _ResponseUserAccountGet instance) =>
     <String, dynamic>{
       'message': instance.message,
       'user': instance.user,
@@ -29,41 +29,41 @@ Map<String, dynamic> _$ResponseUsersAccountGetToJson(
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(requestUsersAccountGet)
-final requestUsersAccountGetProvider = RequestUsersAccountGetProvider._();
+@ProviderFor(requestUserAccountGet)
+final requestUserAccountGetProvider = RequestUserAccountGetProvider._();
 
-final class RequestUsersAccountGetProvider extends $FunctionalProvider<
-        AsyncValue<ResponseUsersAccountGet>,
-        ResponseUsersAccountGet,
-        FutureOr<ResponseUsersAccountGet>>
+final class RequestUserAccountGetProvider extends $FunctionalProvider<
+        AsyncValue<ResponseUserAccountGet>,
+        ResponseUserAccountGet,
+        FutureOr<ResponseUserAccountGet>>
     with
-        $FutureModifier<ResponseUsersAccountGet>,
-        $FutureProvider<ResponseUsersAccountGet> {
-  RequestUsersAccountGetProvider._()
+        $FutureModifier<ResponseUserAccountGet>,
+        $FutureProvider<ResponseUserAccountGet> {
+  RequestUserAccountGetProvider._()
       : super(
           from: null,
           argument: null,
           retry: null,
-          name: r'requestUsersAccountGetProvider',
+          name: r'requestUserAccountGetProvider',
           isAutoDispose: true,
           dependencies: null,
           $allTransitiveDependencies: null,
         );
 
   @override
-  String debugGetCreateSourceHash() => _$requestUsersAccountGetHash();
+  String debugGetCreateSourceHash() => _$requestUserAccountGetHash();
 
   @$internal
   @override
-  $FutureProviderElement<ResponseUsersAccountGet> $createElement(
+  $FutureProviderElement<ResponseUserAccountGet> $createElement(
           $ProviderPointer pointer) =>
       $FutureProviderElement(pointer);
 
   @override
-  FutureOr<ResponseUsersAccountGet> create(Ref ref) {
-    return requestUsersAccountGet(ref);
+  FutureOr<ResponseUserAccountGet> create(Ref ref) {
+    return requestUserAccountGet(ref);
   }
 }
 
-String _$requestUsersAccountGetHash() =>
-    r'eb7fe7bd771165001960b04a7d432a2c5fe1cd24';
+String _$requestUserAccountGetHash() =>
+    r'5b437d7ef64efeddebb2b0dd4ec45d5f961e3fc4';

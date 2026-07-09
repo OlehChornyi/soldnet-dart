@@ -3,8 +3,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:dio/dio.dart';
 import 'package:soldnet/services/api/client/dio_client.dart';
 
-part 'request_users_sign_in.g.dart';
-part 'request_users_sign_in.freezed.dart';
+part 'request_user_sign_in.g.dart';
+part 'request_user_sign_in.freezed.dart';
 
 @riverpod
 Future<ResponseSignIn> requestSignIn(
@@ -13,7 +13,7 @@ Future<ResponseSignIn> requestSignIn(
 }) async {
   final dio = ref.read(dioClientProvider);
   try {
-    final Response response = await dio.post('/users/signin', data: body);
+    final Response response = await dio.post('/user/signin', data: body);
     return ResponseSignIn.fromJson(response.data);
   } on DioException catch (e) {
     return ResponseSignIn.fromJson(e.response?.data);

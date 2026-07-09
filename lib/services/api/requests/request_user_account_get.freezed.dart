@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'request_users_account_get.dart';
+part of 'request_user_account_get.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,26 +13,26 @@ part of 'request_users_account_get.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$ResponseUsersAccountGet {
+mixin _$ResponseUserAccountGet {
   String? get message;
   User? get user;
 
-  /// Create a copy of ResponseUsersAccountGet
+  /// Create a copy of ResponseUserAccountGet
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $ResponseUsersAccountGetCopyWith<ResponseUsersAccountGet> get copyWith =>
-      _$ResponseUsersAccountGetCopyWithImpl<ResponseUsersAccountGet>(
-          this as ResponseUsersAccountGet, _$identity);
+  $ResponseUserAccountGetCopyWith<ResponseUserAccountGet> get copyWith =>
+      _$ResponseUserAccountGetCopyWithImpl<ResponseUserAccountGet>(
+          this as ResponseUserAccountGet, _$identity);
 
-  /// Serializes this ResponseUsersAccountGet to a JSON map.
+  /// Serializes this ResponseUserAccountGet to a JSON map.
   Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ResponseUsersAccountGet &&
+            other is ResponseUserAccountGet &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.user, user) || other.user == user));
   }
@@ -43,15 +43,15 @@ mixin _$ResponseUsersAccountGet {
 
   @override
   String toString() {
-    return 'ResponseUsersAccountGet(message: $message, user: $user)';
+    return 'ResponseUserAccountGet(message: $message, user: $user)';
   }
 }
 
 /// @nodoc
-abstract mixin class $ResponseUsersAccountGetCopyWith<$Res> {
-  factory $ResponseUsersAccountGetCopyWith(ResponseUsersAccountGet value,
-          $Res Function(ResponseUsersAccountGet) _then) =
-      _$ResponseUsersAccountGetCopyWithImpl;
+abstract mixin class $ResponseUserAccountGetCopyWith<$Res> {
+  factory $ResponseUserAccountGetCopyWith(ResponseUserAccountGet value,
+          $Res Function(ResponseUserAccountGet) _then) =
+      _$ResponseUserAccountGetCopyWithImpl;
   @useResult
   $Res call({String? message, User? user});
 
@@ -59,14 +59,14 @@ abstract mixin class $ResponseUsersAccountGetCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ResponseUsersAccountGetCopyWithImpl<$Res>
-    implements $ResponseUsersAccountGetCopyWith<$Res> {
-  _$ResponseUsersAccountGetCopyWithImpl(this._self, this._then);
+class _$ResponseUserAccountGetCopyWithImpl<$Res>
+    implements $ResponseUserAccountGetCopyWith<$Res> {
+  _$ResponseUserAccountGetCopyWithImpl(this._self, this._then);
 
-  final ResponseUsersAccountGet _self;
-  final $Res Function(ResponseUsersAccountGet) _then;
+  final ResponseUserAccountGet _self;
+  final $Res Function(ResponseUserAccountGet) _then;
 
-  /// Create a copy of ResponseUsersAccountGet
+  /// Create a copy of ResponseUserAccountGet
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -86,7 +86,7 @@ class _$ResponseUsersAccountGetCopyWithImpl<$Res>
     ));
   }
 
-  /// Create a copy of ResponseUsersAccountGet
+  /// Create a copy of ResponseUserAccountGet
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -101,8 +101,8 @@ class _$ResponseUsersAccountGetCopyWithImpl<$Res>
   }
 }
 
-/// Adds pattern-matching-related methods to [ResponseUsersAccountGet].
-extension ResponseUsersAccountGetPatterns on ResponseUsersAccountGet {
+/// Adds pattern-matching-related methods to [ResponseUserAccountGet].
+extension ResponseUserAccountGetPatterns on ResponseUserAccountGet {
   /// A variant of `map` that fallback to returning `orElse`.
   ///
   /// It is equivalent to doing:
@@ -117,12 +117,12 @@ extension ResponseUsersAccountGetPatterns on ResponseUsersAccountGet {
 
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_ResponseUsersAccountGet value)? $default, {
+    TResult Function(_ResponseUserAccountGet value)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _ResponseUsersAccountGet() when $default != null:
+      case _ResponseUserAccountGet() when $default != null:
         return $default(_that);
       case _:
         return orElse();
@@ -144,11 +144,11 @@ extension ResponseUsersAccountGetPatterns on ResponseUsersAccountGet {
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_ResponseUsersAccountGet value) $default,
+    TResult Function(_ResponseUserAccountGet value) $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _ResponseUsersAccountGet():
+      case _ResponseUserAccountGet():
         return $default(_that);
       case _:
         throw StateError('Unexpected subclass');
@@ -169,11 +169,11 @@ extension ResponseUsersAccountGetPatterns on ResponseUsersAccountGet {
 
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_ResponseUsersAccountGet value)? $default,
+    TResult? Function(_ResponseUserAccountGet value)? $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _ResponseUsersAccountGet() when $default != null:
+      case _ResponseUserAccountGet() when $default != null:
         return $default(_that);
       case _:
         return null;
@@ -199,7 +199,7 @@ extension ResponseUsersAccountGetPatterns on ResponseUsersAccountGet {
   }) {
     final _that = this;
     switch (_that) {
-      case _ResponseUsersAccountGet() when $default != null:
+      case _ResponseUserAccountGet() when $default != null:
         return $default(_that.message, _that.user);
       case _:
         return orElse();
@@ -225,7 +225,7 @@ extension ResponseUsersAccountGetPatterns on ResponseUsersAccountGet {
   ) {
     final _that = this;
     switch (_that) {
-      case _ResponseUsersAccountGet():
+      case _ResponseUserAccountGet():
         return $default(_that.message, _that.user);
       case _:
         throw StateError('Unexpected subclass');
@@ -250,7 +250,7 @@ extension ResponseUsersAccountGetPatterns on ResponseUsersAccountGet {
   ) {
     final _that = this;
     switch (_that) {
-      case _ResponseUsersAccountGet() when $default != null:
+      case _ResponseUserAccountGet() when $default != null:
         return $default(_that.message, _that.user);
       case _:
         return null;
@@ -260,28 +260,28 @@ extension ResponseUsersAccountGetPatterns on ResponseUsersAccountGet {
 
 /// @nodoc
 @JsonSerializable()
-class _ResponseUsersAccountGet implements ResponseUsersAccountGet {
-  const _ResponseUsersAccountGet({required this.message, required this.user});
-  factory _ResponseUsersAccountGet.fromJson(Map<String, dynamic> json) =>
-      _$ResponseUsersAccountGetFromJson(json);
+class _ResponseUserAccountGet implements ResponseUserAccountGet {
+  const _ResponseUserAccountGet({required this.message, required this.user});
+  factory _ResponseUserAccountGet.fromJson(Map<String, dynamic> json) =>
+      _$ResponseUserAccountGetFromJson(json);
 
   @override
   final String? message;
   @override
   final User? user;
 
-  /// Create a copy of ResponseUsersAccountGet
+  /// Create a copy of ResponseUserAccountGet
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$ResponseUsersAccountGetCopyWith<_ResponseUsersAccountGet> get copyWith =>
-      __$ResponseUsersAccountGetCopyWithImpl<_ResponseUsersAccountGet>(
+  _$ResponseUserAccountGetCopyWith<_ResponseUserAccountGet> get copyWith =>
+      __$ResponseUserAccountGetCopyWithImpl<_ResponseUserAccountGet>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$ResponseUsersAccountGetToJson(
+    return _$ResponseUserAccountGetToJson(
       this,
     );
   }
@@ -290,7 +290,7 @@ class _ResponseUsersAccountGet implements ResponseUsersAccountGet {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ResponseUsersAccountGet &&
+            other is _ResponseUserAccountGet &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.user, user) || other.user == user));
   }
@@ -301,16 +301,16 @@ class _ResponseUsersAccountGet implements ResponseUsersAccountGet {
 
   @override
   String toString() {
-    return 'ResponseUsersAccountGet(message: $message, user: $user)';
+    return 'ResponseUserAccountGet(message: $message, user: $user)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$ResponseUsersAccountGetCopyWith<$Res>
-    implements $ResponseUsersAccountGetCopyWith<$Res> {
-  factory _$ResponseUsersAccountGetCopyWith(_ResponseUsersAccountGet value,
-          $Res Function(_ResponseUsersAccountGet) _then) =
-      __$ResponseUsersAccountGetCopyWithImpl;
+abstract mixin class _$ResponseUserAccountGetCopyWith<$Res>
+    implements $ResponseUserAccountGetCopyWith<$Res> {
+  factory _$ResponseUserAccountGetCopyWith(_ResponseUserAccountGet value,
+          $Res Function(_ResponseUserAccountGet) _then) =
+      __$ResponseUserAccountGetCopyWithImpl;
   @override
   @useResult
   $Res call({String? message, User? user});
@@ -320,14 +320,14 @@ abstract mixin class _$ResponseUsersAccountGetCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ResponseUsersAccountGetCopyWithImpl<$Res>
-    implements _$ResponseUsersAccountGetCopyWith<$Res> {
-  __$ResponseUsersAccountGetCopyWithImpl(this._self, this._then);
+class __$ResponseUserAccountGetCopyWithImpl<$Res>
+    implements _$ResponseUserAccountGetCopyWith<$Res> {
+  __$ResponseUserAccountGetCopyWithImpl(this._self, this._then);
 
-  final _ResponseUsersAccountGet _self;
-  final $Res Function(_ResponseUsersAccountGet) _then;
+  final _ResponseUserAccountGet _self;
+  final $Res Function(_ResponseUserAccountGet) _then;
 
-  /// Create a copy of ResponseUsersAccountGet
+  /// Create a copy of ResponseUserAccountGet
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -335,7 +335,7 @@ class __$ResponseUsersAccountGetCopyWithImpl<$Res>
     Object? message = freezed,
     Object? user = freezed,
   }) {
-    return _then(_ResponseUsersAccountGet(
+    return _then(_ResponseUserAccountGet(
       message: freezed == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -347,7 +347,7 @@ class __$ResponseUsersAccountGetCopyWithImpl<$Res>
     ));
   }
 
-  /// Create a copy of ResponseUsersAccountGet
+  /// Create a copy of ResponseUserAccountGet
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')

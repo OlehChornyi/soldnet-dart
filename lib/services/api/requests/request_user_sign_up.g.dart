@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'request_users_sign_up.dart';
+part of 'request_user_sign_up.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -87,7 +87,7 @@ final class RequestSignUpProvider extends $FunctionalProvider<
   }
 }
 
-String _$requestSignUpHash() => r'c950f4073f46f55546594ebfa441ef5c472e7c1e';
+String _$requestSignUpHash() => r'7ca5f310bc1753d7d478f261df9d677f05793eb5';
 
 final class RequestSignUpFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<ResponseSignUp>, BodySignUp> {

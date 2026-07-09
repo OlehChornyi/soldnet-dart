@@ -8,8 +8,7 @@ part 'dio_client.g.dart';
 Dio dioClient(Ref ref) {
   final dio = Dio(
     BaseOptions(
-      //TODO: Change base URL for
-      baseUrl: 'http://localhost:8080/v1',
+      baseUrl: 'http://localhost:8080',
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 120),
       headers: {'Content-Type': 'application/json'},

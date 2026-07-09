@@ -2,9 +2,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soldnet/models/entities/user.dart';
 import 'package:soldnet/models/utils/login_tab.dart';
-import 'package:soldnet/services/api/requests/request_users_account_get.dart';
-import 'package:soldnet/services/api/requests/request_users_sign_in.dart';
-import 'package:soldnet/services/api/requests/request_users_sign_up.dart';
+import 'package:soldnet/services/api/requests/request_user_account_get.dart';
+import 'package:soldnet/services/api/requests/request_user_sign_in.dart';
+import 'package:soldnet/services/api/requests/request_user_sign_up.dart';
 import 'package:soldnet/services/shared_prefs/shared_prefs.dart';
 
 part 'store_user.g.dart';
@@ -80,7 +80,7 @@ class StoreUser extends _$StoreUser {
   }
 
   Future<void> getUserAccount() async {
-    final response = await ref.read(requestUsersAccountGetProvider.future);
+    final response = await ref.read(requestUserAccountGetProvider.future);
     state = state.copyWith(user: response.user);
   }
 

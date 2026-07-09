@@ -5,6 +5,7 @@ import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
 import 'package:soldnet/presentation/widgets/app/animations/app_animations_fade_in_list.dart';
 import 'package:soldnet/stores/store_chat.dart';
+import 'package:soldnet/stores/store_user.dart';
 
 class ProfileBody extends ConsumerWidget {
   const ProfileBody({super.key});
@@ -14,6 +15,7 @@ class ProfileBody extends ConsumerWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     final chatState = ref.watch(storeChatProvider);
+    final userState = ref.watch(storeUserProvider);
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,22 +59,27 @@ class ProfileBody extends ConsumerWidget {
             decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(12)),
-            child: AppFadeInList<ProfileItem>(
+            child: AppFadeInList<String>(
               padding: EdgeInsets.zero,
-              items: profileItems,
+              items: profileBodyItems,
               itemBuilder: (context, item, index) {
+                // Map<String, String> items = {
+                //   for (var item in profileBodyItems) item: '',
+                // };
+                // items['Електронна пошта'] = userState.user?.email ?? '';
+
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      profileItems[index].value,
+                      index == 1 ? (userState.user?.email ?? '') : '',
                       style: AppTextStyles.s16w500(color: AppColors.white),
                     ),
                     const SizedBox(
                       height: 4,
                     ),
                     Text(
-                      profileItems[index].label,
+                      profileBodyItems[index],
                       style: AppTextStyles.s12w500(color: AppColors.bg),
                     ),
                   ],
@@ -84,11 +91,10 @@ class ProfileBody extends ConsumerWidget {
   }
 }
 
-typedef ProfileItem = ({String label, String value});
-
-List<ProfileItem> get profileItems => [
-      (label: 'П.І.Б.', value: 'Чорний Олег Віталійовий'),
-      (label: 'Військове Звання', value: 'Старший Солдат'),
-      (label: 'Цивільна спеціальність', value: 'Філософ'),
-      (label: 'Коло інтересів', value: 'Програмування')
+List<String> get profileBodyItems => [
+      'П.І.Б.',
+      'Електронна пошта',
+      'Військове звання',
+      'Цивільна спеціальність',
+      'Коло інтересів'
     ];

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'request_users_sign_in.dart';
+part of 'request_user_sign_in.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -89,7 +89,7 @@ final class RequestSignInProvider extends $FunctionalProvider<
   }
 }
 
-String _$requestSignInHash() => r'c60e2336c01a5913d0f14fa499c14ae12956c140';
+String _$requestSignInHash() => r'3987edd94c83d7b096114f1213cd6b1a19d8cfd9';
 
 final class RequestSignInFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<ResponseSignIn>, BodySignIn> {
