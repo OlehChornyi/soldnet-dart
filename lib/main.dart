@@ -31,7 +31,7 @@ void main() => runApp(ProviderScope(child: const App()));
 //            | 4. Implement video calls in web and mobile applications.
 //            | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //            | PUSH NOTIFICATIONS:
-//            | 1. Push tocken.
+//            | 1. Push token.
 //            | 2. Push payload.
 //            | 3. Inactive mobile app - push.
 //            | 4. Push handling by mobile app.
