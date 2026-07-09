@@ -16,6 +16,10 @@ T _$identity<T>(T value) => value;
 mixin _$User {
   int get id;
   String get email;
+  String? get name;
+  String? get militaryRank;
+  String? get civilProfession;
+  List<String>? get interests;
   String? get createdAt;
   String? get updatedAt;
 
@@ -36,6 +40,12 @@ mixin _$User {
             other is User &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.militaryRank, militaryRank) ||
+                other.militaryRank == militaryRank) &&
+            (identical(other.civilProfession, civilProfession) ||
+                other.civilProfession == civilProfession) &&
+            const DeepCollectionEquality().equals(other.interests, interests) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -44,11 +54,20 @@ mixin _$User {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      email,
+      name,
+      militaryRank,
+      civilProfession,
+      const DeepCollectionEquality().hash(interests),
+      createdAt,
+      updatedAt);
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, email: $email, name: $name, militaryRank: $militaryRank, civilProfession: $civilProfession, interests: $interests, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
@@ -57,7 +76,15 @@ abstract mixin class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) _then) =
       _$UserCopyWithImpl;
   @useResult
-  $Res call({int id, String email, String? createdAt, String? updatedAt});
+  $Res call(
+      {int id,
+      String email,
+      String? name,
+      String? militaryRank,
+      String? civilProfession,
+      List<String>? interests,
+      String? createdAt,
+      String? updatedAt});
 }
 
 /// @nodoc
@@ -74,6 +101,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? email = null,
+    Object? name = freezed,
+    Object? militaryRank = freezed,
+    Object? civilProfession = freezed,
+    Object? interests = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -86,6 +117,22 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      militaryRank: freezed == militaryRank
+          ? _self.militaryRank
+          : militaryRank // ignore: cast_nullable_to_non_nullable
+              as String?,
+      civilProfession: freezed == civilProfession
+          ? _self.civilProfession
+          : civilProfession // ignore: cast_nullable_to_non_nullable
+              as String?,
+      interests: freezed == interests
+          ? _self.interests
+          : interests // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       createdAt: freezed == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -192,7 +239,14 @@ extension UserPatterns on User {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            int id, String email, String? createdAt, String? updatedAt)?
+            int id,
+            String email,
+            String? name,
+            String? militaryRank,
+            String? civilProfession,
+            List<String>? interests,
+            String? createdAt,
+            String? updatedAt)?
         $default, {
     required TResult orElse(),
   }) {
@@ -200,7 +254,14 @@ extension UserPatterns on User {
     switch (_that) {
       case _User() when $default != null:
         return $default(
-            _that.id, _that.email, _that.createdAt, _that.updatedAt);
+            _that.id,
+            _that.email,
+            _that.name,
+            _that.militaryRank,
+            _that.civilProfession,
+            _that.interests,
+            _that.createdAt,
+            _that.updatedAt);
       case _:
         return orElse();
     }
@@ -221,14 +282,29 @@ extension UserPatterns on User {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int id, String email, String? createdAt, String? updatedAt)
+    TResult Function(
+            int id,
+            String email,
+            String? name,
+            String? militaryRank,
+            String? civilProfession,
+            List<String>? interests,
+            String? createdAt,
+            String? updatedAt)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _User():
         return $default(
-            _that.id, _that.email, _that.createdAt, _that.updatedAt);
+            _that.id,
+            _that.email,
+            _that.name,
+            _that.militaryRank,
+            _that.civilProfession,
+            _that.interests,
+            _that.createdAt,
+            _that.updatedAt);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -249,14 +325,28 @@ extension UserPatterns on User {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            int id, String email, String? createdAt, String? updatedAt)?
+            int id,
+            String email,
+            String? name,
+            String? militaryRank,
+            String? civilProfession,
+            List<String>? interests,
+            String? createdAt,
+            String? updatedAt)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _User() when $default != null:
         return $default(
-            _that.id, _that.email, _that.createdAt, _that.updatedAt);
+            _that.id,
+            _that.email,
+            _that.name,
+            _that.militaryRank,
+            _that.civilProfession,
+            _that.interests,
+            _that.createdAt,
+            _that.updatedAt);
       case _:
         return null;
     }
@@ -269,14 +359,35 @@ class _User implements User {
   const _User(
       {required this.id,
       required this.email,
+      required this.name,
+      required this.militaryRank,
+      required this.civilProfession,
+      required final List<String>? interests,
       required this.createdAt,
-      required this.updatedAt});
+      required this.updatedAt})
+      : _interests = interests;
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   @override
   final int id;
   @override
   final String email;
+  @override
+  final String? name;
+  @override
+  final String? militaryRank;
+  @override
+  final String? civilProfession;
+  final List<String>? _interests;
+  @override
+  List<String>? get interests {
+    final value = _interests;
+    if (value == null) return null;
+    if (_interests is EqualUnmodifiableListView) return _interests;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final String? createdAt;
   @override
@@ -304,6 +415,13 @@ class _User implements User {
             other is _User &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.militaryRank, militaryRank) ||
+                other.militaryRank == militaryRank) &&
+            (identical(other.civilProfession, civilProfession) ||
+                other.civilProfession == civilProfession) &&
+            const DeepCollectionEquality()
+                .equals(other._interests, _interests) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -312,11 +430,20 @@ class _User implements User {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      email,
+      name,
+      militaryRank,
+      civilProfession,
+      const DeepCollectionEquality().hash(_interests),
+      createdAt,
+      updatedAt);
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, email: $email, name: $name, militaryRank: $militaryRank, civilProfession: $civilProfession, interests: $interests, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
@@ -326,7 +453,15 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$UserCopyWithImpl;
   @override
   @useResult
-  $Res call({int id, String email, String? createdAt, String? updatedAt});
+  $Res call(
+      {int id,
+      String email,
+      String? name,
+      String? militaryRank,
+      String? civilProfession,
+      List<String>? interests,
+      String? createdAt,
+      String? updatedAt});
 }
 
 /// @nodoc
@@ -343,6 +478,10 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? email = null,
+    Object? name = freezed,
+    Object? militaryRank = freezed,
+    Object? civilProfession = freezed,
+    Object? interests = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -355,6 +494,22 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      militaryRank: freezed == militaryRank
+          ? _self.militaryRank
+          : militaryRank // ignore: cast_nullable_to_non_nullable
+              as String?,
+      civilProfession: freezed == civilProfession
+          ? _self.civilProfession
+          : civilProfession // ignore: cast_nullable_to_non_nullable
+              as String?,
+      interests: freezed == interests
+          ? _self._interests
+          : interests // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       createdAt: freezed == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable

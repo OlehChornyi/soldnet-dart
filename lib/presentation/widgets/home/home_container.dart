@@ -5,6 +5,7 @@ import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/widgets/home/home_details.dart';
 import 'package:soldnet/presentation/widgets/home/home_sections.dart';
 import 'package:soldnet/stores/store_home.dart';
+import 'package:soldnet/stores/store_user.dart';
 
 class HomeContainer extends ConsumerStatefulWidget {
   const HomeContainer({super.key});
@@ -17,6 +18,7 @@ class _HomeContainerState extends ConsumerState<HomeContainer> {
   @override
   void initState() {
     super.initState();
+    ref.read(storeUserProvider.notifier).getUserAccount();
   }
 
   @override

@@ -8,7 +8,10 @@ abstract class User with _$User {
   const factory User({
     required int id,
     required String email,
-    //TODO: created at and updated at on server
+    required String? name,
+    required String? militaryRank,
+    required String? civilProfession,
+    required List<String>? interests,
     required String? createdAt,
     required String? updatedAt,
   }) = _User;
