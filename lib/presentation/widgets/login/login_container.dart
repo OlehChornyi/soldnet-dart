@@ -72,9 +72,11 @@ class _LoginContainerState extends ConsumerState<LoginContainer> {
                       ? 'Зареєструвати акаунт'
                       : 'Увійти в існуючий',
                   onTap: () async {
-                    // await userNotifier.signUp(_emailController.text.trim(),
-                    //     _passwordController.text.trim());
-                    context.go(ScreenPaths.home);
+                    await userNotifier.signUp(_emailController.text.trim(),
+                        _passwordController.text.trim());
+                    if (context.mounted && userState.token.isNotEmpty) {
+                      context.go(ScreenPaths.home);
+                    }
                   }),
               const SizedBox(height: 24),
               Text(
