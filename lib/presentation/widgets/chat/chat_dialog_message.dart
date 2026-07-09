@@ -20,6 +20,7 @@ class ChatDialogMessage extends StatelessWidget {
         constraints: BoxConstraints(maxWidth: screenWidth - 100),
         decoration: BoxDecoration(
             color: isUser ? AppColors.userMessage : AppColors.white,
+            border: Border.all(color: AppColors.active),
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
