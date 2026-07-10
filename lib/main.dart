@@ -18,7 +18,7 @@ void main() => runApp(ProviderScope(child: const App()));
 // 2026.07.04 | Write step by step guide of what should be done.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.07.06 | SERVER DEVELOPMENT AND INTEGRATION (WS):
-//            | ALMOST DONE | 1. Authorization.
+//            | DONE | 1. Authorization (+Profile(User data)).
 //            | 2. Chat: find ws or rest api.
 //            | 3. Implement ws or rest api.
 //            | 4. Images: integrate to profile and chat.
@@ -38,4 +38,5 @@ void main() => runApp(ProviderScope(child: const App()));
 //            | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //            | END-TO-END шифрування в месенджерах.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//
+// 2026.07.10 | Implement photo in a profile first.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
