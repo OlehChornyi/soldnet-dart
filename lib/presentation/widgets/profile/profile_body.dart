@@ -72,7 +72,19 @@ class ProfileBody extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      index == 1 ? (userState.user?.email ?? '') : '',
+                      index == 0
+                          ? (userState.user?.name ?? '')
+                          : index == 1
+                              ? (userState.user?.email ?? '')
+                              : index == 2
+                                  ? (userState.user?.militaryRank ?? '')
+                                  : index == 3
+                                      ? (userState.user?.civilProfession ?? '')
+                                      : index == 4
+                                          ? (userState.user?.interests
+                                                  .toString() ??
+                                              '')
+                                          : '',
                       style: AppTextStyles.s16w500(color: AppColors.white),
                     ),
                     const SizedBox(
