@@ -6,6 +6,7 @@ import 'package:soldnet/presentation/widgets/app/button/app_button_action.dart';
 import 'package:soldnet/presentation/widgets/app/textfield/app_text_field.dart';
 import 'package:soldnet/presentation/widgets/login/login_button.dart';
 import 'package:soldnet/presentation/widgets/login/login_footer.dart';
+import 'package:soldnet/services/api/requests/request_user_sign_up.dart';
 import 'package:soldnet/stores/store_user.dart';
 
 class LoginContainer extends ConsumerStatefulWidget {
@@ -106,8 +107,15 @@ class _LoginContainerState extends ConsumerState<LoginContainer> {
                       : 'Увійти в існуючий',
                   onTap: () async {
                     if (userState.loginTab == LoginTab.signup) {
-                      await userNotifier.signUp(_emailController.text.trim(),
-                          _passwordController.text.trim());
+                      await userNotifier.signUp(
+                        BodySignUp(
+                            email: _emailController.text.trim(),
+                            password: _passwordController.text.trim(),
+                            name: _nameController.text.trim(),
+                            militaryRank: _rankController.text.trim(),
+                            civilProfession: _profController.text.trim(),
+                            interests: [_interestsController.text.trim()]),
+                      );
                     } else {
                       await userNotifier.signIn(_emailController.text.trim(),
                           _passwordController.text.trim());

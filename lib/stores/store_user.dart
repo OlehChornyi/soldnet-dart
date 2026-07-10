@@ -43,17 +43,17 @@ class StoreUser extends _$StoreUser {
     state = state.copyWith(token: 'token');
   }
 
-  Future<void> signUp(String email, String password) async {
+  Future<void> signUp(BodySignUp body) async {
     final response = await ref.read(
       requestSignUpProvider(
-        body: BodySignUp(email: email, password: password),
+        body: body,
       ).future,
     );
     if (!response.message.contains('success')) {
       state = state.copyWith(serverMessage: response.message);
       eraseServerMessage();
     } else {
-      await signIn(email, password);
+      await signIn(body.email, body.password);
     }
   }
 

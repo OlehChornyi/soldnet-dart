@@ -16,6 +16,10 @@ T _$identity<T>(T value) => value;
 mixin _$BodySignUp {
   String get email;
   String get password;
+  String get name;
+  String get militaryRank;
+  String get civilProfession;
+  List<String> get interests;
 
   /// Create a copy of BodySignUp
   /// with the given fields replaced by the non-null parameter values.
@@ -34,16 +38,29 @@ mixin _$BodySignUp {
             other is BodySignUp &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.militaryRank, militaryRank) ||
+                other.militaryRank == militaryRank) &&
+            (identical(other.civilProfession, civilProfession) ||
+                other.civilProfession == civilProfession) &&
+            const DeepCollectionEquality().equals(other.interests, interests));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
+  int get hashCode => Object.hash(
+      runtimeType,
+      email,
+      password,
+      name,
+      militaryRank,
+      civilProfession,
+      const DeepCollectionEquality().hash(interests));
 
   @override
   String toString() {
-    return 'BodySignUp(email: $email, password: $password)';
+    return 'BodySignUp(email: $email, password: $password, name: $name, militaryRank: $militaryRank, civilProfession: $civilProfession, interests: $interests)';
   }
 }
 
@@ -53,7 +70,13 @@ abstract mixin class $BodySignUpCopyWith<$Res> {
           BodySignUp value, $Res Function(BodySignUp) _then) =
       _$BodySignUpCopyWithImpl;
   @useResult
-  $Res call({String email, String password});
+  $Res call(
+      {String email,
+      String password,
+      String name,
+      String militaryRank,
+      String civilProfession,
+      List<String> interests});
 }
 
 /// @nodoc
@@ -70,6 +93,10 @@ class _$BodySignUpCopyWithImpl<$Res> implements $BodySignUpCopyWith<$Res> {
   $Res call({
     Object? email = null,
     Object? password = null,
+    Object? name = null,
+    Object? militaryRank = null,
+    Object? civilProfession = null,
+    Object? interests = null,
   }) {
     return _then(_self.copyWith(
       email: null == email
@@ -80,6 +107,22 @@ class _$BodySignUpCopyWithImpl<$Res> implements $BodySignUpCopyWith<$Res> {
           ? _self.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      militaryRank: null == militaryRank
+          ? _self.militaryRank
+          : militaryRank // ignore: cast_nullable_to_non_nullable
+              as String,
+      civilProfession: null == civilProfession
+          ? _self.civilProfession
+          : civilProfession // ignore: cast_nullable_to_non_nullable
+              as String,
+      interests: null == interests
+          ? _self.interests
+          : interests // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -177,13 +220,21 @@ extension BodySignUpPatterns on BodySignUp {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String email, String password)? $default, {
+    TResult Function(
+            String email,
+            String password,
+            String name,
+            String militaryRank,
+            String civilProfession,
+            List<String> interests)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _BodySignUp() when $default != null:
-        return $default(_that.email, _that.password);
+        return $default(_that.email, _that.password, _that.name,
+            _that.militaryRank, _that.civilProfession, _that.interests);
       case _:
         return orElse();
     }
@@ -204,12 +255,15 @@ extension BodySignUpPatterns on BodySignUp {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String email, String password) $default,
+    TResult Function(String email, String password, String name,
+            String militaryRank, String civilProfession, List<String> interests)
+        $default,
   ) {
     final _that = this;
     switch (_that) {
       case _BodySignUp():
-        return $default(_that.email, _that.password);
+        return $default(_that.email, _that.password, _that.name,
+            _that.militaryRank, _that.civilProfession, _that.interests);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -229,12 +283,20 @@ extension BodySignUpPatterns on BodySignUp {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String email, String password)? $default,
+    TResult? Function(
+            String email,
+            String password,
+            String name,
+            String militaryRank,
+            String civilProfession,
+            List<String> interests)?
+        $default,
   ) {
     final _that = this;
     switch (_that) {
       case _BodySignUp() when $default != null:
-        return $default(_that.email, _that.password);
+        return $default(_that.email, _that.password, _that.name,
+            _that.militaryRank, _that.civilProfession, _that.interests);
       case _:
         return null;
     }
@@ -244,7 +306,14 @@ extension BodySignUpPatterns on BodySignUp {
 /// @nodoc
 @JsonSerializable()
 class _BodySignUp implements BodySignUp {
-  const _BodySignUp({required this.email, required this.password});
+  const _BodySignUp(
+      {required this.email,
+      required this.password,
+      required this.name,
+      required this.militaryRank,
+      required this.civilProfession,
+      required final List<String> interests})
+      : _interests = interests;
   factory _BodySignUp.fromJson(Map<String, dynamic> json) =>
       _$BodySignUpFromJson(json);
 
@@ -252,6 +321,19 @@ class _BodySignUp implements BodySignUp {
   final String email;
   @override
   final String password;
+  @override
+  final String name;
+  @override
+  final String militaryRank;
+  @override
+  final String civilProfession;
+  final List<String> _interests;
+  @override
+  List<String> get interests {
+    if (_interests is EqualUnmodifiableListView) return _interests;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_interests);
+  }
 
   /// Create a copy of BodySignUp
   /// with the given fields replaced by the non-null parameter values.
@@ -275,16 +357,30 @@ class _BodySignUp implements BodySignUp {
             other is _BodySignUp &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.militaryRank, militaryRank) ||
+                other.militaryRank == militaryRank) &&
+            (identical(other.civilProfession, civilProfession) ||
+                other.civilProfession == civilProfession) &&
+            const DeepCollectionEquality()
+                .equals(other._interests, _interests));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
+  int get hashCode => Object.hash(
+      runtimeType,
+      email,
+      password,
+      name,
+      militaryRank,
+      civilProfession,
+      const DeepCollectionEquality().hash(_interests));
 
   @override
   String toString() {
-    return 'BodySignUp(email: $email, password: $password)';
+    return 'BodySignUp(email: $email, password: $password, name: $name, militaryRank: $militaryRank, civilProfession: $civilProfession, interests: $interests)';
   }
 }
 
@@ -296,7 +392,13 @@ abstract mixin class _$BodySignUpCopyWith<$Res>
       __$BodySignUpCopyWithImpl;
   @override
   @useResult
-  $Res call({String email, String password});
+  $Res call(
+      {String email,
+      String password,
+      String name,
+      String militaryRank,
+      String civilProfession,
+      List<String> interests});
 }
 
 /// @nodoc
@@ -313,6 +415,10 @@ class __$BodySignUpCopyWithImpl<$Res> implements _$BodySignUpCopyWith<$Res> {
   $Res call({
     Object? email = null,
     Object? password = null,
+    Object? name = null,
+    Object? militaryRank = null,
+    Object? civilProfession = null,
+    Object? interests = null,
   }) {
     return _then(_BodySignUp(
       email: null == email
@@ -323,6 +429,22 @@ class __$BodySignUpCopyWithImpl<$Res> implements _$BodySignUpCopyWith<$Res> {
           ? _self.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      militaryRank: null == militaryRank
+          ? _self.militaryRank
+          : militaryRank // ignore: cast_nullable_to_non_nullable
+              as String,
+      civilProfession: null == civilProfession
+          ? _self.civilProfession
+          : civilProfession // ignore: cast_nullable_to_non_nullable
+              as String,
+      interests: null == interests
+          ? _self._interests
+          : interests // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }

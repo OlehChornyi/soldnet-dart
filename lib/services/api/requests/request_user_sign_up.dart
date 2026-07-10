@@ -22,8 +22,14 @@ Future<ResponseSignUp> requestSignUp(
 
 @freezed
 abstract class BodySignUp with _$BodySignUp {
-  const factory BodySignUp({required String email, required String password}) =
-      _BodySignUp;
+  const factory BodySignUp({
+    required String email,
+    required String password,
+    required String name,
+    required String militaryRank,
+    required String civilProfession,
+    required List<String> interests,
+  }) = _BodySignUp;
 
   factory BodySignUp.fromJson(Map<String, dynamic> json) =>
       _$BodySignUpFromJson(json);

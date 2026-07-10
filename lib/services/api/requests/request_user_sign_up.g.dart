@@ -9,12 +9,21 @@ part of 'request_user_sign_up.dart';
 _BodySignUp _$BodySignUpFromJson(Map<String, dynamic> json) => _BodySignUp(
       email: json['email'] as String,
       password: json['password'] as String,
+      name: json['name'] as String,
+      militaryRank: json['militaryRank'] as String,
+      civilProfession: json['civilProfession'] as String,
+      interests:
+          (json['interests'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$BodySignUpToJson(_BodySignUp instance) =>
     <String, dynamic>{
       'email': instance.email,
       'password': instance.password,
+      'name': instance.name,
+      'militaryRank': instance.militaryRank,
+      'civilProfession': instance.civilProfession,
+      'interests': instance.interests,
     };
 
 _ResponseSignUp _$ResponseSignUpFromJson(Map<String, dynamic> json) =>
