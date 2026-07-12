@@ -1,13 +1,16 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
+import 'package:soldnet/stores/store_user.dart';
 
-class LoginFooter extends StatelessWidget {
+class LoginFooter extends ConsumerWidget {
   const LoginFooter({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userState = ref.watch(storeUserProvider);
     final paddingBottom = MediaQuery.of(context).padding.bottom;
 
     return Column(
@@ -29,8 +32,11 @@ class LoginFooter extends StatelessWidget {
                     if (i != 3 && i != 0) const SizedBox(width: 8),
                     SvgPicture.asset(
                       'assets/icons/home/icon_${i + 1 + ind * 3}.svg',
-                      colorFilter:
-                          ColorFilter.mode(AppColors.bgLight, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(
+                          userState.serverMessage.isNotEmpty
+                              ? AppColors.error
+                              : AppColors.bgLight,
+                          BlendMode.srcIn),
                     )
                   }
                 ],
@@ -53,7 +59,10 @@ class LoginFooter extends StatelessWidget {
                     SvgPicture.asset(
                       'assets/icons/common/envelope.svg',
                       colorFilter: ColorFilter.mode(
-                          AppColors.userMessage, BlendMode.srcIn),
+                          userState.serverMessage.isNotEmpty
+                              ? AppColors.error
+                              : AppColors.userMessage,
+                          BlendMode.srcIn),
                     )
                   }
                 ],
