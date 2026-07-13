@@ -18,7 +18,6 @@ class _HomeSectionsState extends State<HomeSections> {
   bool _isUserReachedPageBottom = false;
 
   final List<String> cItems = [
-    'assets/images/home/kitty.png',
     'assets/images/home/pegas.png',
     'assets/images/home/draco.png',
     'assets/images/home/unicorn.png',
