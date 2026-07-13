@@ -4,6 +4,7 @@ import 'package:soldnet/models/utils/dialog_bg.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
 import 'package:soldnet/presentation/widgets/app/animations/app_animations_fade_in_list.dart';
+import 'package:soldnet/presentation/widgets/profile/profile_body_image.dart';
 import 'package:soldnet/stores/store_chat.dart';
 import 'package:soldnet/stores/store_user.dart';
 
@@ -23,22 +24,8 @@ class ProfileBody extends ConsumerWidget {
         const SizedBox(width: 16),
         Column(
           children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle, color: AppColors.primary),
-              child: Center(
-                child: Icon(
-                  Icons.person_rounded,
-                  size: 64,
-                  color: AppColors.bg,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
+            ProfileBodyImage(imageUrl: ''),
+            const SizedBox(height: 12),
             Container(
               width: 48,
               height: 48,
@@ -87,9 +74,7 @@ class ProfileBody extends ConsumerWidget {
                                           : '',
                       style: AppTextStyles.s16w500(color: AppColors.white),
                     ),
-                    const SizedBox(
-                      height: 4,
-                    ),
+                    const SizedBox(height: 4),
                     Text(
                       profileBodyItems[index],
                       style: AppTextStyles.s12w500(color: AppColors.bg),
