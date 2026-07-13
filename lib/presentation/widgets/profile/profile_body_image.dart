@@ -1,17 +1,19 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
+import 'package:soldnet/stores/store_user.dart';
 
-class ProfileBodyImage extends StatefulWidget {
+class ProfileBodyImage extends ConsumerStatefulWidget {
   const ProfileBodyImage({super.key});
 
   @override
-  State<ProfileBodyImage> createState() => _ProfileBodyImageState();
+  ConsumerState<ProfileBodyImage> createState() => _ProfileBodyImageState();
 }
 
-class _ProfileBodyImageState extends State<ProfileBodyImage> {
+class _ProfileBodyImageState extends ConsumerState<ProfileBodyImage> {
   final picker = ImagePicker();
 
   Future<File?> _pickImage() async {
@@ -26,10 +28,17 @@ class _ProfileBodyImageState extends State<ProfileBodyImage> {
     return File(image.path);
   }
 
+  Future<void> _pickImageAndUploadPhoto() async {
+    final file = await _pickImage();
+    if (file != null) {
+      ref.read(storeUserProvider.notifier).uploadPhoto(file);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async => _pickImage(),
+      onTap: () async => _pickImageAndUploadPhoto(),
       child: Container(
         width: 100,
         height: 100,

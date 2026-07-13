@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soldnet/models/entities/user.dart';
@@ -86,5 +88,10 @@ class StoreUser extends _$StoreUser {
 
   void setLoginTab(LoginTab tab) {
     state = state.copyWith(loginTab: tab);
+  }
+
+  Future<void> uploadPhoto(File file) async {
+    await ref.read(requestUserAccountGetProvider.future);
+    await getUserAccount();
   }
 }
