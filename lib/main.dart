@@ -15,7 +15,7 @@ void main() => runApp(ProviderScope(child: const App()));
 // 2026.07.01 | DONE | 1. Create animation on chat screen.
 //            | DONE | 2. Change app icon and splashScreen.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// 2026.07.04 | Write step by step guide of what should be done.
+// 2026.07.04 | DONE | Write step by step guide of what should be done.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.07.06 | SERVER DEVELOPMENT AND INTEGRATION (WS):
 //            | DONE | 1. Authorization (+Profile(User data)).
