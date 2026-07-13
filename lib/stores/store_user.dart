@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soldnet/models/entities/user.dart';
 import 'package:soldnet/models/utils/login_tab.dart';
 import 'package:soldnet/services/api/requests/request_user_account_get.dart';
+import 'package:soldnet/services/api/requests/request_user_photo_post.dart';
 import 'package:soldnet/services/api/requests/request_user_sign_in.dart';
 import 'package:soldnet/services/api/requests/request_user_sign_up.dart';
 import 'package:soldnet/services/shared_prefs/shared_prefs.dart';
@@ -91,7 +92,7 @@ class StoreUser extends _$StoreUser {
   }
 
   Future<void> uploadPhoto(File file) async {
-    await ref.read(requestUserAccountGetProvider.future);
+    await ref.read(requestUsetPhotoPostProvider(file: file).future);
     await getUserAccount();
   }
 }

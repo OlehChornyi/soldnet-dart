@@ -23,7 +23,7 @@ Future<ResponseUserPhotoPost> requestUsetPhotoPost(
   });
 
   try {
-    final Response response = await dio.post('/user/photo', data: body);
+    final Response response = await dio.post('/v1/user/photo', data: body);
     return ResponseUserPhotoPost.fromJson(response.data);
   } on DioException catch (e) {
     return ResponseUserPhotoPost.fromJson(e.response?.data);
