@@ -24,7 +24,7 @@ class ProfileBody extends ConsumerWidget {
         const SizedBox(width: 16),
         Column(
           children: [
-            ProfileBodyImage(imageUrl: ''),
+            const ProfileBodyImage(),
             const SizedBox(height: 12),
             Container(
               width: 48,
