@@ -32,8 +32,9 @@ Future<ResponseUserPhotoPost> requestUsetPhotoPost(
 
 @freezed
 abstract class ResponseUserPhotoPost with _$ResponseUserPhotoPost {
-  const factory ResponseUserPhotoPost({required String? message}) =
-      _ResponseUserPhotoPost;
+  const factory ResponseUserPhotoPost(
+      {required String? imageUrl,
+      required String? message}) = _ResponseUserPhotoPost;
 
   factory ResponseUserPhotoPost.fromJson(Map<String, dynamic> json) =>
       _$ResponseUserPhotoPostFromJson(json);

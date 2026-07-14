@@ -14,6 +14,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$ResponseUserPhotoPost {
+  String? get imageUrl;
   String? get message;
 
   /// Create a copy of ResponseUserPhotoPost
@@ -32,16 +33,18 @@ mixin _$ResponseUserPhotoPost {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is ResponseUserPhotoPost &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
             (identical(other.message, message) || other.message == message));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, imageUrl, message);
 
   @override
   String toString() {
-    return 'ResponseUserPhotoPost(message: $message)';
+    return 'ResponseUserPhotoPost(imageUrl: $imageUrl, message: $message)';
   }
 }
 
@@ -51,7 +54,7 @@ abstract mixin class $ResponseUserPhotoPostCopyWith<$Res> {
           $Res Function(ResponseUserPhotoPost) _then) =
       _$ResponseUserPhotoPostCopyWithImpl;
   @useResult
-  $Res call({String? message});
+  $Res call({String? imageUrl, String? message});
 }
 
 /// @nodoc
@@ -67,9 +70,14 @@ class _$ResponseUserPhotoPostCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? imageUrl = freezed,
     Object? message = freezed,
   }) {
     return _then(_self.copyWith(
+      imageUrl: freezed == imageUrl
+          ? _self.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       message: freezed == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -171,13 +179,13 @@ extension ResponseUserPhotoPostPatterns on ResponseUserPhotoPost {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String? message)? $default, {
+    TResult Function(String? imageUrl, String? message)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _ResponseUserPhotoPost() when $default != null:
-        return $default(_that.message);
+        return $default(_that.imageUrl, _that.message);
       case _:
         return orElse();
     }
@@ -198,12 +206,12 @@ extension ResponseUserPhotoPostPatterns on ResponseUserPhotoPost {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String? message) $default,
+    TResult Function(String? imageUrl, String? message) $default,
   ) {
     final _that = this;
     switch (_that) {
       case _ResponseUserPhotoPost():
-        return $default(_that.message);
+        return $default(_that.imageUrl, _that.message);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -223,12 +231,12 @@ extension ResponseUserPhotoPostPatterns on ResponseUserPhotoPost {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String? message)? $default,
+    TResult? Function(String? imageUrl, String? message)? $default,
   ) {
     final _that = this;
     switch (_that) {
       case _ResponseUserPhotoPost() when $default != null:
-        return $default(_that.message);
+        return $default(_that.imageUrl, _that.message);
       case _:
         return null;
     }
@@ -238,10 +246,12 @@ extension ResponseUserPhotoPostPatterns on ResponseUserPhotoPost {
 /// @nodoc
 @JsonSerializable()
 class _ResponseUserPhotoPost implements ResponseUserPhotoPost {
-  const _ResponseUserPhotoPost({required this.message});
+  const _ResponseUserPhotoPost({required this.imageUrl, required this.message});
   factory _ResponseUserPhotoPost.fromJson(Map<String, dynamic> json) =>
       _$ResponseUserPhotoPostFromJson(json);
 
+  @override
+  final String? imageUrl;
   @override
   final String? message;
 
@@ -266,16 +276,18 @@ class _ResponseUserPhotoPost implements ResponseUserPhotoPost {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ResponseUserPhotoPost &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
             (identical(other.message, message) || other.message == message));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, imageUrl, message);
 
   @override
   String toString() {
-    return 'ResponseUserPhotoPost(message: $message)';
+    return 'ResponseUserPhotoPost(imageUrl: $imageUrl, message: $message)';
   }
 }
 
@@ -287,7 +299,7 @@ abstract mixin class _$ResponseUserPhotoPostCopyWith<$Res>
       __$ResponseUserPhotoPostCopyWithImpl;
   @override
   @useResult
-  $Res call({String? message});
+  $Res call({String? imageUrl, String? message});
 }
 
 /// @nodoc
@@ -303,9 +315,14 @@ class __$ResponseUserPhotoPostCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
+    Object? imageUrl = freezed,
     Object? message = freezed,
   }) {
     return _then(_ResponseUserPhotoPost(
+      imageUrl: freezed == imageUrl
+          ? _self.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       message: freezed == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable

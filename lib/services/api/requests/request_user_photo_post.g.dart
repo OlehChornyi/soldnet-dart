@@ -9,12 +9,14 @@ part of 'request_user_photo_post.dart';
 _ResponseUserPhotoPost _$ResponseUserPhotoPostFromJson(
         Map<String, dynamic> json) =>
     _ResponseUserPhotoPost(
+      imageUrl: json['imageUrl'] as String?,
       message: json['message'] as String?,
     );
 
 Map<String, dynamic> _$ResponseUserPhotoPostToJson(
         _ResponseUserPhotoPost instance) =>
     <String, dynamic>{
+      'imageUrl': instance.imageUrl,
       'message': instance.message,
     };
 
@@ -83,7 +85,7 @@ final class RequestUsetPhotoPostProvider extends $FunctionalProvider<
 }
 
 String _$requestUsetPhotoPostHash() =>
-    r'3470fe5d4bf694a5c6da81e653fd20a65fc56325';
+    r'84c7b406ea033780fb80ca1c283315b698f638bc';
 
 final class RequestUsetPhotoPostFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<ResponseUserPhotoPost>, File> {
