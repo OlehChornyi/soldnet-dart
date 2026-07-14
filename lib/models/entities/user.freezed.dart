@@ -20,6 +20,7 @@ mixin _$User {
   String? get militaryRank;
   String? get civilProfession;
   List<String>? get interests;
+  String? get avatarUrl;
   String? get createdAt;
   String? get updatedAt;
 
@@ -46,6 +47,8 @@ mixin _$User {
             (identical(other.civilProfession, civilProfession) ||
                 other.civilProfession == civilProfession) &&
             const DeepCollectionEquality().equals(other.interests, interests) &&
+            (identical(other.avatarUrl, avatarUrl) ||
+                other.avatarUrl == avatarUrl) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -62,12 +65,13 @@ mixin _$User {
       militaryRank,
       civilProfession,
       const DeepCollectionEquality().hash(interests),
+      avatarUrl,
       createdAt,
       updatedAt);
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, name: $name, militaryRank: $militaryRank, civilProfession: $civilProfession, interests: $interests, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, email: $email, name: $name, militaryRank: $militaryRank, civilProfession: $civilProfession, interests: $interests, avatarUrl: $avatarUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
@@ -83,6 +87,7 @@ abstract mixin class $UserCopyWith<$Res> {
       String? militaryRank,
       String? civilProfession,
       List<String>? interests,
+      String? avatarUrl,
       String? createdAt,
       String? updatedAt});
 }
@@ -105,6 +110,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? militaryRank = freezed,
     Object? civilProfession = freezed,
     Object? interests = freezed,
+    Object? avatarUrl = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -133,6 +139,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _self.interests
           : interests // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      avatarUrl: freezed == avatarUrl
+          ? _self.avatarUrl
+          : avatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -245,6 +255,7 @@ extension UserPatterns on User {
             String? militaryRank,
             String? civilProfession,
             List<String>? interests,
+            String? avatarUrl,
             String? createdAt,
             String? updatedAt)?
         $default, {
@@ -260,6 +271,7 @@ extension UserPatterns on User {
             _that.militaryRank,
             _that.civilProfession,
             _that.interests,
+            _that.avatarUrl,
             _that.createdAt,
             _that.updatedAt);
       case _:
@@ -289,6 +301,7 @@ extension UserPatterns on User {
             String? militaryRank,
             String? civilProfession,
             List<String>? interests,
+            String? avatarUrl,
             String? createdAt,
             String? updatedAt)
         $default,
@@ -303,6 +316,7 @@ extension UserPatterns on User {
             _that.militaryRank,
             _that.civilProfession,
             _that.interests,
+            _that.avatarUrl,
             _that.createdAt,
             _that.updatedAt);
       case _:
@@ -331,6 +345,7 @@ extension UserPatterns on User {
             String? militaryRank,
             String? civilProfession,
             List<String>? interests,
+            String? avatarUrl,
             String? createdAt,
             String? updatedAt)?
         $default,
@@ -345,6 +360,7 @@ extension UserPatterns on User {
             _that.militaryRank,
             _that.civilProfession,
             _that.interests,
+            _that.avatarUrl,
             _that.createdAt,
             _that.updatedAt);
       case _:
@@ -363,6 +379,7 @@ class _User implements User {
       required this.militaryRank,
       required this.civilProfession,
       required final List<String>? interests,
+      required this.avatarUrl,
       required this.createdAt,
       required this.updatedAt})
       : _interests = interests;
@@ -388,6 +405,8 @@ class _User implements User {
     return EqualUnmodifiableListView(value);
   }
 
+  @override
+  final String? avatarUrl;
   @override
   final String? createdAt;
   @override
@@ -422,6 +441,8 @@ class _User implements User {
                 other.civilProfession == civilProfession) &&
             const DeepCollectionEquality()
                 .equals(other._interests, _interests) &&
+            (identical(other.avatarUrl, avatarUrl) ||
+                other.avatarUrl == avatarUrl) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -438,12 +459,13 @@ class _User implements User {
       militaryRank,
       civilProfession,
       const DeepCollectionEquality().hash(_interests),
+      avatarUrl,
       createdAt,
       updatedAt);
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, name: $name, militaryRank: $militaryRank, civilProfession: $civilProfession, interests: $interests, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, email: $email, name: $name, militaryRank: $militaryRank, civilProfession: $civilProfession, interests: $interests, avatarUrl: $avatarUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
@@ -460,6 +482,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? militaryRank,
       String? civilProfession,
       List<String>? interests,
+      String? avatarUrl,
       String? createdAt,
       String? updatedAt});
 }
@@ -482,6 +505,7 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
     Object? militaryRank = freezed,
     Object? civilProfession = freezed,
     Object? interests = freezed,
+    Object? avatarUrl = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -510,6 +534,10 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
           ? _self._interests
           : interests // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      avatarUrl: freezed == avatarUrl
+          ? _self.avatarUrl
+          : avatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable

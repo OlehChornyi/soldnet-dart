@@ -15,6 +15,7 @@ _User _$UserFromJson(Map<String, dynamic> json) => _User(
       interests: (json['interests'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      avatarUrl: json['avatarUrl'] as String?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
     );
@@ -26,6 +27,7 @@ Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
       'militaryRank': instance.militaryRank,
       'civilProfession': instance.civilProfession,
       'interests': instance.interests,
+      'avatarUrl': instance.avatarUrl,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
     };

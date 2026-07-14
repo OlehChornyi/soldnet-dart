@@ -37,6 +37,8 @@ class _ProfileBodyImageState extends ConsumerState<ProfileBodyImage> {
 
   @override
   Widget build(BuildContext context) {
+    final userState = ref.read(storeUserProvider);
+
     return GestureDetector(
       onTap: () async => _pickImageAndUploadPhoto(),
       child: Container(
@@ -45,11 +47,13 @@ class _ProfileBodyImageState extends ConsumerState<ProfileBodyImage> {
         decoration:
             BoxDecoration(shape: BoxShape.circle, color: AppColors.primary),
         child: Center(
-          child: Icon(
-            Icons.person_rounded,
-            size: 64,
-            color: AppColors.bg,
-          ),
+          child: (userState.user?.avatarUrl?.isNotEmpty ?? false)
+              ? Container()
+              : Icon(
+                  Icons.person_rounded,
+                  size: 64,
+                  color: AppColors.bg,
+                ),
         ),
       ),
     );

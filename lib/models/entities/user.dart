@@ -12,6 +12,7 @@ abstract class User with _$User {
     required String? militaryRank,
     required String? civilProfession,
     required List<String>? interests,
+    required String? avatarUrl,
     required String? createdAt,
     required String? updatedAt,
   }) = _User;
