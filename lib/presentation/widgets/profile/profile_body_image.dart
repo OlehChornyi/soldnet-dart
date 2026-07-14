@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:soldnet/models/const/const_info.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/stores/store_user.dart';
 
@@ -37,7 +38,7 @@ class _ProfileBodyImageState extends ConsumerState<ProfileBodyImage> {
 
   @override
   Widget build(BuildContext context) {
-    final userState = ref.read(storeUserProvider);
+    final userState = ref.watch(storeUserProvider);
 
     return GestureDetector(
       onTap: () async => _pickImageAndUploadPhoto(),
@@ -48,7 +49,26 @@ class _ProfileBodyImageState extends ConsumerState<ProfileBodyImage> {
             BoxDecoration(shape: BoxShape.circle, color: AppColors.primary),
         child: Center(
           child: (userState.user?.avatarUrl?.isNotEmpty ?? false)
-              ? Container()
+              ? Container(
+                  width: 90,
+                  height: 90,
+                  decoration: BoxDecoration(
+                    color: AppColors.active,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  '${ConstInfo.baseUrl}${userState.user?.avatarUrl}'))),
+                    ),
+                  ),
+                )
               : Icon(
                   Icons.person_rounded,
                   size: 64,
