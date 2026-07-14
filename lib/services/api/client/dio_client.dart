@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:soldnet/models/const/const_info.dart';
 import 'package:soldnet/stores/store_user.dart';
 
 part 'dio_client.g.dart';
@@ -8,7 +9,7 @@ part 'dio_client.g.dart';
 Dio dioClient(Ref ref) {
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'http://localhost:8080',
+      baseUrl: ConstInfo.baseUrl,
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 120),
       headers: {'Content-Type': 'application/json'},

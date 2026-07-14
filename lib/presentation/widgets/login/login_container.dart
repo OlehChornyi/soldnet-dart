@@ -120,9 +120,9 @@ class _LoginContainerState extends ConsumerState<LoginContainer> {
                       await userNotifier.signIn(_emailController.text.trim(),
                           _passwordController.text.trim());
                     }
-                    if (userState.user != null) {
-                      router.go(ScreenPaths.home);
-                    }
+                    // if (userState.user != null) {
+                    router.go(ScreenPaths.home);
+                    // }
                   }),
               const LoginFooter()
             ],
