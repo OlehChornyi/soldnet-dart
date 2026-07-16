@@ -4,6 +4,7 @@ import 'package:soldnet/models/utils/chat_tab.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
 import 'package:soldnet/presentation/widgets/app/button/app_button_fade.dart';
+import 'package:soldnet/presentation/widgets/chat/chat_bottom_sheet_users.dart';
 import 'package:soldnet/stores/store_chat.dart';
 
 class ChatHeader extends ConsumerWidget {
@@ -64,20 +65,23 @@ class ChatHeader extends ConsumerWidget {
           : Center(
               child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add_rounded,
-                        color: AppColors.white,
-                      ),
-                      Text(
-                        'Додати Чат',
-                        style: AppTextStyles.s16w500(color: AppColors.white),
-                      )
-                    ],
+                GestureDetector(
+                  onTap: () => showChatBottomSheetUsers(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add_rounded,
+                          color: AppColors.white,
+                        ),
+                        Text(
+                          'Додати Чат',
+                          style: AppTextStyles.s16w500(color: AppColors.white),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Divider(
