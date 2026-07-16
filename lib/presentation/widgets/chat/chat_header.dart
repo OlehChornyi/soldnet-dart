@@ -66,7 +66,10 @@ class ChatHeader extends ConsumerWidget {
               child: Column(
               children: [
                 GestureDetector(
-                  onTap: () => showChatBottomSheetUsers(),
+                  onTap: () {
+                    ref.read(storeChatProvider.notifier).getAllUsers();
+                    showChatBottomSheetUsers();
+                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: Row(

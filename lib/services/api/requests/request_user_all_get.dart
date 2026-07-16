@@ -11,7 +11,7 @@ part 'request_user_all_get.freezed.dart';
 Future<ResponseUserAllGet> requestUserAllGet(Ref ref) async {
   final dio = ref.read(dioClientProvider);
   try {
-    final Response response = await dio.get('/v1/user/account');
+    final Response response = await dio.get('/v1/user/all');
     return ResponseUserAllGet.fromJson(response.data);
   } on DioException catch (e) {
     return ResponseUserAllGet.fromJson(e.response?.data);

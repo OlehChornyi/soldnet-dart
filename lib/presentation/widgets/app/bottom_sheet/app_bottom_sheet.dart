@@ -45,7 +45,9 @@ class AppBottomSheet extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(header, style: AppTextStyles.s20w600()),
+                        Text(header,
+                            style: AppTextStyles.s20w600(
+                                color: AppColors.bgLight)),
                         Spacer(),
                         GestureDetector(
                           onTap: () => context.pop(),
@@ -56,10 +58,11 @@ class AppBottomSheet extends StatelessWidget {
                     ),
                     if (subHeader != null)
                       Padding(
-                        padding: const EdgeInsets.only(top: 4),
+                        padding: const EdgeInsets.only(top: 2),
                         child: Text(
                           subHeader ?? '',
-                          style: AppTextStyles.s20w600(color: AppColors.white),
+                          style:
+                              AppTextStyles.s12w500(color: AppColors.bgLight),
                         ),
                       ),
                   ],

@@ -35,7 +35,9 @@ class StoreChat extends _$StoreChat {
     state = state.copyWith(dialogBg: bg);
   }
 
-  void fetchAllUsers() async {
+  void getAllUsers() async {
+    // if (state.users.isNotEmpty) return;
+
     final response = await ref.read(requestUserAllGetProvider.future);
 
     state = state.copyWith(users: response.users ?? []);
