@@ -17,6 +17,7 @@ mixin _$StoreChatModel {
   ChatTab get tab;
   List<String> get chatGroups;
   DialogBg get dialogBg;
+  List<User> get users;
 
   /// Create a copy of StoreChatModel
   /// with the given fields replaced by the non-null parameter values.
@@ -35,16 +36,21 @@ mixin _$StoreChatModel {
             const DeepCollectionEquality()
                 .equals(other.chatGroups, chatGroups) &&
             (identical(other.dialogBg, dialogBg) ||
-                other.dialogBg == dialogBg));
+                other.dialogBg == dialogBg) &&
+            const DeepCollectionEquality().equals(other.users, users));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tab,
-      const DeepCollectionEquality().hash(chatGroups), dialogBg);
+  int get hashCode => Object.hash(
+      runtimeType,
+      tab,
+      const DeepCollectionEquality().hash(chatGroups),
+      dialogBg,
+      const DeepCollectionEquality().hash(users));
 
   @override
   String toString() {
-    return 'StoreChatModel(tab: $tab, chatGroups: $chatGroups, dialogBg: $dialogBg)';
+    return 'StoreChatModel(tab: $tab, chatGroups: $chatGroups, dialogBg: $dialogBg, users: $users)';
   }
 }
 
@@ -54,7 +60,11 @@ abstract mixin class $StoreChatModelCopyWith<$Res> {
           StoreChatModel value, $Res Function(StoreChatModel) _then) =
       _$StoreChatModelCopyWithImpl;
   @useResult
-  $Res call({ChatTab tab, List<String> chatGroups, DialogBg dialogBg});
+  $Res call(
+      {ChatTab tab,
+      List<String> chatGroups,
+      DialogBg dialogBg,
+      List<User> users});
 }
 
 /// @nodoc
@@ -73,6 +83,7 @@ class _$StoreChatModelCopyWithImpl<$Res>
     Object? tab = null,
     Object? chatGroups = null,
     Object? dialogBg = null,
+    Object? users = null,
   }) {
     return _then(_self.copyWith(
       tab: null == tab
@@ -87,6 +98,10 @@ class _$StoreChatModelCopyWithImpl<$Res>
           ? _self.dialogBg
           : dialogBg // ignore: cast_nullable_to_non_nullable
               as DialogBg,
+      users: null == users
+          ? _self.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<User>,
     ));
   }
 }
@@ -184,14 +199,16 @@ extension StoreChatModelPatterns on StoreChatModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(ChatTab tab, List<String> chatGroups, DialogBg dialogBg)?
+    TResult Function(ChatTab tab, List<String> chatGroups, DialogBg dialogBg,
+            List<User> users)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _StoreChatModel() when $default != null:
-        return $default(_that.tab, _that.chatGroups, _that.dialogBg);
+        return $default(
+            _that.tab, _that.chatGroups, _that.dialogBg, _that.users);
       case _:
         return orElse();
     }
@@ -212,13 +229,15 @@ extension StoreChatModelPatterns on StoreChatModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(ChatTab tab, List<String> chatGroups, DialogBg dialogBg)
+    TResult Function(ChatTab tab, List<String> chatGroups, DialogBg dialogBg,
+            List<User> users)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreChatModel():
-        return $default(_that.tab, _that.chatGroups, _that.dialogBg);
+        return $default(
+            _that.tab, _that.chatGroups, _that.dialogBg, _that.users);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -238,13 +257,15 @@ extension StoreChatModelPatterns on StoreChatModel {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(ChatTab tab, List<String> chatGroups, DialogBg dialogBg)?
+    TResult? Function(ChatTab tab, List<String> chatGroups, DialogBg dialogBg,
+            List<User> users)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreChatModel() when $default != null:
-        return $default(_that.tab, _that.chatGroups, _that.dialogBg);
+        return $default(
+            _that.tab, _that.chatGroups, _that.dialogBg, _that.users);
       case _:
         return null;
     }
@@ -257,8 +278,10 @@ class _StoreChatModel implements StoreChatModel {
   const _StoreChatModel(
       {required this.tab,
       required final List<String> chatGroups,
-      required this.dialogBg})
-      : _chatGroups = chatGroups;
+      required this.dialogBg,
+      required final List<User> users})
+      : _chatGroups = chatGroups,
+        _users = users;
 
   @override
   final ChatTab tab;
@@ -272,6 +295,13 @@ class _StoreChatModel implements StoreChatModel {
 
   @override
   final DialogBg dialogBg;
+  final List<User> _users;
+  @override
+  List<User> get users {
+    if (_users is EqualUnmodifiableListView) return _users;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_users);
+  }
 
   /// Create a copy of StoreChatModel
   /// with the given fields replaced by the non-null parameter values.
@@ -290,16 +320,21 @@ class _StoreChatModel implements StoreChatModel {
             const DeepCollectionEquality()
                 .equals(other._chatGroups, _chatGroups) &&
             (identical(other.dialogBg, dialogBg) ||
-                other.dialogBg == dialogBg));
+                other.dialogBg == dialogBg) &&
+            const DeepCollectionEquality().equals(other._users, _users));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tab,
-      const DeepCollectionEquality().hash(_chatGroups), dialogBg);
+  int get hashCode => Object.hash(
+      runtimeType,
+      tab,
+      const DeepCollectionEquality().hash(_chatGroups),
+      dialogBg,
+      const DeepCollectionEquality().hash(_users));
 
   @override
   String toString() {
-    return 'StoreChatModel(tab: $tab, chatGroups: $chatGroups, dialogBg: $dialogBg)';
+    return 'StoreChatModel(tab: $tab, chatGroups: $chatGroups, dialogBg: $dialogBg, users: $users)';
   }
 }
 
@@ -311,7 +346,11 @@ abstract mixin class _$StoreChatModelCopyWith<$Res>
       __$StoreChatModelCopyWithImpl;
   @override
   @useResult
-  $Res call({ChatTab tab, List<String> chatGroups, DialogBg dialogBg});
+  $Res call(
+      {ChatTab tab,
+      List<String> chatGroups,
+      DialogBg dialogBg,
+      List<User> users});
 }
 
 /// @nodoc
@@ -330,6 +369,7 @@ class __$StoreChatModelCopyWithImpl<$Res>
     Object? tab = null,
     Object? chatGroups = null,
     Object? dialogBg = null,
+    Object? users = null,
   }) {
     return _then(_StoreChatModel(
       tab: null == tab
@@ -344,6 +384,10 @@ class __$StoreChatModelCopyWithImpl<$Res>
           ? _self.dialogBg
           : dialogBg // ignore: cast_nullable_to_non_nullable
               as DialogBg,
+      users: null == users
+          ? _self._users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<User>,
     ));
   }
 }

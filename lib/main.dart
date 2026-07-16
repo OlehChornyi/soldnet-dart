@@ -38,5 +38,5 @@ void main() => runApp(ProviderScope(child: const App()));
 //            | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //            | END-TO-END шифрування в месенджерах.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// 2026.07.10 | Implement photo in a profile first. - search the most sutable way to store photos.
+// 2026.07.10 | DONE | Implement photo in a profile first. - search the most sutable way to store photos.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
