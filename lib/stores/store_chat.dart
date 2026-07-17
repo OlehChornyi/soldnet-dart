@@ -7,6 +7,7 @@ import 'package:soldnet/models/utils/dialog_bg.dart';
 import 'package:soldnet/services/api/requests/request_conversations_create.dart';
 import 'package:soldnet/services/api/requests/request_conversations_get.dart';
 import 'package:soldnet/services/api/requests/request_user_all_get.dart';
+import 'package:soldnet/stores/store_user.dart';
 
 part 'store_chat.g.dart';
 part 'store_chat.freezed.dart';
@@ -57,13 +58,41 @@ class StoreChat extends _$StoreChat {
     }
   }
 
-  Future<void> createConversation(BodyConversationsCreate body) async {
-    final response =
-        await ref.read(requestConversationsCreateProvider(body: body).future);
+  Future<void> createConversation(User chatUser) async {
+    final currentUserId = ref.read(storeUserProvider).user?.id ?? 0;
+    final members = [currentUserId, chatUser.id];
+    final title = chatUser.name ?? 'Chat with user, id: ${chatUser.id}';
+
+    final response = await ref.read(requestConversationsCreateProvider(
+            body: BodyConversationsCreate(title: title, members: members))
+        .future);
 
     if (response.conversation != null) {
       state = state.copyWith(
           conversations: [...state.conversations, response.conversation!]);
+    }
+  }
+
+  String getChatUserAvatarUrl(List<int> members) {
+    final currentUserId = ref.read(storeUserProvider).user?.id ?? 0;
+    final chatUserId = members.firstWhere((m) => m != currentUserId);
+
+    final chatUserAvatarUrl =
+        state.users.firstWhere((u) => u.id == chatUserId).avatarUrl;
+
+    return chatUserAvatarUrl ?? '';
+  }
+
+  String getConversationSubtitle(List<int> members) {
+    if (members.length < 2) {
+      return 'Кількість учасників [${members.length}]';
+    } else {
+      final currentUserId = ref.read(storeUserProvider).user?.id ?? 0;
+      final chatUserId = members.firstWhere((m) => m != currentUserId);
+
+      final chatUser = state.users.firstWhere((u) => u.id == chatUserId);
+
+      return 'Звання [${chatUser.militaryRank}]\nЦивільна професія [${chatUser.civilProfession}]';
     }
   }
 }

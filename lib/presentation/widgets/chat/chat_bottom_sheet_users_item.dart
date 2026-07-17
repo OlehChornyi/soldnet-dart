@@ -5,6 +5,7 @@ import 'package:soldnet/models/const/const_info.dart';
 import 'package:soldnet/models/entities/user.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
+import 'package:soldnet/stores/store_chat.dart';
 
 class ChatBottomSheetUsersItem extends ConsumerWidget {
   final User user;
@@ -13,10 +14,14 @@ class ChatBottomSheetUsersItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final chatNotifier = ref.read(storeChatProvider.notifier);
+
     return GestureDetector(
-      onTap: () {
-        print('Selected user: ${user.name} (ID: ${user.id})');
-        context.pop();
+      onTap: () async {
+        await chatNotifier.createConversation(user);
+        if (context.mounted) {
+          context.pop();
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),

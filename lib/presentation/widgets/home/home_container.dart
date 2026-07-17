@@ -20,7 +20,9 @@ class _HomeContainerState extends ConsumerState<HomeContainer> {
   void initState() {
     super.initState();
     ref.read(storeUserProvider.notifier).getUserAccount();
-    ref.read(storeChatProvider.notifier).getAllUserConversations();
+    final chatNotifier = ref.read(storeChatProvider.notifier);
+    chatNotifier.getAllUserConversations();
+    chatNotifier.getAllUsers();
   }
 
   @override
