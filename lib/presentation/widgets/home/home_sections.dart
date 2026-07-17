@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:soldnet/models/data/home_sections.dart';
+import 'package:soldnet/models/data/home_sections_mascot.dart';
 import 'package:soldnet/presentation/widgets/app/animations/app_animations_fade_in_list.dart';
 import 'package:soldnet/presentation/widgets/home/home_sections_back.dart';
 import 'package:soldnet/presentation/widgets/home/home_sections_front.dart';
@@ -16,13 +17,6 @@ class HomeSections extends StatefulWidget {
 class _HomeSectionsState extends State<HomeSections> {
   final _scrollController = ScrollController();
   bool _isUserReachedPageBottom = false;
-
-  final List<String> cItems = [
-    'assets/images/home/pegas.png',
-    'assets/images/home/draco.png',
-    'assets/images/home/unicorn.png',
-    'assets/images/home/draco_2.png',
-  ];
 
   @override
   void initState() {
@@ -77,7 +71,7 @@ class _HomeSectionsState extends State<HomeSections> {
                     viewportFraction: 0.45,
                     enlargeCenterPage: true,
                   ),
-                  items: cItems.map((item) {
+                  items: mascotItems.map((item) {
                     return Image.asset(
                       item,
                       height: 200,
