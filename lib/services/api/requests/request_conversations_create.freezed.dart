@@ -341,7 +341,7 @@ class __$BodyConversationsCreateCopyWithImpl<$Res>
 /// @nodoc
 mixin _$ResponseConversationsCreate {
   String? get message;
-  String? get conversation;
+  Conversation? get conversation;
 
   /// Create a copy of ResponseConversationsCreate
   /// with the given fields replaced by the non-null parameter values.
@@ -382,7 +382,9 @@ abstract mixin class $ResponseConversationsCreateCopyWith<$Res> {
           $Res Function(ResponseConversationsCreate) _then) =
       _$ResponseConversationsCreateCopyWithImpl;
   @useResult
-  $Res call({String? message, String? conversation});
+  $Res call({String? message, Conversation? conversation});
+
+  $ConversationCopyWith<$Res>? get conversation;
 }
 
 /// @nodoc
@@ -409,8 +411,22 @@ class _$ResponseConversationsCreateCopyWithImpl<$Res>
       conversation: freezed == conversation
           ? _self.conversation
           : conversation // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Conversation?,
     ));
+  }
+
+  /// Create a copy of ResponseConversationsCreate
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ConversationCopyWith<$Res>? get conversation {
+    if (_self.conversation == null) {
+      return null;
+    }
+
+    return $ConversationCopyWith<$Res>(_self.conversation!, (value) {
+      return _then(_self.copyWith(conversation: value));
+    });
   }
 }
 
@@ -507,7 +523,7 @@ extension ResponseConversationsCreatePatterns on ResponseConversationsCreate {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String? message, String? conversation)? $default, {
+    TResult Function(String? message, Conversation? conversation)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
@@ -534,7 +550,7 @@ extension ResponseConversationsCreatePatterns on ResponseConversationsCreate {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String? message, String? conversation) $default,
+    TResult Function(String? message, Conversation? conversation) $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -559,7 +575,7 @@ extension ResponseConversationsCreatePatterns on ResponseConversationsCreate {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String? message, String? conversation)? $default,
+    TResult? Function(String? message, Conversation? conversation)? $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -582,7 +598,7 @@ class _ResponseConversationsCreate implements ResponseConversationsCreate {
   @override
   final String? message;
   @override
-  final String? conversation;
+  final Conversation? conversation;
 
   /// Create a copy of ResponseConversationsCreate
   /// with the given fields replaced by the non-null parameter values.
@@ -629,7 +645,10 @@ abstract mixin class _$ResponseConversationsCreateCopyWith<$Res>
       __$ResponseConversationsCreateCopyWithImpl;
   @override
   @useResult
-  $Res call({String? message, String? conversation});
+  $Res call({String? message, Conversation? conversation});
+
+  @override
+  $ConversationCopyWith<$Res>? get conversation;
 }
 
 /// @nodoc
@@ -656,8 +675,22 @@ class __$ResponseConversationsCreateCopyWithImpl<$Res>
       conversation: freezed == conversation
           ? _self.conversation
           : conversation // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Conversation?,
     ));
+  }
+
+  /// Create a copy of ResponseConversationsCreate
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ConversationCopyWith<$Res>? get conversation {
+    if (_self.conversation == null) {
+      return null;
+    }
+
+    return $ConversationCopyWith<$Res>(_self.conversation!, (value) {
+      return _then(_self.copyWith(conversation: value));
+    });
   }
 }
 

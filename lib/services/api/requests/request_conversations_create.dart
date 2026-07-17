@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:dio/dio.dart';
+import 'package:soldnet/models/entities/conversation.dart';
 import 'package:soldnet/services/api/client/dio_client.dart';
 
 part 'request_conversations_create.g.dart';
@@ -35,7 +36,7 @@ abstract class BodyConversationsCreate with _$BodyConversationsCreate {
 abstract class ResponseConversationsCreate with _$ResponseConversationsCreate {
   const factory ResponseConversationsCreate({
     required String? message,
-    required String? conversation,
+    required Conversation? conversation,
   }) = _ResponseConversationsCreate;
 
   factory ResponseConversationsCreate.fromJson(Map<String, dynamic> json) =>

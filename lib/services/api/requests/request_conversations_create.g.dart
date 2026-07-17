@@ -26,7 +26,9 @@ _ResponseConversationsCreate _$ResponseConversationsCreateFromJson(
         Map<String, dynamic> json) =>
     _ResponseConversationsCreate(
       message: json['message'] as String?,
-      conversation: json['conversation'] as String?,
+      conversation: json['conversation'] == null
+          ? null
+          : Conversation.fromJson(json['conversation'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ResponseConversationsCreateToJson(
