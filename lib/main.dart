@@ -40,3 +40,5 @@ void main() => runApp(ProviderScope(child: const App()));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.07.10 | DONE | Implement photo in a profile first. - search the most sutable way to store photos.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.07.18 | DONE | User contacts on server and in mobile.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
