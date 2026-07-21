@@ -119,30 +119,29 @@ class StoreChat extends _$StoreChat {
 
     if (state.selectedConversation != null) {
       final message = Message(
-        id: math.Random()
-            .nextInt(1000000), // Generate a random ID for the message
+        id: math.Random().nextInt(1000000),
         conversationId: state.selectedConversation!.id,
         sederId: state.chatUserId,
         message: text.data ?? '',
         createdAt: DateTime.now().toIso8601String(),
       );
       WsChat.sendMessage(message);
-      addMessageToConversation(message.conversationId, message);
+      addMessageToConversation(message);
     }
   }
 
   void handleMessageFromWs(Message message) {
-    addMessageToConversation(message.conversationId, message);
+    addMessageToConversation(message);
   }
 
-  void addMessageToConversation(int conversationId, Message message) {
+  void addMessageToConversation(Message message) {
     final currentMessages =
-        state.messagesByConversationId[conversationId] ?? [];
+        state.messagesByConversationId[message.conversationId] ?? [];
     final updatedMessages = [...currentMessages, message];
 
     state = state.copyWith(messagesByConversationId: {
       ...state.messagesByConversationId,
-      conversationId: updatedMessages,
+      message.conversationId: updatedMessages,
     });
   }
 }
