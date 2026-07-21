@@ -19,6 +19,7 @@ mixin _$StoreChatModel {
   DialogBg get dialogBg;
   List<User> get users;
   List<Conversation> get conversations;
+  Map<int, List<Message>> get messagesByConversationId;
 
   /// Create a copy of StoreChatModel
   /// with the given fields replaced by the non-null parameter values.
@@ -40,7 +41,9 @@ mixin _$StoreChatModel {
                 other.dialogBg == dialogBg) &&
             const DeepCollectionEquality().equals(other.users, users) &&
             const DeepCollectionEquality()
-                .equals(other.conversations, conversations));
+                .equals(other.conversations, conversations) &&
+            const DeepCollectionEquality().equals(
+                other.messagesByConversationId, messagesByConversationId));
   }
 
   @override
@@ -50,11 +53,12 @@ mixin _$StoreChatModel {
       const DeepCollectionEquality().hash(chatGroups),
       dialogBg,
       const DeepCollectionEquality().hash(users),
-      const DeepCollectionEquality().hash(conversations));
+      const DeepCollectionEquality().hash(conversations),
+      const DeepCollectionEquality().hash(messagesByConversationId));
 
   @override
   String toString() {
-    return 'StoreChatModel(tab: $tab, chatGroups: $chatGroups, dialogBg: $dialogBg, users: $users, conversations: $conversations)';
+    return 'StoreChatModel(tab: $tab, chatGroups: $chatGroups, dialogBg: $dialogBg, users: $users, conversations: $conversations, messagesByConversationId: $messagesByConversationId)';
   }
 }
 
@@ -69,7 +73,8 @@ abstract mixin class $StoreChatModelCopyWith<$Res> {
       List<String> chatGroups,
       DialogBg dialogBg,
       List<User> users,
-      List<Conversation> conversations});
+      List<Conversation> conversations,
+      Map<int, List<Message>> messagesByConversationId});
 }
 
 /// @nodoc
@@ -90,6 +95,7 @@ class _$StoreChatModelCopyWithImpl<$Res>
     Object? dialogBg = null,
     Object? users = null,
     Object? conversations = null,
+    Object? messagesByConversationId = null,
   }) {
     return _then(_self.copyWith(
       tab: null == tab
@@ -112,6 +118,10 @@ class _$StoreChatModelCopyWithImpl<$Res>
           ? _self.conversations
           : conversations // ignore: cast_nullable_to_non_nullable
               as List<Conversation>,
+      messagesByConversationId: null == messagesByConversationId
+          ? _self.messagesByConversationId
+          : messagesByConversationId // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Message>>,
     ));
   }
 }
@@ -209,8 +219,13 @@ extension StoreChatModelPatterns on StoreChatModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(ChatTab tab, List<String> chatGroups, DialogBg dialogBg,
-            List<User> users, List<Conversation> conversations)?
+    TResult Function(
+            ChatTab tab,
+            List<String> chatGroups,
+            DialogBg dialogBg,
+            List<User> users,
+            List<Conversation> conversations,
+            Map<int, List<Message>> messagesByConversationId)?
         $default, {
     required TResult orElse(),
   }) {
@@ -218,7 +233,7 @@ extension StoreChatModelPatterns on StoreChatModel {
     switch (_that) {
       case _StoreChatModel() when $default != null:
         return $default(_that.tab, _that.chatGroups, _that.dialogBg,
-            _that.users, _that.conversations);
+            _that.users, _that.conversations, _that.messagesByConversationId);
       case _:
         return orElse();
     }
@@ -239,15 +254,20 @@ extension StoreChatModelPatterns on StoreChatModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(ChatTab tab, List<String> chatGroups, DialogBg dialogBg,
-            List<User> users, List<Conversation> conversations)
+    TResult Function(
+            ChatTab tab,
+            List<String> chatGroups,
+            DialogBg dialogBg,
+            List<User> users,
+            List<Conversation> conversations,
+            Map<int, List<Message>> messagesByConversationId)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreChatModel():
         return $default(_that.tab, _that.chatGroups, _that.dialogBg,
-            _that.users, _that.conversations);
+            _that.users, _that.conversations, _that.messagesByConversationId);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -267,15 +287,20 @@ extension StoreChatModelPatterns on StoreChatModel {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(ChatTab tab, List<String> chatGroups, DialogBg dialogBg,
-            List<User> users, List<Conversation> conversations)?
+    TResult? Function(
+            ChatTab tab,
+            List<String> chatGroups,
+            DialogBg dialogBg,
+            List<User> users,
+            List<Conversation> conversations,
+            Map<int, List<Message>> messagesByConversationId)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreChatModel() when $default != null:
         return $default(_that.tab, _that.chatGroups, _that.dialogBg,
-            _that.users, _that.conversations);
+            _that.users, _that.conversations, _that.messagesByConversationId);
       case _:
         return null;
     }
@@ -290,10 +315,12 @@ class _StoreChatModel implements StoreChatModel {
       required final List<String> chatGroups,
       required this.dialogBg,
       required final List<User> users,
-      required final List<Conversation> conversations})
+      required final List<Conversation> conversations,
+      required final Map<int, List<Message>> messagesByConversationId})
       : _chatGroups = chatGroups,
         _users = users,
-        _conversations = conversations;
+        _conversations = conversations,
+        _messagesByConversationId = messagesByConversationId;
 
   @override
   final ChatTab tab;
@@ -323,6 +350,15 @@ class _StoreChatModel implements StoreChatModel {
     return EqualUnmodifiableListView(_conversations);
   }
 
+  final Map<int, List<Message>> _messagesByConversationId;
+  @override
+  Map<int, List<Message>> get messagesByConversationId {
+    if (_messagesByConversationId is EqualUnmodifiableMapView)
+      return _messagesByConversationId;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_messagesByConversationId);
+  }
+
   /// Create a copy of StoreChatModel
   /// with the given fields replaced by the non-null parameter values.
   @override
@@ -343,7 +379,9 @@ class _StoreChatModel implements StoreChatModel {
                 other.dialogBg == dialogBg) &&
             const DeepCollectionEquality().equals(other._users, _users) &&
             const DeepCollectionEquality()
-                .equals(other._conversations, _conversations));
+                .equals(other._conversations, _conversations) &&
+            const DeepCollectionEquality().equals(
+                other._messagesByConversationId, _messagesByConversationId));
   }
 
   @override
@@ -353,11 +391,12 @@ class _StoreChatModel implements StoreChatModel {
       const DeepCollectionEquality().hash(_chatGroups),
       dialogBg,
       const DeepCollectionEquality().hash(_users),
-      const DeepCollectionEquality().hash(_conversations));
+      const DeepCollectionEquality().hash(_conversations),
+      const DeepCollectionEquality().hash(_messagesByConversationId));
 
   @override
   String toString() {
-    return 'StoreChatModel(tab: $tab, chatGroups: $chatGroups, dialogBg: $dialogBg, users: $users, conversations: $conversations)';
+    return 'StoreChatModel(tab: $tab, chatGroups: $chatGroups, dialogBg: $dialogBg, users: $users, conversations: $conversations, messagesByConversationId: $messagesByConversationId)';
   }
 }
 
@@ -374,7 +413,8 @@ abstract mixin class _$StoreChatModelCopyWith<$Res>
       List<String> chatGroups,
       DialogBg dialogBg,
       List<User> users,
-      List<Conversation> conversations});
+      List<Conversation> conversations,
+      Map<int, List<Message>> messagesByConversationId});
 }
 
 /// @nodoc
@@ -395,6 +435,7 @@ class __$StoreChatModelCopyWithImpl<$Res>
     Object? dialogBg = null,
     Object? users = null,
     Object? conversations = null,
+    Object? messagesByConversationId = null,
   }) {
     return _then(_StoreChatModel(
       tab: null == tab
@@ -417,6 +458,10 @@ class __$StoreChatModelCopyWithImpl<$Res>
           ? _self._conversations
           : conversations // ignore: cast_nullable_to_non_nullable
               as List<Conversation>,
+      messagesByConversationId: null == messagesByConversationId
+          ? _self._messagesByConversationId
+          : messagesByConversationId // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Message>>,
     ));
   }
 }

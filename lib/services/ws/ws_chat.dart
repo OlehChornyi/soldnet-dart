@@ -7,6 +7,8 @@ class WsChat {
   static WebSocketChannel? channel;
 
   static Future<void> startWsChat() async {
+    if (channel != null) return;
+
     channel =
         WebSocketChannel.connect(Uri.parse('${ConstInfo.wsBaseUrl}/chat'));
 

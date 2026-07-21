@@ -4,6 +4,7 @@ import 'package:soldnet/models/utils/home_tab.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/widgets/home/home_details.dart';
 import 'package:soldnet/presentation/widgets/home/home_sections.dart';
+import 'package:soldnet/services/ws/ws_chat.dart';
 import 'package:soldnet/stores/store_chat.dart';
 import 'package:soldnet/stores/store_home.dart';
 import 'package:soldnet/stores/store_user.dart';
@@ -19,10 +20,16 @@ class _HomeContainerState extends ConsumerState<HomeContainer> {
   @override
   void initState() {
     super.initState();
+    _makeApiCallsAndMaybeStartWs();
+  }
+
+  void _makeApiCallsAndMaybeStartWs() {
     ref.read(storeUserProvider.notifier).getUserAccount();
     final chatNotifier = ref.read(storeChatProvider.notifier);
     chatNotifier.getAllUserConversations();
     chatNotifier.getAllUsers();
+
+    WsChat.startWsChat();
   }
 
   @override

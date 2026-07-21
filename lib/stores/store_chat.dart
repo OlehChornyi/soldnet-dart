@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soldnet/models/entities/conversation.dart';
+import 'package:soldnet/models/entities/message.dart';
 import 'package:soldnet/models/entities/user.dart';
 import 'package:soldnet/models/utils/chat_tab.dart';
 import 'package:soldnet/models/utils/dialog_bg.dart';
@@ -20,6 +21,7 @@ abstract class StoreChatModel with _$StoreChatModel {
     required DialogBg dialogBg,
     required List<User> users,
     required List<Conversation> conversations,
+    required Map<int, List<Message>> messagesByConversationId,
   }) = _StoreChatModel;
 }
 
@@ -31,7 +33,8 @@ class StoreChat extends _$StoreChat {
       chatGroups: [],
       dialogBg: DialogBg.leaves,
       users: [],
-      conversations: []);
+      conversations: [],
+      messagesByConversationId: {});
 
   void setTab(ChatTab tab) {
     state = state.copyWith(tab: tab);
@@ -54,6 +57,11 @@ class StoreChat extends _$StoreChat {
     final response = await ref.read(requestConversationsGetProvider.future);
 
     if (response.conversations != null) {
+      Map<int, List<Message>> messagesByConversationId = <int, List<Message>>{};
+      messagesByConversationId
+          .addEntries(response.conversations!.map((conversation) {
+        return MapEntry(conversation.id, []);
+      }));
       state = state.copyWith(conversations: response.conversations!);
     }
   }
