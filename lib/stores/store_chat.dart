@@ -48,6 +48,10 @@ class StoreChat extends _$StoreChat {
     state = state.copyWith(chatUserId: userId);
   }
 
+  void setSelectedConversation(Conversation conversation) {
+    state = state.copyWith(selectedConversation: conversation);
+  }
+
   void setTab(ChatTab tab) {
     state = state.copyWith(tab: tab);
   }
@@ -113,7 +117,7 @@ class StoreChat extends _$StoreChat {
     }
   }
 
-  void sendMessageToWs(Text text) {
+  void sendMessageToWs(String text) {
     //TODO: implement
     // final uuid = UuidV4().generate();
 
@@ -122,7 +126,7 @@ class StoreChat extends _$StoreChat {
         id: math.Random().nextInt(1000000),
         conversationId: state.selectedConversation!.id,
         sederId: state.chatUserId,
-        message: text.data ?? '',
+        message: text,
         createdAt: DateTime.now().toIso8601String(),
       );
       WsChat.sendMessage(message);
