@@ -29,7 +29,7 @@ class _HomeContainerState extends ConsumerState<HomeContainer> {
     chatNotifier.getAllUserConversations();
     chatNotifier.getAllUsers();
 
-    WsChat.startWsChat();
+    WsChat.startWsChat(ref);
   }
 
   @override
