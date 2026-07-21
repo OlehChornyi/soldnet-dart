@@ -14,12 +14,13 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$StoreChatModel {
+  int get chatUserId;
   ChatTab get tab;
-  List<String> get chatGroups;
   DialogBg get dialogBg;
   List<User> get users;
   List<Conversation> get conversations;
   Map<int, List<Message>> get messagesByConversationId;
+  Conversation? get selectedConversation;
 
   /// Create a copy of StoreChatModel
   /// with the given fields replaced by the non-null parameter values.
@@ -34,31 +35,34 @@ mixin _$StoreChatModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is StoreChatModel &&
+            (identical(other.chatUserId, chatUserId) ||
+                other.chatUserId == chatUserId) &&
             (identical(other.tab, tab) || other.tab == tab) &&
-            const DeepCollectionEquality()
-                .equals(other.chatGroups, chatGroups) &&
             (identical(other.dialogBg, dialogBg) ||
                 other.dialogBg == dialogBg) &&
             const DeepCollectionEquality().equals(other.users, users) &&
             const DeepCollectionEquality()
                 .equals(other.conversations, conversations) &&
             const DeepCollectionEquality().equals(
-                other.messagesByConversationId, messagesByConversationId));
+                other.messagesByConversationId, messagesByConversationId) &&
+            (identical(other.selectedConversation, selectedConversation) ||
+                other.selectedConversation == selectedConversation));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      chatUserId,
       tab,
-      const DeepCollectionEquality().hash(chatGroups),
       dialogBg,
       const DeepCollectionEquality().hash(users),
       const DeepCollectionEquality().hash(conversations),
-      const DeepCollectionEquality().hash(messagesByConversationId));
+      const DeepCollectionEquality().hash(messagesByConversationId),
+      selectedConversation);
 
   @override
   String toString() {
-    return 'StoreChatModel(tab: $tab, chatGroups: $chatGroups, dialogBg: $dialogBg, users: $users, conversations: $conversations, messagesByConversationId: $messagesByConversationId)';
+    return 'StoreChatModel(chatUserId: $chatUserId, tab: $tab, dialogBg: $dialogBg, users: $users, conversations: $conversations, messagesByConversationId: $messagesByConversationId, selectedConversation: $selectedConversation)';
   }
 }
 
@@ -69,12 +73,15 @@ abstract mixin class $StoreChatModelCopyWith<$Res> {
       _$StoreChatModelCopyWithImpl;
   @useResult
   $Res call(
-      {ChatTab tab,
-      List<String> chatGroups,
+      {int chatUserId,
+      ChatTab tab,
       DialogBg dialogBg,
       List<User> users,
       List<Conversation> conversations,
-      Map<int, List<Message>> messagesByConversationId});
+      Map<int, List<Message>> messagesByConversationId,
+      Conversation? selectedConversation});
+
+  $ConversationCopyWith<$Res>? get selectedConversation;
 }
 
 /// @nodoc
@@ -90,22 +97,23 @@ class _$StoreChatModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? chatUserId = null,
     Object? tab = null,
-    Object? chatGroups = null,
     Object? dialogBg = null,
     Object? users = null,
     Object? conversations = null,
     Object? messagesByConversationId = null,
+    Object? selectedConversation = freezed,
   }) {
     return _then(_self.copyWith(
+      chatUserId: null == chatUserId
+          ? _self.chatUserId
+          : chatUserId // ignore: cast_nullable_to_non_nullable
+              as int,
       tab: null == tab
           ? _self.tab
           : tab // ignore: cast_nullable_to_non_nullable
               as ChatTab,
-      chatGroups: null == chatGroups
-          ? _self.chatGroups
-          : chatGroups // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       dialogBg: null == dialogBg
           ? _self.dialogBg
           : dialogBg // ignore: cast_nullable_to_non_nullable
@@ -122,7 +130,25 @@ class _$StoreChatModelCopyWithImpl<$Res>
           ? _self.messagesByConversationId
           : messagesByConversationId // ignore: cast_nullable_to_non_nullable
               as Map<int, List<Message>>,
+      selectedConversation: freezed == selectedConversation
+          ? _self.selectedConversation
+          : selectedConversation // ignore: cast_nullable_to_non_nullable
+              as Conversation?,
     ));
+  }
+
+  /// Create a copy of StoreChatModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ConversationCopyWith<$Res>? get selectedConversation {
+    if (_self.selectedConversation == null) {
+      return null;
+    }
+
+    return $ConversationCopyWith<$Res>(_self.selectedConversation!, (value) {
+      return _then(_self.copyWith(selectedConversation: value));
+    });
   }
 }
 
@@ -220,20 +246,27 @@ extension StoreChatModelPatterns on StoreChatModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
+            int chatUserId,
             ChatTab tab,
-            List<String> chatGroups,
             DialogBg dialogBg,
             List<User> users,
             List<Conversation> conversations,
-            Map<int, List<Message>> messagesByConversationId)?
+            Map<int, List<Message>> messagesByConversationId,
+            Conversation? selectedConversation)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _StoreChatModel() when $default != null:
-        return $default(_that.tab, _that.chatGroups, _that.dialogBg,
-            _that.users, _that.conversations, _that.messagesByConversationId);
+        return $default(
+            _that.chatUserId,
+            _that.tab,
+            _that.dialogBg,
+            _that.users,
+            _that.conversations,
+            _that.messagesByConversationId,
+            _that.selectedConversation);
       case _:
         return orElse();
     }
@@ -255,19 +288,26 @@ extension StoreChatModelPatterns on StoreChatModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
+            int chatUserId,
             ChatTab tab,
-            List<String> chatGroups,
             DialogBg dialogBg,
             List<User> users,
             List<Conversation> conversations,
-            Map<int, List<Message>> messagesByConversationId)
+            Map<int, List<Message>> messagesByConversationId,
+            Conversation? selectedConversation)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreChatModel():
-        return $default(_that.tab, _that.chatGroups, _that.dialogBg,
-            _that.users, _that.conversations, _that.messagesByConversationId);
+        return $default(
+            _that.chatUserId,
+            _that.tab,
+            _that.dialogBg,
+            _that.users,
+            _that.conversations,
+            _that.messagesByConversationId,
+            _that.selectedConversation);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -288,19 +328,26 @@ extension StoreChatModelPatterns on StoreChatModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
+            int chatUserId,
             ChatTab tab,
-            List<String> chatGroups,
             DialogBg dialogBg,
             List<User> users,
             List<Conversation> conversations,
-            Map<int, List<Message>> messagesByConversationId)?
+            Map<int, List<Message>> messagesByConversationId,
+            Conversation? selectedConversation)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreChatModel() when $default != null:
-        return $default(_that.tab, _that.chatGroups, _that.dialogBg,
-            _that.users, _that.conversations, _that.messagesByConversationId);
+        return $default(
+            _that.chatUserId,
+            _that.tab,
+            _that.dialogBg,
+            _that.users,
+            _that.conversations,
+            _that.messagesByConversationId,
+            _that.selectedConversation);
       case _:
         return null;
     }
@@ -311,27 +358,21 @@ extension StoreChatModelPatterns on StoreChatModel {
 
 class _StoreChatModel implements StoreChatModel {
   const _StoreChatModel(
-      {required this.tab,
-      required final List<String> chatGroups,
+      {required this.chatUserId,
+      required this.tab,
       required this.dialogBg,
       required final List<User> users,
       required final List<Conversation> conversations,
-      required final Map<int, List<Message>> messagesByConversationId})
-      : _chatGroups = chatGroups,
-        _users = users,
+      required final Map<int, List<Message>> messagesByConversationId,
+      required this.selectedConversation})
+      : _users = users,
         _conversations = conversations,
         _messagesByConversationId = messagesByConversationId;
 
   @override
-  final ChatTab tab;
-  final List<String> _chatGroups;
+  final int chatUserId;
   @override
-  List<String> get chatGroups {
-    if (_chatGroups is EqualUnmodifiableListView) return _chatGroups;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_chatGroups);
-  }
-
+  final ChatTab tab;
   @override
   final DialogBg dialogBg;
   final List<User> _users;
@@ -359,6 +400,9 @@ class _StoreChatModel implements StoreChatModel {
     return EqualUnmodifiableMapView(_messagesByConversationId);
   }
 
+  @override
+  final Conversation? selectedConversation;
+
   /// Create a copy of StoreChatModel
   /// with the given fields replaced by the non-null parameter values.
   @override
@@ -372,31 +416,34 @@ class _StoreChatModel implements StoreChatModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _StoreChatModel &&
+            (identical(other.chatUserId, chatUserId) ||
+                other.chatUserId == chatUserId) &&
             (identical(other.tab, tab) || other.tab == tab) &&
-            const DeepCollectionEquality()
-                .equals(other._chatGroups, _chatGroups) &&
             (identical(other.dialogBg, dialogBg) ||
                 other.dialogBg == dialogBg) &&
             const DeepCollectionEquality().equals(other._users, _users) &&
             const DeepCollectionEquality()
                 .equals(other._conversations, _conversations) &&
             const DeepCollectionEquality().equals(
-                other._messagesByConversationId, _messagesByConversationId));
+                other._messagesByConversationId, _messagesByConversationId) &&
+            (identical(other.selectedConversation, selectedConversation) ||
+                other.selectedConversation == selectedConversation));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      chatUserId,
       tab,
-      const DeepCollectionEquality().hash(_chatGroups),
       dialogBg,
       const DeepCollectionEquality().hash(_users),
       const DeepCollectionEquality().hash(_conversations),
-      const DeepCollectionEquality().hash(_messagesByConversationId));
+      const DeepCollectionEquality().hash(_messagesByConversationId),
+      selectedConversation);
 
   @override
   String toString() {
-    return 'StoreChatModel(tab: $tab, chatGroups: $chatGroups, dialogBg: $dialogBg, users: $users, conversations: $conversations, messagesByConversationId: $messagesByConversationId)';
+    return 'StoreChatModel(chatUserId: $chatUserId, tab: $tab, dialogBg: $dialogBg, users: $users, conversations: $conversations, messagesByConversationId: $messagesByConversationId, selectedConversation: $selectedConversation)';
   }
 }
 
@@ -409,12 +456,16 @@ abstract mixin class _$StoreChatModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {ChatTab tab,
-      List<String> chatGroups,
+      {int chatUserId,
+      ChatTab tab,
       DialogBg dialogBg,
       List<User> users,
       List<Conversation> conversations,
-      Map<int, List<Message>> messagesByConversationId});
+      Map<int, List<Message>> messagesByConversationId,
+      Conversation? selectedConversation});
+
+  @override
+  $ConversationCopyWith<$Res>? get selectedConversation;
 }
 
 /// @nodoc
@@ -430,22 +481,23 @@ class __$StoreChatModelCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
+    Object? chatUserId = null,
     Object? tab = null,
-    Object? chatGroups = null,
     Object? dialogBg = null,
     Object? users = null,
     Object? conversations = null,
     Object? messagesByConversationId = null,
+    Object? selectedConversation = freezed,
   }) {
     return _then(_StoreChatModel(
+      chatUserId: null == chatUserId
+          ? _self.chatUserId
+          : chatUserId // ignore: cast_nullable_to_non_nullable
+              as int,
       tab: null == tab
           ? _self.tab
           : tab // ignore: cast_nullable_to_non_nullable
               as ChatTab,
-      chatGroups: null == chatGroups
-          ? _self._chatGroups
-          : chatGroups // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       dialogBg: null == dialogBg
           ? _self.dialogBg
           : dialogBg // ignore: cast_nullable_to_non_nullable
@@ -462,7 +514,25 @@ class __$StoreChatModelCopyWithImpl<$Res>
           ? _self._messagesByConversationId
           : messagesByConversationId // ignore: cast_nullable_to_non_nullable
               as Map<int, List<Message>>,
+      selectedConversation: freezed == selectedConversation
+          ? _self.selectedConversation
+          : selectedConversation // ignore: cast_nullable_to_non_nullable
+              as Conversation?,
     ));
+  }
+
+  /// Create a copy of StoreChatModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ConversationCopyWith<$Res>? get selectedConversation {
+    if (_self.selectedConversation == null) {
+      return null;
+    }
+
+    return $ConversationCopyWith<$Res>(_self.selectedConversation!, (value) {
+      return _then(_self.copyWith(selectedConversation: value));
+    });
   }
 }
 

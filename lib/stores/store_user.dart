@@ -9,6 +9,7 @@ import 'package:soldnet/services/api/requests/request_user_photo_post.dart';
 import 'package:soldnet/services/api/requests/request_user_sign_in.dart';
 import 'package:soldnet/services/api/requests/request_user_sign_up.dart';
 import 'package:soldnet/services/shared_prefs/shared_prefs.dart';
+import 'package:soldnet/stores/store_chat.dart';
 
 part 'store_user.g.dart';
 part 'store_user.freezed.dart';
@@ -84,6 +85,9 @@ class StoreUser extends _$StoreUser {
 
   Future<void> getUserAccount() async {
     final response = await ref.read(requestUserAccountGetProvider.future);
+
+    ref.read(storeChatProvider.notifier).setChatUserId(response.user?.id ?? 0);
+
     state = state.copyWith(user: response.user);
   }
 

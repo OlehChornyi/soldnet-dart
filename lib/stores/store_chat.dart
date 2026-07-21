@@ -1,3 +1,6 @@
+import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soldnet/models/entities/conversation.dart';
@@ -9,6 +12,8 @@ import 'package:soldnet/services/api/requests/request_conversations_create.dart'
 import 'package:soldnet/services/api/requests/request_conversations_get.dart';
 import 'package:soldnet/services/api/requests/request_user_all_get.dart';
 import 'package:soldnet/stores/store_user.dart';
+import 'package:uuid/uuid.dart';
+import 'package:uuid/v4.dart';
 
 part 'store_chat.g.dart';
 part 'store_chat.freezed.dart';
@@ -16,12 +21,13 @@ part 'store_chat.freezed.dart';
 @freezed
 abstract class StoreChatModel with _$StoreChatModel {
   const factory StoreChatModel({
+    required int chatUserId,
     required ChatTab tab,
-    required List<String> chatGroups,
     required DialogBg dialogBg,
     required List<User> users,
     required List<Conversation> conversations,
     required Map<int, List<Message>> messagesByConversationId,
+    required Conversation? selectedConversation,
   }) = _StoreChatModel;
 }
 
@@ -29,12 +35,17 @@ abstract class StoreChatModel with _$StoreChatModel {
 class StoreChat extends _$StoreChat {
   @override
   StoreChatModel build() => StoreChatModel(
+      chatUserId: 0,
       tab: ChatTab.groups,
-      chatGroups: [],
       dialogBg: DialogBg.leaves,
       users: [],
       conversations: [],
-      messagesByConversationId: {});
+      messagesByConversationId: {},
+      selectedConversation: null);
+
+  void setChatUserId(int userId) {
+    state = state.copyWith(chatUserId: userId);
+  }
 
   void setTab(ChatTab tab) {
     state = state.copyWith(tab: tab);
@@ -67,8 +78,7 @@ class StoreChat extends _$StoreChat {
   }
 
   Future<void> createConversation(User chatUser) async {
-    final currentUserId = ref.read(storeUserProvider).user?.id ?? 0;
-    final members = [currentUserId, chatUser.id];
+    final members = [state.chatUserId, chatUser.id];
     final title = chatUser.name ?? 'Chat with user, id: ${chatUser.id}';
 
     final response = await ref.read(requestConversationsCreateProvider(
@@ -82,8 +92,7 @@ class StoreChat extends _$StoreChat {
   }
 
   String getChatUserAvatarUrl(List<int> members) {
-    final currentUserId = ref.read(storeUserProvider).user?.id ?? 0;
-    final chatUserId = members.firstWhere((m) => m != currentUserId);
+    final chatUserId = members.firstWhere((m) => m != state.chatUserId);
 
     final chatUserAvatarUrl =
         state.users.firstWhere((u) => u.id == chatUserId).avatarUrl;
@@ -95,12 +104,43 @@ class StoreChat extends _$StoreChat {
     if (members.length < 2) {
       return 'Кількість учасників [${members.length}]';
     } else {
-      final currentUserId = ref.read(storeUserProvider).user?.id ?? 0;
-      final chatUserId = members.firstWhere((m) => m != currentUserId);
+      final chatUserId = members.firstWhere((m) => m != state.chatUserId);
 
       final chatUser = state.users.firstWhere((u) => u.id == chatUserId);
 
       return 'Звання [${chatUser.militaryRank}]\nЦивільна професія [${chatUser.civilProfession}]';
     }
+  }
+
+  void sendMessageToWs(Text text) {
+    //TODO: implement
+    // final uuid = UuidV4().generate();
+    if (state.selectedConversation != null) {
+      final message = Message(
+        id: math.Random()
+            .nextInt(1000000), // Generate a random ID for the message
+        conversationId: state.selectedConversation!.id,
+        sederId: 5,
+        message: text.data ?? '',
+        createdAt: DateTime.now().toIso8601String(),
+      );
+
+      addMessageToConversation(message.conversationId, message);
+    }
+  }
+
+  void handleMessageFromWs(Message message) {
+    addMessageToConversation(message.conversationId, message);
+  }
+
+  void addMessageToConversation(int conversationId, Message message) {
+    final currentMessages =
+        state.messagesByConversationId[conversationId] ?? [];
+    final updatedMessages = [...currentMessages, message];
+
+    state = state.copyWith(messagesByConversationId: {
+      ...state.messagesByConversationId,
+      conversationId: updatedMessages,
+    });
   }
 }
