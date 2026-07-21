@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:soldnet/models/const/const_info.dart';
+import 'package:soldnet/models/entities/message.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class WsChat {
@@ -15,13 +16,15 @@ class WsChat {
     await channel?.ready;
 
     channel?.stream.listen((event) => print(event));
-
-    channel?.sink.add(jsonEncode(
-        {"conversationId": 1, "receiverId": 5, "message": "Hello!"}));
   }
 
-  static void sendMessage(String message) {
-    channel?.sink.add(
-        jsonEncode({"conversationId": 1, "receiverId": 5, "message": message}));
+  static void sendMessage(Message message) {
+    channel?.sink.add(jsonEncode({
+      "id": message.id,
+      "conversationId": message.conversationId,
+      "sederId": message.sederId,
+      "message": message.message,
+      "createdAt": message.createdAt
+    }));
   }
 }

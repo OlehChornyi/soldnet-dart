@@ -11,6 +11,7 @@ import 'package:soldnet/models/utils/dialog_bg.dart';
 import 'package:soldnet/services/api/requests/request_conversations_create.dart';
 import 'package:soldnet/services/api/requests/request_conversations_get.dart';
 import 'package:soldnet/services/api/requests/request_user_all_get.dart';
+import 'package:soldnet/services/ws/ws_chat.dart';
 import 'package:soldnet/stores/store_user.dart';
 import 'package:uuid/uuid.dart';
 import 'package:uuid/v4.dart';
@@ -115,16 +116,17 @@ class StoreChat extends _$StoreChat {
   void sendMessageToWs(Text text) {
     //TODO: implement
     // final uuid = UuidV4().generate();
+
     if (state.selectedConversation != null) {
       final message = Message(
         id: math.Random()
             .nextInt(1000000), // Generate a random ID for the message
         conversationId: state.selectedConversation!.id,
-        sederId: 5,
+        sederId: state.chatUserId,
         message: text.data ?? '',
         createdAt: DateTime.now().toIso8601String(),
       );
-
+      WsChat.sendMessage(message);
       addMessageToConversation(message.conversationId, message);
     }
   }
