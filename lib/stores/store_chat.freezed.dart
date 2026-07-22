@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$StoreChatModel {
-  int get chatUserId;
+  String get chatUserId;
   ChatTab get tab;
   DialogBg get dialogBg;
   List<User> get users;
   List<Conversation> get conversations;
-  Map<int, List<Message>> get messagesByConversationId;
+  Map<String, List<Message>> get messagesByConversationId;
   Conversation? get selectedConversation;
 
   /// Create a copy of StoreChatModel
@@ -73,12 +73,12 @@ abstract mixin class $StoreChatModelCopyWith<$Res> {
       _$StoreChatModelCopyWithImpl;
   @useResult
   $Res call(
-      {int chatUserId,
+      {String chatUserId,
       ChatTab tab,
       DialogBg dialogBg,
       List<User> users,
       List<Conversation> conversations,
-      Map<int, List<Message>> messagesByConversationId,
+      Map<String, List<Message>> messagesByConversationId,
       Conversation? selectedConversation});
 
   $ConversationCopyWith<$Res>? get selectedConversation;
@@ -109,7 +109,7 @@ class _$StoreChatModelCopyWithImpl<$Res>
       chatUserId: null == chatUserId
           ? _self.chatUserId
           : chatUserId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       tab: null == tab
           ? _self.tab
           : tab // ignore: cast_nullable_to_non_nullable
@@ -129,7 +129,7 @@ class _$StoreChatModelCopyWithImpl<$Res>
       messagesByConversationId: null == messagesByConversationId
           ? _self.messagesByConversationId
           : messagesByConversationId // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<Message>>,
+              as Map<String, List<Message>>,
       selectedConversation: freezed == selectedConversation
           ? _self.selectedConversation
           : selectedConversation // ignore: cast_nullable_to_non_nullable
@@ -246,12 +246,12 @@ extension StoreChatModelPatterns on StoreChatModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            int chatUserId,
+            String chatUserId,
             ChatTab tab,
             DialogBg dialogBg,
             List<User> users,
             List<Conversation> conversations,
-            Map<int, List<Message>> messagesByConversationId,
+            Map<String, List<Message>> messagesByConversationId,
             Conversation? selectedConversation)?
         $default, {
     required TResult orElse(),
@@ -288,12 +288,12 @@ extension StoreChatModelPatterns on StoreChatModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            int chatUserId,
+            String chatUserId,
             ChatTab tab,
             DialogBg dialogBg,
             List<User> users,
             List<Conversation> conversations,
-            Map<int, List<Message>> messagesByConversationId,
+            Map<String, List<Message>> messagesByConversationId,
             Conversation? selectedConversation)
         $default,
   ) {
@@ -328,12 +328,12 @@ extension StoreChatModelPatterns on StoreChatModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            int chatUserId,
+            String chatUserId,
             ChatTab tab,
             DialogBg dialogBg,
             List<User> users,
             List<Conversation> conversations,
-            Map<int, List<Message>> messagesByConversationId,
+            Map<String, List<Message>> messagesByConversationId,
             Conversation? selectedConversation)?
         $default,
   ) {
@@ -363,14 +363,14 @@ class _StoreChatModel implements StoreChatModel {
       required this.dialogBg,
       required final List<User> users,
       required final List<Conversation> conversations,
-      required final Map<int, List<Message>> messagesByConversationId,
+      required final Map<String, List<Message>> messagesByConversationId,
       required this.selectedConversation})
       : _users = users,
         _conversations = conversations,
         _messagesByConversationId = messagesByConversationId;
 
   @override
-  final int chatUserId;
+  final String chatUserId;
   @override
   final ChatTab tab;
   @override
@@ -391,9 +391,9 @@ class _StoreChatModel implements StoreChatModel {
     return EqualUnmodifiableListView(_conversations);
   }
 
-  final Map<int, List<Message>> _messagesByConversationId;
+  final Map<String, List<Message>> _messagesByConversationId;
   @override
-  Map<int, List<Message>> get messagesByConversationId {
+  Map<String, List<Message>> get messagesByConversationId {
     if (_messagesByConversationId is EqualUnmodifiableMapView)
       return _messagesByConversationId;
     // ignore: implicit_dynamic_type
@@ -456,12 +456,12 @@ abstract mixin class _$StoreChatModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int chatUserId,
+      {String chatUserId,
       ChatTab tab,
       DialogBg dialogBg,
       List<User> users,
       List<Conversation> conversations,
-      Map<int, List<Message>> messagesByConversationId,
+      Map<String, List<Message>> messagesByConversationId,
       Conversation? selectedConversation});
 
   @override
@@ -493,7 +493,7 @@ class __$StoreChatModelCopyWithImpl<$Res>
       chatUserId: null == chatUserId
           ? _self.chatUserId
           : chatUserId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       tab: null == tab
           ? _self.tab
           : tab // ignore: cast_nullable_to_non_nullable
@@ -513,7 +513,7 @@ class __$StoreChatModelCopyWithImpl<$Res>
       messagesByConversationId: null == messagesByConversationId
           ? _self._messagesByConversationId
           : messagesByConversationId // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<Message>>,
+              as Map<String, List<Message>>,
       selectedConversation: freezed == selectedConversation
           ? _self.selectedConversation
           : selectedConversation // ignore: cast_nullable_to_non_nullable

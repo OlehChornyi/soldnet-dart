@@ -6,11 +6,11 @@ part 'conversation.freezed.dart';
 @freezed
 abstract class Conversation with _$Conversation {
   const factory Conversation({
-    required int id,
-    required int userId,
+    required String id,
+    required String userId,
     required bool isGroup,
     required String title,
-    required List<int> members,
+    required List<String> members,
     required String createdAt,
   }) = _Conversation;
 

@@ -14,11 +14,11 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Conversation {
-  int get id;
-  int get userId;
+  String get id;
+  String get userId;
   bool get isGroup;
   String get title;
-  List<int> get members;
+  List<String> get members;
   String get createdAt;
 
   /// Create a copy of Conversation
@@ -64,11 +64,11 @@ abstract mixin class $ConversationCopyWith<$Res> {
       _$ConversationCopyWithImpl;
   @useResult
   $Res call(
-      {int id,
-      int userId,
+      {String id,
+      String userId,
       bool isGroup,
       String title,
-      List<int> members,
+      List<String> members,
       String createdAt});
 }
 
@@ -95,11 +95,11 @@ class _$ConversationCopyWithImpl<$Res> implements $ConversationCopyWith<$Res> {
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       userId: null == userId
           ? _self.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       isGroup: null == isGroup
           ? _self.isGroup
           : isGroup // ignore: cast_nullable_to_non_nullable
@@ -111,7 +111,7 @@ class _$ConversationCopyWithImpl<$Res> implements $ConversationCopyWith<$Res> {
       members: null == members
           ? _self.members
           : members // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -213,8 +213,8 @@ extension ConversationPatterns on Conversation {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int id, int userId, bool isGroup, String title,
-            List<int> members, String createdAt)?
+    TResult Function(String id, String userId, bool isGroup, String title,
+            List<String> members, String createdAt)?
         $default, {
     required TResult orElse(),
   }) {
@@ -243,8 +243,8 @@ extension ConversationPatterns on Conversation {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int id, int userId, bool isGroup, String title,
-            List<int> members, String createdAt)
+    TResult Function(String id, String userId, bool isGroup, String title,
+            List<String> members, String createdAt)
         $default,
   ) {
     final _that = this;
@@ -271,8 +271,8 @@ extension ConversationPatterns on Conversation {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(int id, int userId, bool isGroup, String title,
-            List<int> members, String createdAt)?
+    TResult? Function(String id, String userId, bool isGroup, String title,
+            List<String> members, String createdAt)?
         $default,
   ) {
     final _that = this;
@@ -294,23 +294,23 @@ class _Conversation implements Conversation {
       required this.userId,
       required this.isGroup,
       required this.title,
-      required final List<int> members,
+      required final List<String> members,
       required this.createdAt})
       : _members = members;
   factory _Conversation.fromJson(Map<String, dynamic> json) =>
       _$ConversationFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
-  final int userId;
+  final String userId;
   @override
   final bool isGroup;
   @override
   final String title;
-  final List<int> _members;
+  final List<String> _members;
   @override
-  List<int> get members {
+  List<String> get members {
     if (_members is EqualUnmodifiableListView) return _members;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_members);
@@ -368,11 +368,11 @@ abstract mixin class _$ConversationCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      int userId,
+      {String id,
+      String userId,
       bool isGroup,
       String title,
-      List<int> members,
+      List<String> members,
       String createdAt});
 }
 
@@ -400,11 +400,11 @@ class __$ConversationCopyWithImpl<$Res>
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       userId: null == userId
           ? _self.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       isGroup: null == isGroup
           ? _self.isGroup
           : isGroup // ignore: cast_nullable_to_non_nullable
@@ -416,7 +416,7 @@ class __$ConversationCopyWithImpl<$Res>
       members: null == members
           ? _self._members
           : members // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable

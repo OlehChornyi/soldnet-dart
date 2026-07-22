@@ -6,9 +6,9 @@ part 'message.freezed.dart';
 @freezed
 abstract class Message with _$Message {
   const factory Message({
-    required int id,
-    required int conversationId,
-    required int sederId,
+    required String id,
+    required String conversationId,
+    required String senderId,
     required String message,
     required String createdAt,
   }) = _Message;

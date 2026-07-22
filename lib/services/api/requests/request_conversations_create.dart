@@ -26,7 +26,7 @@ Future<ResponseConversationsCreate> requestConversationsCreate(
 abstract class BodyConversationsCreate with _$BodyConversationsCreate {
   const factory BodyConversationsCreate(
       {required String title,
-      required List<int> members}) = _BodyConversationsCreate;
+      required List<String> members}) = _BodyConversationsCreate;
 
   factory BodyConversationsCreate.fromJson(Map<String, dynamic> json) =>
       _$BodyConversationsCreateFromJson(json);

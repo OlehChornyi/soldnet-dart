@@ -14,9 +14,9 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Message {
-  int get id;
-  int get conversationId;
-  int get sederId;
+  String get id;
+  String get conversationId;
+  String get senderId;
   String get message;
   String get createdAt;
 
@@ -38,7 +38,8 @@ mixin _$Message {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.conversationId, conversationId) ||
                 other.conversationId == conversationId) &&
-            (identical(other.sederId, sederId) || other.sederId == sederId) &&
+            (identical(other.senderId, senderId) ||
+                other.senderId == senderId) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
@@ -46,12 +47,12 @@ mixin _$Message {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, conversationId, sederId, message, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, conversationId, senderId, message, createdAt);
 
   @override
   String toString() {
-    return 'Message(id: $id, conversationId: $conversationId, sederId: $sederId, message: $message, createdAt: $createdAt)';
+    return 'Message(id: $id, conversationId: $conversationId, senderId: $senderId, message: $message, createdAt: $createdAt)';
   }
 }
 
@@ -61,9 +62,9 @@ abstract mixin class $MessageCopyWith<$Res> {
       _$MessageCopyWithImpl;
   @useResult
   $Res call(
-      {int id,
-      int conversationId,
-      int sederId,
+      {String id,
+      String conversationId,
+      String senderId,
       String message,
       String createdAt});
 }
@@ -82,7 +83,7 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? conversationId = null,
-    Object? sederId = null,
+    Object? senderId = null,
     Object? message = null,
     Object? createdAt = null,
   }) {
@@ -90,15 +91,15 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       conversationId: null == conversationId
           ? _self.conversationId
           : conversationId // ignore: cast_nullable_to_non_nullable
-              as int,
-      sederId: null == sederId
-          ? _self.sederId
-          : sederId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
+      senderId: null == senderId
+          ? _self.senderId
+          : senderId // ignore: cast_nullable_to_non_nullable
+              as String,
       message: null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -204,15 +205,15 @@ extension MessagePatterns on Message {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int id, int conversationId, int sederId, String message,
-            String createdAt)?
+    TResult Function(String id, String conversationId, String senderId,
+            String message, String createdAt)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _Message() when $default != null:
-        return $default(_that.id, _that.conversationId, _that.sederId,
+        return $default(_that.id, _that.conversationId, _that.senderId,
             _that.message, _that.createdAt);
       case _:
         return orElse();
@@ -234,14 +235,14 @@ extension MessagePatterns on Message {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int id, int conversationId, int sederId, String message,
-            String createdAt)
+    TResult Function(String id, String conversationId, String senderId,
+            String message, String createdAt)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _Message():
-        return $default(_that.id, _that.conversationId, _that.sederId,
+        return $default(_that.id, _that.conversationId, _that.senderId,
             _that.message, _that.createdAt);
       case _:
         throw StateError('Unexpected subclass');
@@ -262,14 +263,14 @@ extension MessagePatterns on Message {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(int id, int conversationId, int sederId, String message,
-            String createdAt)?
+    TResult? Function(String id, String conversationId, String senderId,
+            String message, String createdAt)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _Message() when $default != null:
-        return $default(_that.id, _that.conversationId, _that.sederId,
+        return $default(_that.id, _that.conversationId, _that.senderId,
             _that.message, _that.createdAt);
       case _:
         return null;
@@ -283,18 +284,18 @@ class _Message implements Message {
   const _Message(
       {required this.id,
       required this.conversationId,
-      required this.sederId,
+      required this.senderId,
       required this.message,
       required this.createdAt});
   factory _Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
-  final int conversationId;
+  final String conversationId;
   @override
-  final int sederId;
+  final String senderId;
   @override
   final String message;
   @override
@@ -323,7 +324,8 @@ class _Message implements Message {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.conversationId, conversationId) ||
                 other.conversationId == conversationId) &&
-            (identical(other.sederId, sederId) || other.sederId == sederId) &&
+            (identical(other.senderId, senderId) ||
+                other.senderId == senderId) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
@@ -331,12 +333,12 @@ class _Message implements Message {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, conversationId, sederId, message, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, conversationId, senderId, message, createdAt);
 
   @override
   String toString() {
-    return 'Message(id: $id, conversationId: $conversationId, sederId: $sederId, message: $message, createdAt: $createdAt)';
+    return 'Message(id: $id, conversationId: $conversationId, senderId: $senderId, message: $message, createdAt: $createdAt)';
   }
 }
 
@@ -347,9 +349,9 @@ abstract mixin class _$MessageCopyWith<$Res> implements $MessageCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
-      int conversationId,
-      int sederId,
+      {String id,
+      String conversationId,
+      String senderId,
       String message,
       String createdAt});
 }
@@ -368,7 +370,7 @@ class __$MessageCopyWithImpl<$Res> implements _$MessageCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? conversationId = null,
-    Object? sederId = null,
+    Object? senderId = null,
     Object? message = null,
     Object? createdAt = null,
   }) {
@@ -376,15 +378,15 @@ class __$MessageCopyWithImpl<$Res> implements _$MessageCopyWith<$Res> {
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       conversationId: null == conversationId
           ? _self.conversationId
           : conversationId // ignore: cast_nullable_to_non_nullable
-              as int,
-      sederId: null == sederId
-          ? _self.sederId
-          : sederId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
+      senderId: null == senderId
+          ? _self.senderId
+          : senderId // ignore: cast_nullable_to_non_nullable
+              as String,
       message: null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable

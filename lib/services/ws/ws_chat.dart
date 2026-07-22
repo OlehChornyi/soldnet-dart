@@ -9,16 +9,13 @@ class WsChat {
   static WebSocketChannel? channel;
 
   static Future<void> startWsChat(WidgetRef ref) async {
-    // if (channel != null) return;
+    if (channel != null) return;
 
     channel =
         WebSocketChannel.connect(Uri.parse('${ConstInfo.wsBaseUrl}/chat'));
 
     await channel?.ready;
-    print('WebSocket connected: $channel');
     channel?.stream.listen((data) {
-      print(data);
-
       //TODO: implemet message handling
     });
   }
@@ -27,7 +24,7 @@ class WsChat {
     channel?.sink.add(jsonEncode({
       "id": message.id,
       "conversationId": message.conversationId,
-      "sederId": message.sederId,
+      "sederId": message.senderId,
       "message": message.message,
       "createdAt": message.createdAt
     }));

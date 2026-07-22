@@ -41,7 +41,7 @@ final class StoreUserProvider
   }
 }
 
-String _$storeUserHash() => r'afd886846d2573acbda8fcc65a38e69b19222d0a';
+String _$storeUserHash() => r'458d0983d266db539102a816dacc8a38afa44408';
 
 abstract class _$StoreUser extends $Notifier<StoreUserModel> {
   StoreUserModel build();

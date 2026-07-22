@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$User {
-  int get id;
+  String get id;
   String get email;
   String? get name;
   String? get militaryRank;
@@ -81,7 +81,7 @@ abstract mixin class $UserCopyWith<$Res> {
       _$UserCopyWithImpl;
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String email,
       String? name,
       String? militaryRank,
@@ -118,7 +118,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       email: null == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -249,7 +249,7 @@ extension UserPatterns on User {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            int id,
+            String id,
             String email,
             String? name,
             String? militaryRank,
@@ -295,7 +295,7 @@ extension UserPatterns on User {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            int id,
+            String id,
             String email,
             String? name,
             String? militaryRank,
@@ -339,7 +339,7 @@ extension UserPatterns on User {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            int id,
+            String id,
             String email,
             String? name,
             String? militaryRank,
@@ -386,7 +386,7 @@ class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final String email;
   @override
@@ -476,7 +476,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String email,
       String? name,
       String? militaryRank,
@@ -513,7 +513,7 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       email: null == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable

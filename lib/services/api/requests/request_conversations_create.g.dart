@@ -10,9 +10,8 @@ _BodyConversationsCreate _$BodyConversationsCreateFromJson(
         Map<String, dynamic> json) =>
     _BodyConversationsCreate(
       title: json['title'] as String,
-      members: (json['members'] as List<dynamic>)
-          .map((e) => (e as num).toInt())
-          .toList(),
+      members:
+          (json['members'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$BodyConversationsCreateToJson(

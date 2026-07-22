@@ -1,6 +1,3 @@
-import 'dart:math' as math;
-
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soldnet/models/entities/conversation.dart';
@@ -12,9 +9,7 @@ import 'package:soldnet/services/api/requests/request_conversations_create.dart'
 import 'package:soldnet/services/api/requests/request_conversations_get.dart';
 import 'package:soldnet/services/api/requests/request_user_all_get.dart';
 import 'package:soldnet/services/ws/ws_chat.dart';
-import 'package:soldnet/stores/store_user.dart';
-import 'package:uuid/uuid.dart';
-import 'package:uuid/v4.dart';
+import 'package:uuid/v7.dart';
 
 part 'store_chat.g.dart';
 part 'store_chat.freezed.dart';
@@ -22,12 +17,12 @@ part 'store_chat.freezed.dart';
 @freezed
 abstract class StoreChatModel with _$StoreChatModel {
   const factory StoreChatModel({
-    required int chatUserId,
+    required String chatUserId,
     required ChatTab tab,
     required DialogBg dialogBg,
     required List<User> users,
     required List<Conversation> conversations,
-    required Map<int, List<Message>> messagesByConversationId,
+    required Map<String, List<Message>> messagesByConversationId,
     required Conversation? selectedConversation,
   }) = _StoreChatModel;
 }
@@ -36,7 +31,7 @@ abstract class StoreChatModel with _$StoreChatModel {
 class StoreChat extends _$StoreChat {
   @override
   StoreChatModel build() => StoreChatModel(
-      chatUserId: 0,
+      chatUserId: '',
       tab: ChatTab.groups,
       dialogBg: DialogBg.leaves,
       users: [],
@@ -44,7 +39,7 @@ class StoreChat extends _$StoreChat {
       messagesByConversationId: {},
       selectedConversation: null);
 
-  void setChatUserId(int userId) {
+  void setChatUserId(String userId) {
     state = state.copyWith(chatUserId: userId);
   }
 
@@ -73,7 +68,8 @@ class StoreChat extends _$StoreChat {
     final response = await ref.read(requestConversationsGetProvider.future);
 
     if (response.conversations != null) {
-      Map<int, List<Message>> messagesByConversationId = <int, List<Message>>{};
+      Map<String, List<Message>> messagesByConversationId =
+          <String, List<Message>>{};
       messagesByConversationId
           .addEntries(response.conversations!.map((conversation) {
         return MapEntry(conversation.id, []);
@@ -96,7 +92,7 @@ class StoreChat extends _$StoreChat {
     }
   }
 
-  String getChatUserAvatarUrl(List<int> members) {
+  String getChatUserAvatarUrl(List<String> members) {
     final chatUserId = members.firstWhere((m) => m != state.chatUserId);
 
     final chatUserAvatarUrl =
@@ -105,7 +101,7 @@ class StoreChat extends _$StoreChat {
     return chatUserAvatarUrl ?? '';
   }
 
-  String getConversationSubtitle(List<int> members) {
+  String getConversationSubtitle(List<String> members) {
     if (members.length < 2) {
       return 'Кількість учасників [${members.length}]';
     } else {
@@ -118,14 +114,13 @@ class StoreChat extends _$StoreChat {
   }
 
   void sendMessageToWs(String text) {
-    //TODO: implement
-    // final uuid = UuidV4().generate();
+    final uuid = UuidV7().generate();
 
     if (state.selectedConversation != null) {
       final message = Message(
-        id: math.Random().nextInt(1000000),
+        id: uuid,
         conversationId: state.selectedConversation!.id,
-        sederId: state.chatUserId,
+        senderId: state.chatUserId,
         message: text,
         createdAt: DateTime.now().toIso8601String(),
       );

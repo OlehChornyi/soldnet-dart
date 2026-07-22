@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BodyConversationsCreate {
   String get title;
-  List<int> get members;
+  List<String> get members;
 
   /// Create a copy of BodyConversationsCreate
   /// with the given fields replaced by the non-null parameter values.
@@ -54,7 +54,7 @@ abstract mixin class $BodyConversationsCreateCopyWith<$Res> {
           $Res Function(BodyConversationsCreate) _then) =
       _$BodyConversationsCreateCopyWithImpl;
   @useResult
-  $Res call({String title, List<int> members});
+  $Res call({String title, List<String> members});
 }
 
 /// @nodoc
@@ -81,7 +81,7 @@ class _$BodyConversationsCreateCopyWithImpl<$Res>
       members: null == members
           ? _self.members
           : members // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
     ));
   }
 }
@@ -179,7 +179,7 @@ extension BodyConversationsCreatePatterns on BodyConversationsCreate {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String title, List<int> members)? $default, {
+    TResult Function(String title, List<String> members)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
@@ -206,7 +206,7 @@ extension BodyConversationsCreatePatterns on BodyConversationsCreate {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String title, List<int> members) $default,
+    TResult Function(String title, List<String> members) $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -231,7 +231,7 @@ extension BodyConversationsCreatePatterns on BodyConversationsCreate {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String title, List<int> members)? $default,
+    TResult? Function(String title, List<String> members)? $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -247,16 +247,16 @@ extension BodyConversationsCreatePatterns on BodyConversationsCreate {
 @JsonSerializable()
 class _BodyConversationsCreate implements BodyConversationsCreate {
   const _BodyConversationsCreate(
-      {required this.title, required final List<int> members})
+      {required this.title, required final List<String> members})
       : _members = members;
   factory _BodyConversationsCreate.fromJson(Map<String, dynamic> json) =>
       _$BodyConversationsCreateFromJson(json);
 
   @override
   final String title;
-  final List<int> _members;
+  final List<String> _members;
   @override
-  List<int> get members {
+  List<String> get members {
     if (_members is EqualUnmodifiableListView) return _members;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_members);
@@ -306,7 +306,7 @@ abstract mixin class _$BodyConversationsCreateCopyWith<$Res>
       __$BodyConversationsCreateCopyWithImpl;
   @override
   @useResult
-  $Res call({String title, List<int> members});
+  $Res call({String title, List<String> members});
 }
 
 /// @nodoc
@@ -333,7 +333,7 @@ class __$BodyConversationsCreateCopyWithImpl<$Res>
       members: null == members
           ? _self._members
           : members // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
     ));
   }
 }

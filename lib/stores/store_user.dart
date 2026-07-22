@@ -86,7 +86,7 @@ class StoreUser extends _$StoreUser {
   Future<void> getUserAccount() async {
     final response = await ref.read(requestUserAccountGetProvider.future);
 
-    ref.read(storeChatProvider.notifier).setChatUserId(response.user?.id ?? 0);
+    ref.read(storeChatProvider.notifier).setChatUserId(response.user?.id ?? '');
 
     state = state.copyWith(user: response.user);
   }

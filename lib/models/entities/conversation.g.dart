@@ -8,13 +8,12 @@ part of 'conversation.dart';
 
 _Conversation _$ConversationFromJson(Map<String, dynamic> json) =>
     _Conversation(
-      id: (json['id'] as num).toInt(),
-      userId: (json['userId'] as num).toInt(),
+      id: json['id'] as String,
+      userId: json['userId'] as String,
       isGroup: json['isGroup'] as bool,
       title: json['title'] as String,
-      members: (json['members'] as List<dynamic>)
-          .map((e) => (e as num).toInt())
-          .toList(),
+      members:
+          (json['members'] as List<dynamic>).map((e) => e as String).toList(),
       createdAt: json['createdAt'] as String,
     );
 
