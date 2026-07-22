@@ -19,7 +19,7 @@ void main() => runApp(ProviderScope(child: const App()));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.07.06 | SERVER DEVELOPMENT AND INTEGRATION (WS):
 //            | DONE | 1. Authorization (+Profile(User data)).
-//            | 2. Chat: find ws or rest api (web socket).
+//            | DONE | 2. Chat: find ws or rest api (web socket).
 //            | 3. Implement ws or rest api.
 //            | 4. Images: integrate to profile and chat.
 //            | 5. Videos: integrate to chat.
@@ -42,5 +42,5 @@ void main() => runApp(ProviderScope(child: const App()));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.07.18 | DONE | User contacts on server and in mobile.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// 2026.07.19 | Find how to test chat with web socket.
+// 2026.07.19 | DONE | Find how to test chat with web socket.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
