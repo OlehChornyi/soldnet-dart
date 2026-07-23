@@ -23,6 +23,7 @@ void main() => runApp(ProviderScope(child: const App()));
 //            | 3. Implement ws or rest api.
 //            | 4. Images: integrate to profile and chat.
 //            | 5. Videos: integrate to chat.
+//            | 6. Share files through chat.
 //            | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //            | AUDIO and VIDEO CALL (WEB RTC):
 //            | 1. Find how audio calls are done and ask OpenIA.
