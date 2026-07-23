@@ -29,33 +29,34 @@ Map<String, dynamic> _$ResponseConversationsMessagesGetToJson(
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(requestConversationsGet)
-final requestConversationsGetProvider = RequestConversationsGetFamily._();
+@ProviderFor(requestConversationsMessagesGet)
+final requestConversationsMessagesGetProvider =
+    RequestConversationsMessagesGetFamily._();
 
-final class RequestConversationsGetProvider extends $FunctionalProvider<
+final class RequestConversationsMessagesGetProvider extends $FunctionalProvider<
         AsyncValue<ResponseConversationsMessagesGet>,
         ResponseConversationsMessagesGet,
         FutureOr<ResponseConversationsMessagesGet>>
     with
         $FutureModifier<ResponseConversationsMessagesGet>,
         $FutureProvider<ResponseConversationsMessagesGet> {
-  RequestConversationsGetProvider._(
-      {required RequestConversationsGetFamily super.from,
+  RequestConversationsMessagesGetProvider._(
+      {required RequestConversationsMessagesGetFamily super.from,
       required String super.argument})
       : super(
           retry: null,
-          name: r'requestConversationsGetProvider',
+          name: r'requestConversationsMessagesGetProvider',
           isAutoDispose: true,
           dependencies: null,
           $allTransitiveDependencies: null,
         );
 
   @override
-  String debugGetCreateSourceHash() => _$requestConversationsGetHash();
+  String debugGetCreateSourceHash() => _$requestConversationsMessagesGetHash();
 
   @override
   String toString() {
-    return r'requestConversationsGetProvider'
+    return r'requestConversationsMessagesGetProvider'
         ''
         '($argument)';
   }
@@ -69,7 +70,7 @@ final class RequestConversationsGetProvider extends $FunctionalProvider<
   @override
   FutureOr<ResponseConversationsMessagesGet> create(Ref ref) {
     final argument = this.argument as String;
-    return requestConversationsGet(
+    return requestConversationsMessagesGet(
       ref,
       conversationId: argument,
     );
@@ -77,7 +78,7 @@ final class RequestConversationsGetProvider extends $FunctionalProvider<
 
   @override
   bool operator ==(Object other) {
-    return other is RequestConversationsGetProvider &&
+    return other is RequestConversationsMessagesGetProvider &&
         other.argument == argument;
   }
 
@@ -87,27 +88,28 @@ final class RequestConversationsGetProvider extends $FunctionalProvider<
   }
 }
 
-String _$requestConversationsGetHash() =>
-    r'd620b96c18016273bef500cfc14087ed8fcbf59f';
+String _$requestConversationsMessagesGetHash() =>
+    r'b627522667db410e779e23844d71e4ffb7b3a62e';
 
-final class RequestConversationsGetFamily extends $Family
+final class RequestConversationsMessagesGetFamily extends $Family
     with
         $FunctionalFamilyOverride<FutureOr<ResponseConversationsMessagesGet>,
             String> {
-  RequestConversationsGetFamily._()
+  RequestConversationsMessagesGetFamily._()
       : super(
           retry: null,
-          name: r'requestConversationsGetProvider',
+          name: r'requestConversationsMessagesGetProvider',
           dependencies: null,
           $allTransitiveDependencies: null,
           isAutoDispose: true,
         );
 
-  RequestConversationsGetProvider call({
+  RequestConversationsMessagesGetProvider call({
     required String conversationId,
   }) =>
-      RequestConversationsGetProvider._(argument: conversationId, from: this);
+      RequestConversationsMessagesGetProvider._(
+          argument: conversationId, from: this);
 
   @override
-  String toString() => r'requestConversationsGetProvider';
+  String toString() => r'requestConversationsMessagesGetProvider';
 }

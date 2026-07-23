@@ -7,6 +7,7 @@ import 'package:soldnet/models/utils/chat_tab.dart';
 import 'package:soldnet/models/utils/dialog_bg.dart';
 import 'package:soldnet/services/api/requests/request_conversations_create.dart';
 import 'package:soldnet/services/api/requests/request_conversations_get.dart';
+import 'package:soldnet/services/api/requests/request_conversations_messages_get.dart';
 import 'package:soldnet/services/api/requests/request_user_all_get.dart';
 import 'package:soldnet/services/ws/ws_chat.dart';
 import 'package:uuid/v7.dart';
@@ -43,8 +44,19 @@ class StoreChat extends _$StoreChat {
     state = state.copyWith(chatUserId: userId);
   }
 
-  void setSelectedConversation(Conversation conversation) {
+  Future<void> setSelectedConversation(Conversation conversation) async {
     state = state.copyWith(selectedConversation: conversation);
+
+    final response = await ref.read(
+        requestConversationsMessagesGetProvider(conversationId: conversation.id)
+            .future);
+
+    if (response.messages?.isNotEmpty ?? false) {
+      Map<String, List<Message>> msgs = {...state.messagesByConversationId};
+      msgs[conversation.id] = response.messages!;
+
+      state = state.copyWith(messagesByConversationId: msgs);
+    }
   }
 
   void setTab(ChatTab tab) {
@@ -74,7 +86,9 @@ class StoreChat extends _$StoreChat {
           .addEntries(response.conversations!.map((conversation) {
         return MapEntry(conversation.id, []);
       }));
-      state = state.copyWith(conversations: response.conversations!);
+      state = state.copyWith(
+          conversations: response.conversations!,
+          messagesByConversationId: messagesByConversationId);
     }
   }
 

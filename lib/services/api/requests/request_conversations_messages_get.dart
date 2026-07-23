@@ -8,7 +8,8 @@ part 'request_conversations_messages_get.g.dart';
 part 'request_conversations_messages_get.freezed.dart';
 
 @riverpod
-Future<ResponseConversationsMessagesGet> requestConversationsGet(Ref ref,
+Future<ResponseConversationsMessagesGet> requestConversationsMessagesGet(
+    Ref ref,
     {required String conversationId}) async {
   final dio = ref.read(dioClientProvider);
   try {
