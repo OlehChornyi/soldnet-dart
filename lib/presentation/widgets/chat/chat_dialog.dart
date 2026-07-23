@@ -12,6 +12,9 @@ class ChatDialog extends ConsumerWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     final chatState = ref.watch(storeChatProvider);
+    final userId = chatState.chatUserId;
+    final conversationId = chatState.selectedConversation?.id ?? '';
+    final messages = chatState.messagesByConversationId[conversationId] ?? [];
 
     return Container(
         width: screenWidth - 32,
@@ -24,31 +27,16 @@ class ChatDialog extends ConsumerWidget {
               fit: BoxFit.cover),
         ),
         child: ListView.separated(
-          itemCount: _messages.length,
+          itemCount: messages.length,
           padding: EdgeInsets.zero,
           separatorBuilder: (context, index) => const SizedBox(
             height: 8,
           ),
           itemBuilder: (context, index) {
             return ChatDialogMessage(
-                text: _messages[index].text, isUser: _messages[index].isUser);
+                text: messages[index].message,
+                isUser: messages[index].senderId == userId);
           },
         ));
   }
 }
-
-List<({String text, bool isUser})> get _messages => [
-      (text: 'Hello!', isUser: true),
-      (text: 'Hello! MazerPlayer, boo yah! Just do it.', isUser: false),
-      (text: 'Hello! MazerPlayer, boo yah! Just do it.', isUser: true),
-      (text: 'Hello!', isUser: true),
-      (text: 'Hello!', isUser: true),
-      (text: 'Hello!', isUser: false),
-      (text: 'Hello!', isUser: true),
-      (text: 'Hello!', isUser: false),
-      (text: 'Hello!', isUser: true),
-      (text: 'Hello!', isUser: false),
-      (text: 'Hello!', isUser: true),
-      (text: 'Hello!', isUser: false),
-      (text: 'Hello!', isUser: true),
-    ];

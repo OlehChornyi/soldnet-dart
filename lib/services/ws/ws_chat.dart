@@ -24,7 +24,7 @@ class WsChat {
     channel?.sink.add(jsonEncode({
       "id": message.id,
       "conversationId": message.conversationId,
-      "sederId": message.senderId,
+      "senderId": message.senderId,
       "message": message.message,
       "createdAt": message.createdAt
     }));
