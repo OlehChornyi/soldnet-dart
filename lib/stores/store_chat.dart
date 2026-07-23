@@ -122,7 +122,7 @@ class StoreChat extends _$StoreChat {
         conversationId: state.selectedConversation!.id,
         senderId: state.chatUserId,
         message: text,
-        createdAt: DateTime.now().toIso8601String(),
+        createdAt: DateTime.now().toUtc().toIso8601String(),
       );
       WsChat.sendMessage(message);
       addMessageToConversation(message);
