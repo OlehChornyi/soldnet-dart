@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'store_chat.dart';
+part of 'ws_chat.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,49 +9,49 @@ part of 'store_chat.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(StoreChat)
-final storeChatProvider = StoreChatProvider._();
+@ProviderFor(WsChat)
+final wsChatProvider = WsChatProvider._();
 
-final class StoreChatProvider
-    extends $NotifierProvider<StoreChat, StoreChatModel> {
-  StoreChatProvider._()
+final class WsChatProvider
+    extends $NotifierProvider<WsChat, WebSocketChannel?> {
+  WsChatProvider._()
       : super(
           from: null,
           argument: null,
           retry: null,
-          name: r'storeChatProvider',
+          name: r'wsChatProvider',
           isAutoDispose: false,
           dependencies: null,
           $allTransitiveDependencies: null,
         );
 
   @override
-  String debugGetCreateSourceHash() => _$storeChatHash();
+  String debugGetCreateSourceHash() => _$wsChatHash();
 
   @$internal
   @override
-  StoreChat create() => StoreChat();
+  WsChat create() => WsChat();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(StoreChatModel value) {
+  Override overrideWithValue(WebSocketChannel? value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<StoreChatModel>(value),
+      providerOverride: $SyncValueProvider<WebSocketChannel?>(value),
     );
   }
 }
 
-String _$storeChatHash() => r'343c63c9fbc5ed0d3c9bb285b69ea062a3137b6e';
+String _$wsChatHash() => r'4db87020a6647ed9d19d42fe67cd111252e958af';
 
-abstract class _$StoreChat extends $Notifier<StoreChatModel> {
-  StoreChatModel build();
+abstract class _$WsChat extends $Notifier<WebSocketChannel?> {
+  WebSocketChannel? build();
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
-    final ref = this.ref as $Ref<StoreChatModel, StoreChatModel>;
+    final ref = this.ref as $Ref<WebSocketChannel?, WebSocketChannel?>;
     final element = ref.element as $ClassProviderElement<
-        AnyNotifier<StoreChatModel, StoreChatModel>,
-        StoreChatModel,
+        AnyNotifier<WebSocketChannel?, WebSocketChannel?>,
+        WebSocketChannel?,
         Object?,
         Object?>;
     return element.handleCreate(ref, build);

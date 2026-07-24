@@ -122,8 +122,12 @@ class StoreChat extends _$StoreChat {
   }
 
   String getConversationTitle(List<String> members) {
-    final anotherUser = getAnotherUser(members);
-    return '${anotherUser.name}';
+    if (members.isNotEmpty) {
+      final anotherUser = getAnotherUser(members);
+      return '${anotherUser.name}';
+    } else {
+      return '';
+    }
   }
 
   String getConversationSubtitle(List<String> members) {
@@ -146,13 +150,9 @@ class StoreChat extends _$StoreChat {
         message: text,
         createdAt: DateTime.now().toUtc().toIso8601String(),
       );
-      WsChat.sendMessage(message);
+      ref.read(wsChatProvider.notifier).sendMessage(message);
       addMessageToConversation(message);
     }
-  }
-
-  void handleMessageFromWs(Message message) {
-    addMessageToConversation(message);
   }
 
   void addMessageToConversation(Message message) {

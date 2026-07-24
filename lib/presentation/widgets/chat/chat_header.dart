@@ -106,7 +106,7 @@ class _ChatHeaderState extends ConsumerState<ChatHeader> {
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
                     chatNotifier.getConversationTitle(
-                        chatState.selectedConversation!.members),
+                        chatState.selectedConversation?.members ?? []),
                     style: AppTextStyles.s16w500(color: AppColors.white),
                   ),
                 ),

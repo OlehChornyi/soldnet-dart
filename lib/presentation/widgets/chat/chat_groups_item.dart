@@ -67,7 +67,7 @@ class ChatGroupsItem extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    conversation.title,
+                    chatNotifier.getConversationTitle(conversation.members),
                     style: AppTextStyles.s14w500(),
                   ),
                   const SizedBox(height: 4),

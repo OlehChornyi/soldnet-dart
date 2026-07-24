@@ -1,27 +1,39 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soldnet/models/const/const_info.dart';
 import 'package:soldnet/models/entities/message.dart';
+import 'package:soldnet/stores/store_chat.dart';
+import 'package:soldnet/stores/store_user.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-class WsChat {
-  static WebSocketChannel? channel;
+part 'ws_chat.g.dart';
 
-  static Future<void> startWsChat(WidgetRef ref) async {
+@Riverpod(keepAlive: true)
+class WsChat extends _$WsChat {
+  @override
+  WebSocketChannel? build() => null;
+
+  Future<void> startWsChat() async {
     // if (channel != null) return;
+    final token = ref.read(storeUserProvider).token;
 
-    channel =
-        WebSocketChannel.connect(Uri.parse('${ConstInfo.wsBaseUrl}/chat'));
+    state = WebSocketChannel.connect(
+        Uri.parse('${ConstInfo.wsBaseUrl}/chat?token=$token'));
 
-    await channel?.ready;
-    channel?.stream.listen((data) {
-      //TODO: implemet message handling
+    await state?.ready;
+
+    state?.stream.listen((data) {
+      print('DDDADADADADADAATA: $data');
+      ref
+          .read(storeChatProvider.notifier)
+          .addMessageToConversation(Message.fromJson(data));
     });
   }
 
-  static void sendMessage(Message message) {
-    channel?.sink.add(jsonEncode({
+  void sendMessage(Message message) {
+    state?.sink.add(jsonEncode({
       "id": message.id,
       "conversationId": message.conversationId,
       "senderId": message.senderId,
