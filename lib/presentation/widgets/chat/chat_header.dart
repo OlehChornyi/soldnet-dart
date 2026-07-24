@@ -38,6 +38,8 @@ class _ChatHeaderState extends ConsumerState<ChatHeader> {
     final chatState = ref.watch(storeChatProvider);
     final chatNotifier = ref.read(storeChatProvider.notifier);
 
+    final numberOfActiveChats = chatState.conversations.length;
+
     return FlipCard(
         side: chatState.tab == ChatTab.groups ? CardSide.FRONT : CardSide.BACK,
         flipOnTouch: false,
@@ -82,7 +84,9 @@ class _ChatHeaderState extends ConsumerState<ChatHeader> {
                 height: 4,
               ),
               Text(
-                'У вас є 8 активних чатів',
+                numberOfActiveChats == 1
+                    ? 'У вас є 1 активний чат'
+                    : 'У вас є $numberOfActiveChats активних чати',
                 style: AppTextStyles.s16w500(color: AppColors.white),
               )
             ],
@@ -101,7 +105,8 @@ class _ChatHeaderState extends ConsumerState<ChatHeader> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
-                    'Павло Павленко',
+                    chatNotifier.getConversationTitle(
+                        chatState.selectedConversation!.members),
                     style: AppTextStyles.s16w500(color: AppColors.white),
                   ),
                 ),

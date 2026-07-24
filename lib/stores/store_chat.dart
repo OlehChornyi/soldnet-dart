@@ -115,15 +115,23 @@ class StoreChat extends _$StoreChat {
     return chatUserAvatarUrl ?? '';
   }
 
+  User getAnotherUser(List<String> members) {
+    final anotherUserId = members.firstWhere((m) => m != state.chatUserId);
+    final anotherUser = state.users.firstWhere((u) => u.id == anotherUserId);
+    return anotherUser;
+  }
+
+  String getConversationTitle(List<String> members) {
+    final anotherUser = getAnotherUser(members);
+    return '${anotherUser.name}';
+  }
+
   String getConversationSubtitle(List<String> members) {
-    if (members.length < 2) {
+    if (members.length > 2) {
       return 'Кількість учасників [${members.length}]';
     } else {
-      final chatUserId = members.firstWhere((m) => m != state.chatUserId);
-
-      final chatUser = state.users.firstWhere((u) => u.id == chatUserId);
-
-      return 'Звання [${chatUser.militaryRank}]\nЦивільна професія [${chatUser.civilProfession}]';
+      final anotherUser = getAnotherUser(members);
+      return 'Звання [${anotherUser.militaryRank}]\nЦивільна професія [${anotherUser.civilProfession}]';
     }
   }
 
