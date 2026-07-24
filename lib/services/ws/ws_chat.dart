@@ -28,7 +28,7 @@ class WsChat extends _$WsChat {
       print('DDDADADADADADAATA: $data');
       ref
           .read(storeChatProvider.notifier)
-          .addMessageToConversation(Message.fromJson(data));
+          .addMessageToConversation(Message.fromJson(jsonDecode(data)));
     });
   }
 

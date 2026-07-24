@@ -20,7 +20,9 @@ class _HomeContainerState extends ConsumerState<HomeContainer> {
   @override
   void initState() {
     super.initState();
-    _makeApiCallsAndMaybeStartWs();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _makeApiCallsAndMaybeStartWs();
+    });
   }
 
   void _makeApiCallsAndMaybeStartWs() {
