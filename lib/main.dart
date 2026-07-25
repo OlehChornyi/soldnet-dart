@@ -45,3 +45,5 @@ void main() => runApp(ProviderScope(child: const App()));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.07.19 | DONE | Find how to test chat with web socket.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.07.25 | DONE | Permanently post on LinkedIn.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
