@@ -20,7 +20,7 @@ void main() => runApp(ProviderScope(child: const App()));
 // 2026.07.06 | SERVER DEVELOPMENT AND INTEGRATION (WS):
 //            | DONE | 1. Authorization (+Profile(User data)).
 //            | DONE | 2. Chat: find ws or rest api (web socket).
-//            | 3. Implement ws or rest api.
+//            | DONE | 3. Implement ws or rest api.
 //            | 4. Images: integrate to profile and chat.
 //            | 5. Videos: integrate to chat.
 //            | 6. Share files through chat.
@@ -46,4 +46,8 @@ void main() => runApp(ProviderScope(child: const App()));
 // 2026.07.19 | DONE | Find how to test chat with web socket.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.07.25 | DONE | Permanently post on LinkedIn.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.07.27 | Create search with parameters.
+//            | Think about more sections in home.
+//            | Think about posts and it's types.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
