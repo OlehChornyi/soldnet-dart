@@ -8,21 +8,26 @@ import 'package:soldnet/presentation/theme/app_text_styles.dart';
 import 'package:soldnet/stores/store_chat.dart';
 
 class ChatBottomSheetUsersItem extends ConsumerWidget {
-  final User user;
+  const ChatBottomSheetUsersItem(
+      {super.key, required this.user, required this.isSelected, this.onTap});
 
-  const ChatBottomSheetUsersItem({super.key, required this.user});
+  final User user;
+  final bool isSelected;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chatNotifier = ref.read(storeChatProvider.notifier);
 
     return GestureDetector(
-      onTap: () async {
-        await chatNotifier.createConversation(title: '', members: [user.id]);
-        if (context.mounted) {
-          context.pop();
-        }
-      },
+      onTap: onTap ??
+          () async {
+            await chatNotifier
+                .createConversation(title: '', members: [user.id]);
+            if (context.mounted) {
+              context.pop();
+            }
+          },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
         decoration: BoxDecoration(
@@ -44,7 +49,10 @@ class ChatBottomSheetUsersItem extends ConsumerWidget {
             const Spacer(),
             Padding(
               padding: const EdgeInsets.only(right: 12),
-              child: Icon(Icons.person_add, size: 24, color: AppColors.white),
+              child: isSelected
+                  ? Icon(Icons.check_circle_outline_rounded,
+                      size: 24, color: AppColors.primary)
+                  : Icon(Icons.person_add, size: 24, color: AppColors.white),
             ),
           ],
         ),

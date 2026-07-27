@@ -95,10 +95,11 @@ class StoreChat extends _$StoreChat {
   Future<void> createConversation(
       {required String title, required List<String> members}) async {
     final membersWithUser = [state.chatUserId, ...members];
+    final actualTitle = title.isEmpty ? "User" : title;
 
     final response = await ref.read(requestConversationsCreateProvider(
-            body:
-                BodyConversationsCreate(title: title, members: membersWithUser))
+            body: BodyConversationsCreate(
+                title: actualTitle, members: membersWithUser))
         .future);
 
     if (response.conversation != null) {
@@ -107,7 +108,7 @@ class StoreChat extends _$StoreChat {
     }
   }
 
-  String getChatUserAvatarUrl(List<String> members) {
+  String getChatAvatarUrl(List<String> members) {
     final chatUserId = members.firstWhere((m) => m != state.chatUserId);
 
     final chatUserAvatarUrl =
@@ -122,12 +123,12 @@ class StoreChat extends _$StoreChat {
     return anotherUser;
   }
 
-  String getConversationTitle(List<String> members) {
-    if (members.isNotEmpty) {
-      final anotherUser = getAnotherUser(members);
-      return '${anotherUser.name}';
+  String getConversationTitle(Conversation conversation) {
+    if (conversation.members.length > 2) {
+      return conversation.title;
     } else {
-      return '';
+      final anotherUser = getAnotherUser(conversation.members);
+      return '${anotherUser.name}';
     }
   }
 

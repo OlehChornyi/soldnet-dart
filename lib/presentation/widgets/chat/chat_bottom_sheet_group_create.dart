@@ -33,7 +33,23 @@ class _ChatBottomSheetGroupCreateState
   final _controller = TextEditingController();
   final _focusNode = FocusNode();
 
-  Future<void> _createGroup() async {}
+  List<String> conversationMembers = [];
+
+  void _toggleMember(String id) {
+    if (conversationMembers.contains(id)) {
+      setState(() => conversationMembers.remove(id));
+    } else {
+      setState(() => conversationMembers.add(id));
+    }
+  }
+
+  Future<void> _createGroup() async {
+    if (conversationMembers.isNotEmpty && _controller.text.trim().isNotEmpty) {
+      ref.read(storeChatProvider.notifier).createConversation(
+          title: _controller.text.trim(), members: conversationMembers);
+      router.pop();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +58,7 @@ class _ChatBottomSheetGroupCreateState
 
     return AppBottomSheet(
         header: 'Створити групу',
-        subHeader: 'Всього в групі: ${users.length}',
+        subHeader: 'Всього в групі: ${conversationMembers.length}',
         body: Column(
           mainAxisSize: MainAxisSize.min,
           spacing: 8,
@@ -64,7 +80,11 @@ class _ChatBottomSheetGroupCreateState
               ],
             ),
             if (users.isNotEmpty) ...{
-              ...users.map((user) => ChatBottomSheetUsersItem(user: user))
+              ...users.map((user) => ChatBottomSheetUsersItem(
+                    user: user,
+                    isSelected: conversationMembers.contains(user.id),
+                    onTap: () => _toggleMember(user.id),
+                  ))
             } else
               const SizedBox(
                 height: 200,

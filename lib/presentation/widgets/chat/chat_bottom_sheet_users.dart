@@ -34,7 +34,10 @@ class ChatBottomSheetUsers extends ConsumerWidget {
           spacing: 8,
           children: [
             if (users.isNotEmpty) ...{
-              ...users.map((user) => ChatBottomSheetUsersItem(user: user))
+              ...users.map((user) => ChatBottomSheetUsersItem(
+                    user: user,
+                    isSelected: false,
+                  ))
             } else
               const SizedBox(
                 height: 200,

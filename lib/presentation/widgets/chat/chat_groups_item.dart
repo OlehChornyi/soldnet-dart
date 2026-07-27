@@ -13,7 +13,7 @@ class ChatGroupsItem extends ConsumerWidget {
   final Conversation conversation;
 
   String getAvatar(StoreChat chatNotifier) {
-    return chatNotifier.getChatUserAvatarUrl(conversation.members);
+    return chatNotifier.getChatAvatarUrl(conversation.members);
   }
 
   @override
@@ -67,7 +67,7 @@ class ChatGroupsItem extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    chatNotifier.getConversationTitle(conversation.members),
+                    chatNotifier.getConversationTitle(conversation),
                     style: AppTextStyles.s14w500(),
                   ),
                   const SizedBox(height: 4),
