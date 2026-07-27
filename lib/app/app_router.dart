@@ -9,6 +9,7 @@ import 'package:soldnet/presentation/pages/chat_page.dart' show ChatPage;
 import 'package:soldnet/presentation/pages/home_page.dart';
 import 'package:soldnet/presentation/pages/login_page.dart';
 import 'package:soldnet/presentation/pages/profile_page.dart';
+import 'package:soldnet/presentation/pages/search_page.dart';
 import 'package:soldnet/presentation/widgets/app/nav_bar/app_nav_bar.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -19,6 +20,7 @@ class ScreenPaths {
   static String chat = '/chat';
   static String profile = '/profile';
   static String login = '/login';
+  static String search = '/search';
 }
 
 final GoRouter router = GoRouter(
@@ -39,6 +41,7 @@ final GoRouter router = GoRouter(
       routes: [
         AppRoute(ScreenPaths.home, (_) => HomePage(), noTransition: true),
         AppRoute(ScreenPaths.chat, (_) => ChatPage(), noTransition: true),
+        AppRoute(ScreenPaths.search, (_) => SearchPage(), noTransition: true),
         AppRoute(ScreenPaths.profile, (_) => ProfilePage(), noTransition: true),
       ],
     ),

@@ -48,5 +48,6 @@ typedef NavBarRecord = ({String key, IconData icon, String label});
 List<NavBarRecord> get navBarItems => [
       (key: '/home', icon: Icons.home_rounded, label: 'Дім'),
       (key: '/chat', icon: Icons.message_rounded, label: 'Чат'),
+      (key: '/search', icon: Icons.person_search_rounded, label: 'Пошук'),
       (key: '/profile', icon: Icons.person_rounded, label: 'Профіль'),
     ];
