@@ -92,12 +92,13 @@ class StoreChat extends _$StoreChat {
     }
   }
 
-  Future<void> createConversation(User chatUser) async {
-    final members = [state.chatUserId, chatUser.id];
-    final title = chatUser.name ?? 'Chat with user, id: ${chatUser.id}';
+  Future<void> createConversation(
+      {required String title, required List<String> members}) async {
+    final membersWithUser = [state.chatUserId, ...members];
 
     final response = await ref.read(requestConversationsCreateProvider(
-            body: BodyConversationsCreate(title: title, members: members))
+            body:
+                BodyConversationsCreate(title: title, members: membersWithUser))
         .future);
 
     if (response.conversation != null) {

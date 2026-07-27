@@ -18,7 +18,7 @@ class ChatBottomSheetUsersItem extends ConsumerWidget {
 
     return GestureDetector(
       onTap: () async {
-        await chatNotifier.createConversation(user);
+        await chatNotifier.createConversation(title: '', members: [user.id]);
         if (context.mounted) {
           context.pop();
         }
