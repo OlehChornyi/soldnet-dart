@@ -16,15 +16,19 @@ class ChatActionButtons extends ConsumerWidget {
     return Column(
       children: [
         AppButtonFade(
-          onTap: () => chatNotifier.setTab(ChatTab.groups),
+          onTap: chatState.selectedConversation == null
+              ? () {}
+              : () => chatNotifier.setTab(ChatTab.groups),
           child: Container(
             width: 52,
             height: 48,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: chatState.tab == ChatTab.groups
-                  ? AppColors.action1Active
-                  : AppColors.action1,
+              color: chatState.selectedConversation == null
+                  ? AppColors.grey220
+                  : chatState.tab == ChatTab.groups
+                      ? AppColors.action1Active
+                      : AppColors.action1,
             ),
             child: Center(
                 child: Icon(
@@ -39,15 +43,19 @@ class ChatActionButtons extends ConsumerWidget {
           height: 8,
         ),
         AppButtonFade(
-          onTap: () => chatNotifier.setTab(ChatTab.dialog),
+          onTap: chatState.selectedConversation == null
+              ? () {}
+              : () => chatNotifier.setTab(ChatTab.dialog),
           child: Container(
             width: 52,
             height: 48,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: chatState.tab != ChatTab.groups
-                  ? AppColors.action2Active
-                  : AppColors.action2,
+              color: chatState.selectedConversation == null
+                  ? AppColors.grey220
+                  : chatState.tab != ChatTab.groups
+                      ? AppColors.action2Active
+                      : AppColors.action2,
             ),
             child: Center(
                 child: Icon(
