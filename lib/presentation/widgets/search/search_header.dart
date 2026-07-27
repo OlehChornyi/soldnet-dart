@@ -18,7 +18,7 @@ class _SearchHeaderState extends State<SearchHeader> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Container(
+    return SizedBox(
       width: screenWidth - 32,
       child: Row(
         children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soldnet/presentation/widgets/search/search_body.dart';
 import 'package:soldnet/presentation/widgets/search/search_header.dart';
 
 class SearchContainer extends StatelessWidget {
@@ -10,7 +11,10 @@ class SearchContainer extends StatelessWidget {
 
     return Stack(
       alignment: Alignment.topCenter,
-      children: [Positioned(top: paddingTop + 16, child: const SearchHeader())],
+      children: [
+        SearchBody(),
+        Positioned(top: paddingTop + 16, child: const SearchHeader()),
+      ],
     );
   }
 }
