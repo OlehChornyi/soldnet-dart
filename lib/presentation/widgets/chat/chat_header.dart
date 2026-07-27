@@ -5,8 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soldnet/models/utils/chat_tab.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
-import 'package:soldnet/presentation/widgets/app/button/app_button_fade.dart';
+import 'package:soldnet/presentation/widgets/chat/chat_bottom_sheet_group_create.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_bottom_sheet_users.dart';
+import 'package:soldnet/presentation/widgets/chat/chat_header_button.dart';
 import 'package:soldnet/stores/store_chat.dart';
 
 class ChatHeader extends ConsumerStatefulWidget {
@@ -55,39 +56,30 @@ class _ChatHeaderState extends ConsumerState<ChatHeader> {
           child: Center(
               child: Column(
             children: [
-              GestureDetector(
-                onTap: () {
-                  chatNotifier.getAllUsers();
-                  showChatBottomSheetUsers();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add_rounded,
-                        color: AppColors.white,
-                      ),
-                      Text(
-                        'Додати Чат',
-                        style: AppTextStyles.s16w500(color: AppColors.white),
-                      )
-                    ],
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ChatHeaderButton(
+                        onTap: () => showChatBottomSheetUsers(),
+                        icon: Icons.person_add_rounded),
+                    const SizedBox(width: 8),
+                    ChatHeaderButton(
+                        onTap: () => showChatBottomSheetGroupCreate(),
+                        icon: Icons.group_add_rounded)
+                  ],
                 ),
               ),
-              Divider(
-                color: AppColors.white,
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              Text(
-                numberOfActiveChats == 1
-                    ? 'У вас є 1 активний чат'
-                    : 'У вас є $numberOfActiveChats активних чати',
-                style: AppTextStyles.s16w500(color: AppColors.white),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Text(
+                  numberOfActiveChats == 1
+                      ? 'У вас є 1 активний чат'
+                      : 'У вас є $numberOfActiveChats активних чати',
+                  style: AppTextStyles.s16w500(color: AppColors.white),
+                ),
               )
             ],
           )),
@@ -114,26 +106,10 @@ class _ChatHeaderState extends ConsumerState<ChatHeader> {
                 Row(
                   children: [
                     for (int i = 0; i < 3; i++) ...{
-                      if (i > 0)
-                        const SizedBox(
-                          width: 4,
-                        ),
-                      Expanded(
-                        child: AppButtonFade(
-                          onTap: () {},
-                          child: Container(
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: AppColors.primary,
-                                borderRadius: BorderRadius.circular(6)),
-                            child: Center(
-                              child: Icon(
-                                _chatHeaderItems[i].icon,
-                                color: AppColors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                      if (i > 0) const SizedBox(width: 4),
+                      ChatHeaderButton(
+                        onTap: () {},
+                        icon: _chatHeaderItems[i].icon,
                       )
                     }
                   ],
