@@ -10,6 +10,7 @@ import 'package:soldnet/presentation/pages/home_page.dart';
 import 'package:soldnet/presentation/pages/login_page.dart';
 import 'package:soldnet/presentation/pages/profile_page.dart';
 import 'package:soldnet/presentation/pages/search_page.dart';
+import 'package:soldnet/presentation/pages/user_details_page.dart';
 import 'package:soldnet/presentation/widgets/app/nav_bar/app_nav_bar.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -21,6 +22,7 @@ class ScreenPaths {
   static String profile = '/profile';
   static String login = '/login';
   static String search = '/search';
+  static String userDetails = '/userDetails';
 }
 
 final GoRouter router = GoRouter(
@@ -46,6 +48,7 @@ final GoRouter router = GoRouter(
       ],
     ),
     AppRoute(ScreenPaths.login, (_) => const LoginPage()),
+    AppRoute(ScreenPaths.userDetails, (_) => const UserDetailsPage()),
   ],
 );
 
