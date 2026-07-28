@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soldnet/models/entities/user.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
+import 'package:soldnet/presentation/widgets/app/button/app_button_circle.dart';
+import 'package:soldnet/stores/store_chat.dart';
 
 class SearchBodyItemActions extends ConsumerWidget {
   const SearchBodyItemActions({super.key, required this.user});
@@ -10,39 +12,34 @@ class SearchBodyItemActions extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final chatState = ref.watch(storeChatProvider);
+
+    final isConversationCreated =
+        chatState.notGroupsConversationIds.contains(user.id);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Container(
-          width: 32,
-          height: 32,
-          decoration:
-              BoxDecoration(shape: BoxShape.circle, color: AppColors.grey220),
-          child: Center(
-            child: Icon(
-              Icons.info_rounded,
-              color: AppColors.grey170,
-              size: 20,
-            ),
-          ),
+        AppButtonCircle(
+          onTap: () {},
+          icon: Icons.info_rounded,
+          iconSize: 20,
+          buttonSize: 32,
+          buttonColor: AppColors.action3,
+          iconColor: AppColors.white,
         ),
         const SizedBox(width: 8),
-        Container(
-          width: 32,
-          height: 32,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle, color: AppColors.activeBrown),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 2),
-              child: Icon(
-                Icons.send_rounded,
-                color: AppColors.primary,
-                size: 20,
-              ),
-            ),
-          ),
-        )
+        AppButtonCircle(
+          onTap: () {},
+          icon: Icons.send_rounded,
+          iconSize: 20,
+          buttonSize: 32,
+          buttonColor: !isConversationCreated
+              ? AppColors.activeBrown
+              : AppColors.grey220,
+          iconColor:
+              !isConversationCreated ? AppColors.primary : AppColors.grey170,
+        ),
       ],
     );
   }

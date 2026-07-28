@@ -8,20 +8,24 @@ class AppButtonCircle extends StatelessWidget {
       required this.onTap,
       required this.icon,
       this.buttonColor,
-      this.iconColor});
+      this.iconColor,
+      this.buttonSize,
+      this.iconSize});
 
   final Function() onTap;
   final IconData icon;
   final Color? buttonColor;
   final Color? iconColor;
+  final double? buttonSize;
+  final double? iconSize;
 
   @override
   Widget build(BuildContext context) {
     return AppButtonFade(
       onTap: onTap,
       child: Container(
-        width: 48,
-        height: 48,
+        width: buttonSize ?? 48,
+        height: buttonSize ?? 48,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: buttonColor ?? AppColors.primary,
@@ -30,6 +34,7 @@ class AppButtonCircle extends StatelessWidget {
             child: Icon(
           icon,
           color: iconColor,
+          size: iconSize,
         )),
       ),
     );

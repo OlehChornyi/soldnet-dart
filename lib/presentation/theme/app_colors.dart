@@ -24,6 +24,8 @@ class AppColors {
   static const Color action1 = Color.fromRGBO(255, 127, 221, 1);
   static const Color action2Active = Color.fromRGBO(169, 58, 255, 1);
   static const Color action2 = Color.fromRGBO(198, 124, 255, 1);
+  static const Color action3Active = Color.fromRGBO(58, 81, 255, 1);
+  static const Color action3 = Color.fromRGBO(124, 148, 255, 1);
 
   static const Color userMessage = Color.fromRGBO(222, 237, 255, 1);
 }
