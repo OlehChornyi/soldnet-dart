@@ -41,7 +41,7 @@ final class WsChatProvider
   }
 }
 
-String _$wsChatHash() => r'4db87020a6647ed9d19d42fe67cd111252e958af';
+String _$wsChatHash() => r'22f86983cd16b7b135f33bd04ffb8eae5a628313';
 
 abstract class _$WsChat extends $Notifier<WebSocketChannel?> {
   WebSocketChannel? build();

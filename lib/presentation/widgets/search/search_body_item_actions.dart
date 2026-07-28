@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soldnet/models/entities/user.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 
-class SearchBodyItemActions extends StatelessWidget {
+class SearchBodyItemActions extends ConsumerWidget {
   const SearchBodyItemActions({super.key, required this.user});
 
   final User user;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [

@@ -23,6 +23,7 @@ abstract class StoreChatModel with _$StoreChatModel {
     required DialogBg dialogBg,
     required List<User> users,
     required List<Conversation> conversations,
+    required List<String> notGroupsConversationIds,
     required Map<String, List<Message>> messagesByConversationId,
     required Conversation? selectedConversation,
   }) = _StoreChatModel;
@@ -37,6 +38,7 @@ class StoreChat extends _$StoreChat {
       dialogBg: DialogBg.leaves,
       users: [],
       conversations: [],
+      notGroupsConversationIds: [],
       messagesByConversationId: {},
       selectedConversation: null);
 
@@ -86,9 +88,24 @@ class StoreChat extends _$StoreChat {
           .addEntries(response.conversations!.map((conversation) {
         return MapEntry(conversation.id, []);
       }));
+
+      List<Conversation> cnvrs = [...response.conversations!];
+      List<String> ids = [];
+
+      for (var c in cnvrs) {
+        if (c.members.length == 2) {
+          for (var m in c.members) {
+            if (m != state.chatUserId) {
+              ids.add(m);
+            }
+          }
+        }
+      }
+
       state = state.copyWith(
           conversations: response.conversations!,
-          messagesByConversationId: messagesByConversationId);
+          messagesByConversationId: messagesByConversationId,
+          notGroupsConversationIds: ids);
     }
   }
 
@@ -103,8 +120,19 @@ class StoreChat extends _$StoreChat {
         .future);
 
     if (response.conversation != null) {
+      List<String> ids = [...state.notGroupsConversationIds];
+
+      if (response.conversation?.members.length == 2) {
+        for (var m in response.conversation?.members ?? []) {
+          if (m != state.chatUserId) {
+            ids.add(m);
+          }
+        }
+      }
+
       state = state.copyWith(
-          conversations: [...state.conversations, response.conversation!]);
+          conversations: [...state.conversations, response.conversation!],
+          notGroupsConversationIds: ids);
     }
   }
 
