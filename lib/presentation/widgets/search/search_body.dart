@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soldnet/models/entities/user.dart';
 import 'package:soldnet/presentation/widgets/app/animations/app_animations_fade_in_list.dart';
 import 'package:soldnet/presentation/widgets/search/search_body_item.dart';
-import 'package:soldnet/stores/store_chat.dart';
+import 'package:soldnet/stores/store_search.dart';
 
 class SearchBody extends ConsumerWidget {
   const SearchBody({super.key});
@@ -13,15 +13,15 @@ class SearchBody extends ConsumerWidget {
     final paddingTop = MediaQuery.of(context).padding.top;
     final paddingBottom = MediaQuery.of(context).padding.bottom;
 
-    final chatState = ref.watch(storeChatProvider);
+    final searchState = ref.watch(storeSearchProvider);
 
     return AppFadeInList<User>(
       shrinkWrap: false,
       physics: AlwaysScrollableScrollPhysics(),
       padding: EdgeInsets.fromLTRB(16, paddingTop + 76, 16, paddingBottom + 16),
-      items: chatState.users,
+      items: searchState.users,
       itemBuilder: (context, item, index) {
-        return SearchBodyItem(user: chatState.users[index]);
+        return SearchBodyItem(user: searchState.users[index]);
       },
     );
   }

@@ -7,6 +7,7 @@ import 'package:soldnet/presentation/widgets/home/home_sections.dart';
 import 'package:soldnet/services/ws/ws_chat.dart';
 import 'package:soldnet/stores/store_chat.dart';
 import 'package:soldnet/stores/store_home.dart';
+import 'package:soldnet/stores/store_search.dart';
 import 'package:soldnet/stores/store_user.dart';
 
 class HomeContainer extends ConsumerStatefulWidget {
@@ -26,10 +27,13 @@ class _HomeContainerState extends ConsumerState<HomeContainer> {
   }
 
   void _makeApiCallsAndMaybeStartWs() {
-    ref.read(storeUserProvider.notifier).getUserAccount();
     final chatNotifier = ref.read(storeChatProvider.notifier);
+    final searchNotifier = ref.read(storeSearchProvider.notifier);
+    final userNotifier = ref.read(storeUserProvider.notifier);
+
+    userNotifier.getUserAccount();
     chatNotifier.getAllUserConversations();
-    chatNotifier.getAllUsers();
+    searchNotifier.getAllUsers();
 
     ref.read(wsChatProvider.notifier).startWsChat();
   }

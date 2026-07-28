@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'store_chat.dart';
+part of 'store_search.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,49 +9,49 @@ part of 'store_chat.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(StoreChat)
-final storeChatProvider = StoreChatProvider._();
+@ProviderFor(StoreSearch)
+final storeSearchProvider = StoreSearchProvider._();
 
-final class StoreChatProvider
-    extends $NotifierProvider<StoreChat, StoreChatModel> {
-  StoreChatProvider._()
+final class StoreSearchProvider
+    extends $NotifierProvider<StoreSearch, StoreSearchModel> {
+  StoreSearchProvider._()
       : super(
           from: null,
           argument: null,
           retry: null,
-          name: r'storeChatProvider',
+          name: r'storeSearchProvider',
           isAutoDispose: false,
           dependencies: null,
           $allTransitiveDependencies: null,
         );
 
   @override
-  String debugGetCreateSourceHash() => _$storeChatHash();
+  String debugGetCreateSourceHash() => _$storeSearchHash();
 
   @$internal
   @override
-  StoreChat create() => StoreChat();
+  StoreSearch create() => StoreSearch();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(StoreChatModel value) {
+  Override overrideWithValue(StoreSearchModel value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<StoreChatModel>(value),
+      providerOverride: $SyncValueProvider<StoreSearchModel>(value),
     );
   }
 }
 
-String _$storeChatHash() => r'e90f4e6f60c222552a49cf30fd97be08e1500a93';
+String _$storeSearchHash() => r'1ff9727ead317f10f50a938da9cc948f6e8db2e5';
 
-abstract class _$StoreChat extends $Notifier<StoreChatModel> {
-  StoreChatModel build();
+abstract class _$StoreSearch extends $Notifier<StoreSearchModel> {
+  StoreSearchModel build();
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
-    final ref = this.ref as $Ref<StoreChatModel, StoreChatModel>;
+    final ref = this.ref as $Ref<StoreSearchModel, StoreSearchModel>;
     final element = ref.element as $ClassProviderElement<
-        AnyNotifier<StoreChatModel, StoreChatModel>,
-        StoreChatModel,
+        AnyNotifier<StoreSearchModel, StoreSearchModel>,
+        StoreSearchModel,
         Object?,
         Object?>;
     return element.handleCreate(ref, build);

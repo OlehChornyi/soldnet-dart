@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:soldnet/app/app_router.dart';
 import 'package:soldnet/models/entities/user.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/widgets/app/button/app_button_circle.dart';
-import 'package:soldnet/stores/store_chat.dart';
+import 'package:soldnet/stores/store_search.dart';
 
 class SearchBodyItemActions extends ConsumerWidget {
   const SearchBodyItemActions({super.key, required this.user});
@@ -12,16 +14,20 @@ class SearchBodyItemActions extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chatState = ref.watch(storeChatProvider);
+    final searchState = ref.watch(storeSearchProvider);
+    final searchNotifier = ref.read(storeSearchProvider.notifier);
 
     final isConversationCreated =
-        chatState.notGroupsConversationIds.contains(user.id);
+        searchState.usersAlreadyAddedToSingleChats.contains(user.id);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         AppButtonCircle(
-          onTap: () {},
+          onTap: () {
+            searchNotifier.setSelectedUser(user);
+            context.push(ScreenPaths.userDetails);
+          },
           icon: Icons.info_rounded,
           iconSize: 20,
           buttonSize: 32,

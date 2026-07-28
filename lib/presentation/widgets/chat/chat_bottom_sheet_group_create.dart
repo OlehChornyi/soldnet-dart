@@ -6,6 +6,7 @@ import 'package:soldnet/presentation/widgets/app/button/app_button_circle.dart';
 import 'package:soldnet/presentation/widgets/app/textfield/app_text_field.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_bottom_sheet_users_item.dart';
 import 'package:soldnet/stores/store_chat.dart';
+import 'package:soldnet/stores/store_search.dart';
 
 void showChatBottomSheetGroupCreate() {
   showModalBottomSheet(
@@ -54,7 +55,7 @@ class _ChatBottomSheetGroupCreateState
   @override
   Widget build(BuildContext context) {
     final paddingBottom = MediaQuery.of(context).padding.bottom;
-    final users = ref.watch(storeChatProvider.select((state) => state.users));
+    final users = ref.watch(storeSearchProvider.select((state) => state.users));
 
     return AppBottomSheet(
         header: 'Створити групу',

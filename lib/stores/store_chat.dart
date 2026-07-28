@@ -8,8 +8,8 @@ import 'package:soldnet/models/utils/dialog_bg.dart';
 import 'package:soldnet/services/api/requests/request_conversations_create.dart';
 import 'package:soldnet/services/api/requests/request_conversations_get.dart';
 import 'package:soldnet/services/api/requests/request_conversations_messages_get.dart';
-import 'package:soldnet/services/api/requests/request_user_all_get.dart';
 import 'package:soldnet/services/ws/ws_chat.dart';
+import 'package:soldnet/stores/store_search.dart';
 import 'package:uuid/v7.dart';
 
 part 'store_chat.g.dart';
@@ -21,9 +21,7 @@ abstract class StoreChatModel with _$StoreChatModel {
     required String chatUserId,
     required ChatTab tab,
     required DialogBg dialogBg,
-    required List<User> users,
     required List<Conversation> conversations,
-    required List<String> notGroupsConversationIds,
     required Map<String, List<Message>> messagesByConversationId,
     required Conversation? selectedConversation,
   }) = _StoreChatModel;
@@ -36,9 +34,7 @@ class StoreChat extends _$StoreChat {
       chatUserId: '',
       tab: ChatTab.groups,
       dialogBg: DialogBg.leaves,
-      users: [],
       conversations: [],
-      notGroupsConversationIds: [],
       messagesByConversationId: {},
       selectedConversation: null);
 
@@ -69,15 +65,6 @@ class StoreChat extends _$StoreChat {
     state = state.copyWith(dialogBg: bg);
   }
 
-  Future<void> getAllUsers() async {
-    //TODO: change this into search
-    // if (state.users.isNotEmpty) return;
-
-    final response = await ref.read(requestUserAllGetProvider.future);
-
-    state = state.copyWith(users: response.users ?? []);
-  }
-
   Future<void> getAllUserConversations() async {
     final response = await ref.read(requestConversationsGetProvider.future);
 
@@ -88,6 +75,11 @@ class StoreChat extends _$StoreChat {
           .addEntries(response.conversations!.map((conversation) {
         return MapEntry(conversation.id, []);
       }));
+
+      state = state.copyWith(
+        conversations: response.conversations!,
+        messagesByConversationId: messagesByConversationId,
+      );
 
       List<Conversation> cnvrs = [...response.conversations!];
       List<String> ids = [];
@@ -102,10 +94,9 @@ class StoreChat extends _$StoreChat {
         }
       }
 
-      state = state.copyWith(
-          conversations: response.conversations!,
-          messagesByConversationId: messagesByConversationId,
-          notGroupsConversationIds: ids);
+      ref
+          .read(storeSearchProvider.notifier)
+          .setUsersAlreadyAddedToSingleChats(ids);
     }
   }
 
@@ -120,34 +111,29 @@ class StoreChat extends _$StoreChat {
         .future);
 
     if (response.conversation != null) {
-      List<String> ids = [...state.notGroupsConversationIds];
-
-      if (response.conversation?.members.length == 2) {
-        for (var m in response.conversation?.members ?? []) {
-          if (m != state.chatUserId) {
-            ids.add(m);
-          }
-        }
-      }
-
       state = state.copyWith(
-          conversations: [...state.conversations, response.conversation!],
-          notGroupsConversationIds: ids);
+        conversations: [...state.conversations, response.conversation!],
+      );
+
+      getAllUserConversations();
     }
   }
 
   String getChatAvatarUrl(List<String> members) {
     final chatUserId = members.firstWhere((m) => m != state.chatUserId);
+    final users = ref.read(storeSearchProvider).users;
 
     final chatUserAvatarUrl =
-        state.users.firstWhere((u) => u.id == chatUserId).avatarUrl;
+        users.firstWhere((u) => u.id == chatUserId).avatarUrl;
 
     return chatUserAvatarUrl ?? '';
   }
 
   User getAnotherUser(List<String> members) {
     final anotherUserId = members.firstWhere((m) => m != state.chatUserId);
-    final anotherUser = state.users.firstWhere((u) => u.id == anotherUserId);
+    final users = ref.read(storeSearchProvider).users;
+
+    final anotherUser = users.firstWhere((u) => u.id == anotherUserId);
     return anotherUser;
   }
 

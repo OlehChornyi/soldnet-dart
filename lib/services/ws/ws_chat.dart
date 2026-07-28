@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soldnet/models/const/const_info.dart';
 import 'package:soldnet/models/entities/message.dart';
@@ -25,7 +24,6 @@ class WsChat extends _$WsChat {
     await state?.ready;
 
     state?.stream.listen((data) {
-      print('DDDADADADADADAATA: $data');
       ref
           .read(storeChatProvider.notifier)
           .addMessageToConversation(Message.fromJson(jsonDecode(data)));
