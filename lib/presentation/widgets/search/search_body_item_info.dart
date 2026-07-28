@@ -14,7 +14,7 @@ class SearchBodyItemInfo extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return SizedBox(
-      width: screenWidth - 136,
+      width: screenWidth - 140,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soldnet/models/entities/user.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
+import 'package:soldnet/presentation/widgets/search/search_body_item_actions.dart';
 import 'package:soldnet/presentation/widgets/search/search_body_item_avatar.dart';
 import 'package:soldnet/presentation/widgets/search/search_body_item_info.dart';
 
@@ -26,9 +27,11 @@ class SearchBodyItem extends StatelessWidget {
             children: [
               SearchBodyItemAvatar(user: user),
               const SizedBox(width: 8),
-              SearchBodyItemInfo(user: user)
+              SearchBodyItemInfo(user: user),
+              const SizedBox(width: 4),
             ],
-          )
+          ),
+          SearchBodyItemActions(user: user)
         ],
       ),
     );
