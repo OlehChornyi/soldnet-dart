@@ -17,9 +17,11 @@ class SearchBodyItemAvatar extends StatelessWidget {
       decoration: BoxDecoration(
           color: AppColors.bgLight,
           shape: BoxShape.circle,
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage('${ConstInfo.baseUrl}${user.avatarUrl}'))),
+          image: (user.avatarUrl?.isNotEmpty ?? false)
+              ? DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage('${ConstInfo.baseUrl}${user.avatarUrl}'))
+              : null),
       child: (user.avatarUrl?.isNotEmpty ?? false)
           ? null
           : Center(
