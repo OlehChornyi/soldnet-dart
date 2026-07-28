@@ -16,6 +16,8 @@ class SearchBody extends ConsumerWidget {
     final chatState = ref.watch(storeChatProvider);
 
     return AppFadeInList<User>(
+      shrinkWrap: false,
+      physics: AlwaysScrollableScrollPhysics(),
       padding: EdgeInsets.fromLTRB(16, paddingTop + 76, 16, paddingBottom + 16),
       items: chatState.users,
       itemBuilder: (context, item, index) {

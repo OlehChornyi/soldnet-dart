@@ -9,18 +9,21 @@ class AppFadeInList<T> extends StatefulWidget {
   final ScrollController? controller;
   final Axis scrollDirection;
   final Widget? bottomWidget;
+  final bool? shrinkWrap;
+  final ScrollPhysics? physics;
 
-  const AppFadeInList({
-    super.key,
-    required this.items,
-    required this.itemBuilder,
-    this.itemDelay = const Duration(milliseconds: 200),
-    this.fadeDuration = const Duration(milliseconds: 800),
-    this.scrollDirection = Axis.vertical,
-    this.padding,
-    this.controller,
-    this.bottomWidget,
-  });
+  const AppFadeInList(
+      {super.key,
+      required this.items,
+      required this.itemBuilder,
+      this.itemDelay = const Duration(milliseconds: 200),
+      this.fadeDuration = const Duration(milliseconds: 800),
+      this.scrollDirection = Axis.vertical,
+      this.padding,
+      this.controller,
+      this.bottomWidget,
+      this.shrinkWrap,
+      this.physics});
 
   @override
   State<AppFadeInList<T>> createState() => _AppFadeInListState<T>();
@@ -63,8 +66,8 @@ class _AppFadeInListState<T> extends State<AppFadeInList<T>> {
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return ListView.separated(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: widget.shrinkWrap ?? true,
+      physics: widget.physics ?? NeverScrollableScrollPhysics(),
       key: ValueKey(widget.items.length),
       padding: widget.padding,
       controller: widget.controller,
