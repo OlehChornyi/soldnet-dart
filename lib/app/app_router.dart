@@ -40,8 +40,8 @@ final GoRouter router = GoRouter(
       },
       routes: [
         AppRoute(ScreenPaths.home, (_) => HomePage(), noTransition: true),
-        AppRoute(ScreenPaths.chat, (_) => ChatPage(), noTransition: true),
         AppRoute(ScreenPaths.search, (_) => SearchPage(), noTransition: true),
+        AppRoute(ScreenPaths.chat, (_) => ChatPage(), noTransition: true),
         AppRoute(ScreenPaths.profile, (_) => ProfilePage(), noTransition: true),
       ],
     ),
