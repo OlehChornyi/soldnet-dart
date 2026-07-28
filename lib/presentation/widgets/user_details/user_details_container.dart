@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:soldnet/models/const/const_info.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
+import 'package:soldnet/presentation/widgets/app/button/app_button_action.dart';
 import 'package:soldnet/stores/store_search.dart';
 
 class UserDetailsContainer extends ConsumerWidget {
@@ -69,9 +70,34 @@ class UserDetailsContainer extends ConsumerWidget {
               height: 32,
               color: AppColors.primary,
             ),
-            Text(searchState.selectedUser?.militaryRank ?? ''),
-            Text(searchState.selectedUser?.civilProfession ?? ''),
-            Text(searchState.selectedUser?.interests.toString() ?? ''),
+            Text(
+              'Звання: ${searchState.selectedUser?.militaryRank ?? ''}',
+              style: AppTextStyles.s16w500(color: AppColors.white),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Професія: ${searchState.selectedUser?.civilProfession ?? ''}',
+              style: AppTextStyles.s16w500(color: AppColors.white),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Захоплення: ${searchState.selectedUser?.interests.toString() ?? ''}',
+              style: AppTextStyles.s16w500(color: AppColors.white),
+            ),
+            const Divider(
+              height: 32,
+              color: AppColors.primary,
+            ),
+            AppButtonAction(
+                text: searchState.usersAlreadyAddedToSingleChats
+                        .contains(searchState.selectedUser?.id ?? '')
+                    ? 'Відкрити чат'
+                    : 'Розпочати чат',
+                buttonColor: searchState.usersAlreadyAddedToSingleChats
+                        .contains(searchState.selectedUser?.id ?? '')
+                    ? AppColors.grey120
+                    : null,
+                onTap: () {})
           ],
         ),
       ),
