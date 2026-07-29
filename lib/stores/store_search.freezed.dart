@@ -17,6 +17,7 @@ mixin _$StoreSearchModel {
   List<User> get users;
   List<String> get usersAlreadyAddedToSingleChats;
   User? get selectedUser;
+  SearchParam? get selectedParam;
 
   /// Create a copy of StoreSearchModel
   /// with the given fields replaced by the non-null parameter values.
@@ -36,7 +37,9 @@ mixin _$StoreSearchModel {
                 other.usersAlreadyAddedToSingleChats,
                 usersAlreadyAddedToSingleChats) &&
             (identical(other.selectedUser, selectedUser) ||
-                other.selectedUser == selectedUser));
+                other.selectedUser == selectedUser) &&
+            (identical(other.selectedParam, selectedParam) ||
+                other.selectedParam == selectedParam));
   }
 
   @override
@@ -44,11 +47,12 @@ mixin _$StoreSearchModel {
       runtimeType,
       const DeepCollectionEquality().hash(users),
       const DeepCollectionEquality().hash(usersAlreadyAddedToSingleChats),
-      selectedUser);
+      selectedUser,
+      selectedParam);
 
   @override
   String toString() {
-    return 'StoreSearchModel(users: $users, usersAlreadyAddedToSingleChats: $usersAlreadyAddedToSingleChats, selectedUser: $selectedUser)';
+    return 'StoreSearchModel(users: $users, usersAlreadyAddedToSingleChats: $usersAlreadyAddedToSingleChats, selectedUser: $selectedUser, selectedParam: $selectedParam)';
   }
 }
 
@@ -61,7 +65,8 @@ abstract mixin class $StoreSearchModelCopyWith<$Res> {
   $Res call(
       {List<User> users,
       List<String> usersAlreadyAddedToSingleChats,
-      User? selectedUser});
+      User? selectedUser,
+      SearchParam? selectedParam});
 
   $UserCopyWith<$Res>? get selectedUser;
 }
@@ -82,6 +87,7 @@ class _$StoreSearchModelCopyWithImpl<$Res>
     Object? users = null,
     Object? usersAlreadyAddedToSingleChats = null,
     Object? selectedUser = freezed,
+    Object? selectedParam = freezed,
   }) {
     return _then(_self.copyWith(
       users: null == users
@@ -96,6 +102,10 @@ class _$StoreSearchModelCopyWithImpl<$Res>
           ? _self.selectedUser
           : selectedUser // ignore: cast_nullable_to_non_nullable
               as User?,
+      selectedParam: freezed == selectedParam
+          ? _self.selectedParam
+          : selectedParam // ignore: cast_nullable_to_non_nullable
+              as SearchParam?,
     ));
   }
 
@@ -207,8 +217,11 @@ extension StoreSearchModelPatterns on StoreSearchModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<User> users,
-            List<String> usersAlreadyAddedToSingleChats, User? selectedUser)?
+    TResult Function(
+            List<User> users,
+            List<String> usersAlreadyAddedToSingleChats,
+            User? selectedUser,
+            SearchParam? selectedParam)?
         $default, {
     required TResult orElse(),
   }) {
@@ -216,7 +229,7 @@ extension StoreSearchModelPatterns on StoreSearchModel {
     switch (_that) {
       case _StoreSearchModel() when $default != null:
         return $default(_that.users, _that.usersAlreadyAddedToSingleChats,
-            _that.selectedUser);
+            _that.selectedUser, _that.selectedParam);
       case _:
         return orElse();
     }
@@ -237,15 +250,18 @@ extension StoreSearchModelPatterns on StoreSearchModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<User> users,
-            List<String> usersAlreadyAddedToSingleChats, User? selectedUser)
+    TResult Function(
+            List<User> users,
+            List<String> usersAlreadyAddedToSingleChats,
+            User? selectedUser,
+            SearchParam? selectedParam)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreSearchModel():
         return $default(_that.users, _that.usersAlreadyAddedToSingleChats,
-            _that.selectedUser);
+            _that.selectedUser, _that.selectedParam);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -265,15 +281,18 @@ extension StoreSearchModelPatterns on StoreSearchModel {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(List<User> users,
-            List<String> usersAlreadyAddedToSingleChats, User? selectedUser)?
+    TResult? Function(
+            List<User> users,
+            List<String> usersAlreadyAddedToSingleChats,
+            User? selectedUser,
+            SearchParam? selectedParam)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _StoreSearchModel() when $default != null:
         return $default(_that.users, _that.usersAlreadyAddedToSingleChats,
-            _that.selectedUser);
+            _that.selectedUser, _that.selectedParam);
       case _:
         return null;
     }
@@ -286,7 +305,8 @@ class _StoreSearchModel implements StoreSearchModel {
   const _StoreSearchModel(
       {required final List<User> users,
       required final List<String> usersAlreadyAddedToSingleChats,
-      required this.selectedUser})
+      required this.selectedUser,
+      required this.selectedParam})
       : _users = users,
         _usersAlreadyAddedToSingleChats = usersAlreadyAddedToSingleChats;
 
@@ -309,6 +329,8 @@ class _StoreSearchModel implements StoreSearchModel {
 
   @override
   final User? selectedUser;
+  @override
+  final SearchParam? selectedParam;
 
   /// Create a copy of StoreSearchModel
   /// with the given fields replaced by the non-null parameter values.
@@ -328,7 +350,9 @@ class _StoreSearchModel implements StoreSearchModel {
                 other._usersAlreadyAddedToSingleChats,
                 _usersAlreadyAddedToSingleChats) &&
             (identical(other.selectedUser, selectedUser) ||
-                other.selectedUser == selectedUser));
+                other.selectedUser == selectedUser) &&
+            (identical(other.selectedParam, selectedParam) ||
+                other.selectedParam == selectedParam));
   }
 
   @override
@@ -336,11 +360,12 @@ class _StoreSearchModel implements StoreSearchModel {
       runtimeType,
       const DeepCollectionEquality().hash(_users),
       const DeepCollectionEquality().hash(_usersAlreadyAddedToSingleChats),
-      selectedUser);
+      selectedUser,
+      selectedParam);
 
   @override
   String toString() {
-    return 'StoreSearchModel(users: $users, usersAlreadyAddedToSingleChats: $usersAlreadyAddedToSingleChats, selectedUser: $selectedUser)';
+    return 'StoreSearchModel(users: $users, usersAlreadyAddedToSingleChats: $usersAlreadyAddedToSingleChats, selectedUser: $selectedUser, selectedParam: $selectedParam)';
   }
 }
 
@@ -355,7 +380,8 @@ abstract mixin class _$StoreSearchModelCopyWith<$Res>
   $Res call(
       {List<User> users,
       List<String> usersAlreadyAddedToSingleChats,
-      User? selectedUser});
+      User? selectedUser,
+      SearchParam? selectedParam});
 
   @override
   $UserCopyWith<$Res>? get selectedUser;
@@ -377,6 +403,7 @@ class __$StoreSearchModelCopyWithImpl<$Res>
     Object? users = null,
     Object? usersAlreadyAddedToSingleChats = null,
     Object? selectedUser = freezed,
+    Object? selectedParam = freezed,
   }) {
     return _then(_StoreSearchModel(
       users: null == users
@@ -391,6 +418,10 @@ class __$StoreSearchModelCopyWithImpl<$Res>
           ? _self.selectedUser
           : selectedUser // ignore: cast_nullable_to_non_nullable
               as User?,
+      selectedParam: freezed == selectedParam
+          ? _self.selectedParam
+          : selectedParam // ignore: cast_nullable_to_non_nullable
+              as SearchParam?,
     ));
   }
 
