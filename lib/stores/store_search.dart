@@ -46,6 +46,7 @@ class StoreSearch extends _$StoreSearch {
   void setSelectedParam(SearchParam param) {
     if (param == SearchParam.none) {
       state = state.copyWith(selectedParam: null);
+      getAllUsers();
     } else {
       state = state.copyWith(selectedParam: param);
     }
@@ -54,7 +55,7 @@ class StoreSearch extends _$StoreSearch {
   Future<void> getUsersWithQuery(String keyWord) async {
     final query = state.selectedParam == null
         ? ''
-        : '?${state.selectedParam!.name}=$keyWord';
+        : '?searchBy=${state.selectedParam!.name}&keyword=$keyWord';
 
     final response =
         await ref.read(requestUserSearchProvider(query: query).future);
