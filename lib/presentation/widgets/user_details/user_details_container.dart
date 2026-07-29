@@ -18,7 +18,6 @@ class UserDetailsContainer extends ConsumerWidget {
     final paddingTop = MediaQuery.of(context).padding.top;
 
     final searchState = ref.watch(storeSearchProvider);
-    final chatState = ref.watch(storeChatProvider);
     final chatNotifier = ref.read(storeChatProvider.notifier);
 
     return Scaffold(
@@ -105,7 +104,6 @@ class UserDetailsContainer extends ConsumerWidget {
                 onTap: () async {
                   if (searchState.usersAlreadyAddedToSingleChats
                       .contains(searchState.selectedUser?.id ?? '')) {
-                    print('sdfsdf');
                     final conversation = chatNotifier
                         .findConversationByUser(searchState.selectedUser!);
                     context.go(ScreenPaths.chat);

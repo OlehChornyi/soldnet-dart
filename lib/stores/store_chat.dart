@@ -118,6 +118,7 @@ class StoreChat extends _$StoreChat {
       getAllUserConversations();
       return response.conversation;
     }
+    return null;
   }
 
   String getChatAvatarUrl(List<String> members) {
