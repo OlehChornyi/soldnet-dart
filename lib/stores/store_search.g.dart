@@ -41,7 +41,7 @@ final class StoreSearchProvider
   }
 }
 
-String _$storeSearchHash() => r'1ff9727ead317f10f50a938da9cc948f6e8db2e5';
+String _$storeSearchHash() => r'7a77d483d5ceaead798e057c120f886e21897b63';
 
 abstract class _$StoreSearch extends $Notifier<StoreSearchModel> {
   StoreSearchModel build();
