@@ -6,22 +6,6 @@ part of 'request_user_search.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_QueryUserSearch _$QueryUserSearchFromJson(Map<String, dynamic> json) =>
-    _QueryUserSearch(
-      name: json['name'] as String?,
-      rank: json['rank'] as String?,
-      profession: json['profession'] as String?,
-      hobby: json['hobby'] as String?,
-    );
-
-Map<String, dynamic> _$QueryUserSearchToJson(_QueryUserSearch instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'rank': instance.rank,
-      'profession': instance.profession,
-      'hobby': instance.hobby,
-    };
-
 _ResponseUserSearch _$ResponseUserSearchFromJson(Map<String, dynamic> json) =>
     _ResponseUserSearch(
       message: json['message'] as String?,
@@ -55,7 +39,7 @@ final class RequestUserSearchProvider extends $FunctionalProvider<
         $FutureProvider<ResponseUserSearch> {
   RequestUserSearchProvider._(
       {required RequestUserSearchFamily super.from,
-      required QueryUserSearch super.argument})
+      required String super.argument})
       : super(
           retry: null,
           name: r'requestUserSearchProvider',
@@ -82,7 +66,7 @@ final class RequestUserSearchProvider extends $FunctionalProvider<
 
   @override
   FutureOr<ResponseUserSearch> create(Ref ref) {
-    final argument = this.argument as QueryUserSearch;
+    final argument = this.argument as String;
     return requestUserSearch(
       ref,
       query: argument,
@@ -100,12 +84,10 @@ final class RequestUserSearchProvider extends $FunctionalProvider<
   }
 }
 
-String _$requestUserSearchHash() => r'dca622e1d164e31446a841bc4385e35a8cebe143';
+String _$requestUserSearchHash() => r'ccd450523131c255c80b402fab6013df4856d136';
 
 final class RequestUserSearchFamily extends $Family
-    with
-        $FunctionalFamilyOverride<FutureOr<ResponseUserSearch>,
-            QueryUserSearch> {
+    with $FunctionalFamilyOverride<FutureOr<ResponseUserSearch>, String> {
   RequestUserSearchFamily._()
       : super(
           retry: null,
@@ -116,7 +98,7 @@ final class RequestUserSearchFamily extends $Family
         );
 
   RequestUserSearchProvider call({
-    required QueryUserSearch query,
+    required String query,
   }) =>
       RequestUserSearchProvider._(argument: query, from: this);
 

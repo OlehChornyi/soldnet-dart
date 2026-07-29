@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/widgets/app/button/app_button_circle.dart';
 import 'package:soldnet/presentation/widgets/app/textfield/app_text_field.dart';
 import 'package:soldnet/presentation/widgets/search/search_bottom_sheet.dart';
+import 'package:soldnet/stores/store_search.dart';
 
-class SearchHeader extends StatefulWidget {
+class SearchHeader extends ConsumerStatefulWidget {
   const SearchHeader({super.key});
 
   @override
-  State<SearchHeader> createState() => _SearchHeaderState();
+  ConsumerState<SearchHeader> createState() => _SearchHeaderState();
 }
 
-class _SearchHeaderState extends State<SearchHeader> {
+class _SearchHeaderState extends ConsumerState<SearchHeader> {
   final _controller = TextEditingController();
   final _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+
+    final searchNotifier = ref.read(storeSearchProvider.notifier);
 
     return SizedBox(
       width: screenWidth - 32,
@@ -40,7 +44,11 @@ class _SearchHeaderState extends State<SearchHeader> {
           ),
           const SizedBox(width: 8),
           AppButtonCircle(
-            onTap: () {},
+            onTap: () {
+              if (_controller.text.trim().isNotEmpty) {
+                searchNotifier.getUsersWithQuery(_controller.text.trim());
+              }
+            },
             icon: Icons.search_rounded,
             iconColor: AppColors.activeBrown,
           ),

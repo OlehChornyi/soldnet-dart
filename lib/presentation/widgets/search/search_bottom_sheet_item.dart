@@ -24,7 +24,8 @@ class SearchBottomSheetItem extends StatelessWidget {
         height: 32,
         width: screenWidth - 32,
         decoration: BoxDecoration(
-            color: AppColors.primary, borderRadius: BorderRadius.circular(16)),
+            color: isSeltcted ? AppColors.action2 : AppColors.primary,
+            borderRadius: BorderRadius.circular(16)),
         child: Center(
           child: Text(
             name,
