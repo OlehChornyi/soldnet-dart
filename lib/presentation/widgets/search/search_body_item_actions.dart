@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:soldnet/app/app_router.dart';
 import 'package:soldnet/models/entities/user.dart';
+import 'package:soldnet/models/utils/chat_tab.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/widgets/app/button/app_button_circle.dart';
+import 'package:soldnet/stores/store_chat.dart';
 import 'package:soldnet/stores/store_search.dart';
 
 class SearchBodyItemActions extends ConsumerWidget {
@@ -16,6 +18,7 @@ class SearchBodyItemActions extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchState = ref.watch(storeSearchProvider);
     final searchNotifier = ref.read(storeSearchProvider.notifier);
+    final chatNotifier = ref.read(storeChatProvider.notifier);
 
     final isConversationCreated =
         searchState.usersAlreadyAddedToSingleChats.contains(user.id);
@@ -36,7 +39,16 @@ class SearchBodyItemActions extends ConsumerWidget {
         ),
         const SizedBox(width: 8),
         AppButtonCircle(
-          onTap: () {},
+          onTap: () async {
+            final conversation = await chatNotifier
+                .createConversation(title: '', members: [user.id]);
+            if (conversation != null) {
+              if (!context.mounted) return;
+              context.go(ScreenPaths.chat);
+              chatNotifier.setSelectedConversation(conversation);
+              chatNotifier.setTab(ChatTab.dialog);
+            }
+          },
           icon: Icons.send_rounded,
           iconSize: 20,
           buttonSize: 32,

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:soldnet/app/app_router.dart';
 import 'package:soldnet/models/const/const_info.dart';
+import 'package:soldnet/models/utils/chat_tab.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
 import 'package:soldnet/presentation/widgets/app/button/app_button_action.dart';
+import 'package:soldnet/stores/store_chat.dart';
 import 'package:soldnet/stores/store_search.dart';
 
 class UserDetailsContainer extends ConsumerWidget {
@@ -15,6 +18,8 @@ class UserDetailsContainer extends ConsumerWidget {
     final paddingTop = MediaQuery.of(context).padding.top;
 
     final searchState = ref.watch(storeSearchProvider);
+    final chatState = ref.watch(storeChatProvider);
+    final chatNotifier = ref.read(storeChatProvider.notifier);
 
     return Scaffold(
       body: Padding(
@@ -97,7 +102,28 @@ class UserDetailsContainer extends ConsumerWidget {
                         .contains(searchState.selectedUser?.id ?? '')
                     ? AppColors.grey120
                     : null,
-                onTap: () {})
+                onTap: () async {
+                  if (searchState.usersAlreadyAddedToSingleChats
+                      .contains(searchState.selectedUser?.id ?? '')) {
+                    print('sdfsdf');
+                    final conversation = chatNotifier
+                        .findConversationByUser(searchState.selectedUser!);
+                    context.go(ScreenPaths.chat);
+                    chatNotifier.setSelectedConversation(conversation);
+                    chatNotifier.setTab(ChatTab.dialog);
+                  } else {
+                    //create conversation
+                    final conversation = await chatNotifier.createConversation(
+                        title: '',
+                        members: [searchState.selectedUser?.id ?? '']);
+                    if (conversation != null) {
+                      if (!context.mounted) return;
+                      context.go(ScreenPaths.chat);
+                      chatNotifier.setSelectedConversation(conversation);
+                      chatNotifier.setTab(ChatTab.dialog);
+                    }
+                  }
+                })
           ],
         ),
       ),

@@ -100,7 +100,7 @@ class StoreChat extends _$StoreChat {
     }
   }
 
-  Future<void> createConversation(
+  Future<Conversation?> createConversation(
       {required String title, required List<String> members}) async {
     final membersWithUser = [state.chatUserId, ...members];
     final actualTitle = title.isEmpty ? "User" : title;
@@ -116,6 +116,7 @@ class StoreChat extends _$StoreChat {
       );
 
       getAllUserConversations();
+      return response.conversation;
     }
   }
 
@@ -180,5 +181,13 @@ class StoreChat extends _$StoreChat {
       ...state.messagesByConversationId,
       message.conversationId: updatedMessages,
     });
+  }
+
+  Conversation findConversationByUser(User user) {
+    final conversations = [
+      ...state.conversations.where((c) => c.members.length == 2)
+    ];
+
+    return conversations.firstWhere((c) => c.members.contains(user.id));
   }
 }
