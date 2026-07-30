@@ -12,13 +12,23 @@ class ChatPopupUpload extends StatelessWidget {
   const ChatPopupUpload({super.key});
 
   Future<void> _uploadImage(BuildContext context) async {
-    final image = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      imageQuality: 80,
-      maxWidth: 1000,
-    );
+    final images = await ImagePicker().pickMultiImage();
 
-    print(File(image?.path ?? ''));
+    if (images.isNotEmpty) {
+      print(File(images[0].path));
+    }
+
+    if (context.mounted) {
+      context.pop();
+    }
+  }
+
+  Future<void> _uploadVideo(BuildContext context) async {
+    final images = await ImagePicker().pickMultiVideo();
+
+    if (images.isNotEmpty) {
+      print(File(images[0].path));
+    }
 
     if (context.mounted) {
       context.pop();
@@ -47,16 +57,18 @@ class ChatPopupUpload extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-        height: 128,
+        height: 184,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
             color: AppColors.activeBrown,
             borderRadius: BorderRadius.circular(16)),
         child: Column(
+          spacing: 8,
           children: [
             AppButtonAction(
                 text: 'Upload image', onTap: () => _uploadImage(context)),
-            const SizedBox(height: 8),
+            AppButtonAction(
+                text: 'Upload video', onTap: () => _uploadVideo(context)),
             AppButtonAction(
                 text: 'Upload file', onTap: () => _uploadFile(context))
           ],
