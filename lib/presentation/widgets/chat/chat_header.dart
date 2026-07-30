@@ -8,6 +8,7 @@ import 'package:soldnet/presentation/theme/app_text_styles.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_bottom_sheet_group_create.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_bottom_sheet_users.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_header_button.dart';
+import 'package:soldnet/presentation/widgets/chat/chat_popup_upload.dart';
 import 'package:soldnet/stores/store_chat.dart';
 
 class ChatHeader extends ConsumerStatefulWidget {
@@ -19,6 +20,18 @@ class ChatHeader extends ConsumerStatefulWidget {
 
 class _ChatHeaderState extends ConsumerState<ChatHeader> {
   final flipController = FlipCardController();
+
+  void _makeVoiceCall() {}
+
+  void _makeVideoCall() {}
+
+  Future<void> _uploadFile() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return ChatPopupUpload();
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,25 +119,23 @@ class _ChatHeaderState extends ConsumerState<ChatHeader> {
                 ),
                 Spacer(),
                 Row(
+                  spacing: 4,
                   children: [
-                    for (int i = 0; i < 3; i++) ...{
-                      if (i > 0) const SizedBox(width: 4),
-                      ChatHeaderButton(
-                        onTap: () {},
-                        icon: _chatHeaderItems[i].icon,
-                      )
-                    }
+                    ChatHeaderButton(
+                      onTap: () => _makeVoiceCall(),
+                      icon: Icons.call,
+                    ),
+                    ChatHeaderButton(
+                      onTap: () => _makeVideoCall(),
+                      icon: Icons.video_chat,
+                    ),
+                    ChatHeaderButton(
+                      onTap: () => _uploadFile(),
+                      icon: Icons.attach_file_rounded,
+                    )
                   ],
                 )
               ],
             )));
   }
 }
-
-typedef ChatHeaderItem = ({IconData icon, Function() onTap});
-
-List<ChatHeaderItem> get _chatHeaderItems => [
-      (icon: Icons.call, onTap: () {}),
-      (icon: Icons.video_chat, onTap: () {}),
-      (icon: Icons.attach_file_rounded, onTap: () {})
-    ];
