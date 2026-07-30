@@ -17,6 +17,7 @@ mixin _$Message {
   String get id;
   String get conversationId;
   String get senderId;
+  MessageType get type;
   String get message;
   String get createdAt;
 
@@ -40,6 +41,7 @@ mixin _$Message {
                 other.conversationId == conversationId) &&
             (identical(other.senderId, senderId) ||
                 other.senderId == senderId) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
@@ -48,11 +50,11 @@ mixin _$Message {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, conversationId, senderId, message, createdAt);
+      runtimeType, id, conversationId, senderId, type, message, createdAt);
 
   @override
   String toString() {
-    return 'Message(id: $id, conversationId: $conversationId, senderId: $senderId, message: $message, createdAt: $createdAt)';
+    return 'Message(id: $id, conversationId: $conversationId, senderId: $senderId, type: $type, message: $message, createdAt: $createdAt)';
   }
 }
 
@@ -65,6 +67,7 @@ abstract mixin class $MessageCopyWith<$Res> {
       {String id,
       String conversationId,
       String senderId,
+      MessageType type,
       String message,
       String createdAt});
 }
@@ -84,6 +87,7 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
     Object? id = null,
     Object? conversationId = null,
     Object? senderId = null,
+    Object? type = null,
     Object? message = null,
     Object? createdAt = null,
   }) {
@@ -100,6 +104,10 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
           ? _self.senderId
           : senderId // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MessageType,
       message: null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -206,7 +214,7 @@ extension MessagePatterns on Message {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String id, String conversationId, String senderId,
-            String message, String createdAt)?
+            MessageType type, String message, String createdAt)?
         $default, {
     required TResult orElse(),
   }) {
@@ -214,7 +222,7 @@ extension MessagePatterns on Message {
     switch (_that) {
       case _Message() when $default != null:
         return $default(_that.id, _that.conversationId, _that.senderId,
-            _that.message, _that.createdAt);
+            _that.type, _that.message, _that.createdAt);
       case _:
         return orElse();
     }
@@ -236,14 +244,14 @@ extension MessagePatterns on Message {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(String id, String conversationId, String senderId,
-            String message, String createdAt)
+            MessageType type, String message, String createdAt)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _Message():
         return $default(_that.id, _that.conversationId, _that.senderId,
-            _that.message, _that.createdAt);
+            _that.type, _that.message, _that.createdAt);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -264,14 +272,14 @@ extension MessagePatterns on Message {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(String id, String conversationId, String senderId,
-            String message, String createdAt)?
+            MessageType type, String message, String createdAt)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _Message() when $default != null:
         return $default(_that.id, _that.conversationId, _that.senderId,
-            _that.message, _that.createdAt);
+            _that.type, _that.message, _that.createdAt);
       case _:
         return null;
     }
@@ -285,6 +293,7 @@ class _Message implements Message {
       {required this.id,
       required this.conversationId,
       required this.senderId,
+      required this.type,
       required this.message,
       required this.createdAt});
   factory _Message.fromJson(Map<String, dynamic> json) =>
@@ -296,6 +305,8 @@ class _Message implements Message {
   final String conversationId;
   @override
   final String senderId;
+  @override
+  final MessageType type;
   @override
   final String message;
   @override
@@ -326,6 +337,7 @@ class _Message implements Message {
                 other.conversationId == conversationId) &&
             (identical(other.senderId, senderId) ||
                 other.senderId == senderId) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
@@ -334,11 +346,11 @@ class _Message implements Message {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, conversationId, senderId, message, createdAt);
+      runtimeType, id, conversationId, senderId, type, message, createdAt);
 
   @override
   String toString() {
-    return 'Message(id: $id, conversationId: $conversationId, senderId: $senderId, message: $message, createdAt: $createdAt)';
+    return 'Message(id: $id, conversationId: $conversationId, senderId: $senderId, type: $type, message: $message, createdAt: $createdAt)';
   }
 }
 
@@ -352,6 +364,7 @@ abstract mixin class _$MessageCopyWith<$Res> implements $MessageCopyWith<$Res> {
       {String id,
       String conversationId,
       String senderId,
+      MessageType type,
       String message,
       String createdAt});
 }
@@ -371,6 +384,7 @@ class __$MessageCopyWithImpl<$Res> implements _$MessageCopyWith<$Res> {
     Object? id = null,
     Object? conversationId = null,
     Object? senderId = null,
+    Object? type = null,
     Object? message = null,
     Object? createdAt = null,
   }) {
@@ -387,6 +401,10 @@ class __$MessageCopyWithImpl<$Res> implements _$MessageCopyWith<$Res> {
           ? _self.senderId
           : senderId // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MessageType,
       message: null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable

@@ -5,6 +5,7 @@ import 'package:soldnet/models/entities/message.dart';
 import 'package:soldnet/models/entities/user.dart';
 import 'package:soldnet/models/utils/chat_tab.dart';
 import 'package:soldnet/models/utils/dialog_bg.dart';
+import 'package:soldnet/models/utils/message_type.dart';
 import 'package:soldnet/services/api/requests/request_conversations_create.dart';
 import 'package:soldnet/services/api/requests/request_conversations_get.dart';
 import 'package:soldnet/services/api/requests/request_conversations_messages_get.dart';
@@ -157,7 +158,7 @@ class StoreChat extends _$StoreChat {
     }
   }
 
-  void sendMessageToWs(String text) {
+  void sendMessageTextToWs(String text) {
     final uuid = UuidV7().generate();
 
     if (state.selectedConversation != null) {
@@ -165,6 +166,7 @@ class StoreChat extends _$StoreChat {
         id: uuid,
         conversationId: state.selectedConversation!.id,
         senderId: state.chatUserId,
+        type: MessageType.text,
         message: text,
         createdAt: DateTime.now().toUtc().toIso8601String(),
       );

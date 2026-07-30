@@ -31,10 +31,12 @@ class WsChat extends _$WsChat {
   }
 
   void sendMessage(Message message) {
+    print(message);
     state?.sink.add(jsonEncode({
       "id": message.id,
       "conversationId": message.conversationId,
       "senderId": message.senderId,
+      "type": message.type.name,
       "message": message.message,
       "createdAt": message.createdAt
     }));

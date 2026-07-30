@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:soldnet/models/utils/message_type.dart';
 
 part 'message.g.dart';
 part 'message.freezed.dart';
@@ -9,6 +10,7 @@ abstract class Message with _$Message {
     required String id,
     required String conversationId,
     required String senderId,
+    required MessageType type,
     required String message,
     required String createdAt,
   }) = _Message;

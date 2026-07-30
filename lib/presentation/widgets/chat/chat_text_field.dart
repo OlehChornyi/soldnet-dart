@@ -17,7 +17,9 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
   final bool _isNotError = true;
 
   void _sendMessage() {
-    ref.read(storeChatProvider.notifier).sendMessageToWs(_textController.text);
+    ref
+        .read(storeChatProvider.notifier)
+        .sendMessageTextToWs(_textController.text);
   }
 
   @override
