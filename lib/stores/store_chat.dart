@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:soldnet/models/entities/attachment.dart';
 import 'package:soldnet/models/entities/conversation.dart';
 import 'package:soldnet/models/entities/message.dart';
 import 'package:soldnet/models/entities/user.dart';
@@ -159,21 +160,35 @@ class StoreChat extends _$StoreChat {
     }
   }
 
-  void sendMessageTextToWs(String text) {
-    final uuid = UuidV7().generate();
+  Future<List<Attachment>> _createAttachments() async {
+    List<Attachment> atchs = [];
+
+    for (var file in state.filesToUpload) {}
+
+    return atchs;
+  }
+
+  void sendMessageTextToWs(String text) async {
+    final messageId = UuidV7().generate();
 
     if (state.selectedConversation != null) {
-      final message = Message(
-        id: uuid,
-        conversationId: state.selectedConversation!.id,
-        senderId: state.chatUserId,
-        type: MessageType.text,
-        message: text,
-        attachments: [],
-        createdAt: DateTime.now().toUtc().toIso8601String(),
-      );
-      ref.read(wsChatProvider.notifier).sendMessage(message);
-      addMessageToConversation(message);
+      List<Attachment> atchs = [];
+
+      if (state.filesToUpload.isNotEmpty) {
+        atchs = await _createAttachments();
+      }
+
+      // final message = Message(
+      //   id: messageId,
+      //   conversationId: state.selectedConversation!.id,
+      //   senderId: state.chatUserId,
+      //   type: MessageType.text,
+      //   message: text,
+      //   attachments: atchs,
+      //   createdAt: DateTime.now().toUtc().toIso8601String(),
+      // );
+      // ref.read(wsChatProvider.notifier).sendMessage(message);
+      // addMessageToConversation(message);
     }
   }
 
