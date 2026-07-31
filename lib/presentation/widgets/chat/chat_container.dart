@@ -63,16 +63,20 @@ class _ChatContainerState extends ConsumerState<ChatContainer> {
         AnimatedPositioned(
             duration: Duration(milliseconds: 500),
             width: screenWidth - 32,
-            height: screenHeight - paddingBottom - paddingTop - 184,
+            height: screenHeight -
+                paddingBottom -
+                paddingTop -
+                (chatState.filesToUpload.isEmpty ? 184 : 224),
             right: _areActionButtonsVisible && chatState.tab == ChatTab.dialog
                 ? 16
                 : -screenWidth,
-            bottom: paddingBottom + 64,
+            bottom:
+                paddingBottom + (chatState.filesToUpload.isEmpty ? 64 : 104),
             child: ChatDialog()),
         AnimatedPositioned(
             duration: Duration(milliseconds: 500),
             width: screenWidth - 32,
-            height: 88,
+            height: chatState.filesToUpload.isEmpty ? 48 : 88,
             right: _areActionButtonsVisible && chatState.tab == ChatTab.dialog
                 ? 16
                 : -screenWidth,

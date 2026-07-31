@@ -25,14 +25,19 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final filesToUpload =
+        ref.watch(storeChatProvider.select((state) => state.filesToUpload));
+
     return Column(
       children: [
-        Container(
-          width: 100,
-          height: 32,
-          decoration: BoxDecoration(color: AppColors.white),
-        ),
-        const SizedBox(height: 8),
+        if (filesToUpload.isNotEmpty) ...{
+          Container(
+            width: 100,
+            height: 32,
+            decoration: BoxDecoration(color: AppColors.white),
+          ),
+          const SizedBox(height: 8)
+        },
         Row(
           children: [
             Expanded(
