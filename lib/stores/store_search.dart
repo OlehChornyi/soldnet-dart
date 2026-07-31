@@ -60,8 +60,6 @@ class StoreSearch extends _$StoreSearch {
     final response =
         await ref.read(requestUserSearchProvider(query: query).future);
 
-    if (response.users != null) {
-      state = state.copyWith(users: response.users!);
-    }
+    state = state.copyWith(users: response.users ?? []);
   }
 }
