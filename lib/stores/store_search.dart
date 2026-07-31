@@ -32,9 +32,7 @@ class StoreSearch extends _$StoreSearch {
   }
 
   Future<void> getAllUsers() async {
-    //TODO: change this into search
-    // if (state.users.isNotEmpty) return;
-
+    //TODO: change this into pagination 20+
     final response = await ref.read(requestUserAllGetProvider.future);
     state = state.copyWith(users: response.users ?? []);
   }

@@ -19,6 +19,7 @@ mixin _$Message {
   String get senderId;
   MessageType get type;
   String get message;
+  List<Attachment> get attachments;
   String get createdAt;
 
   /// Create a copy of Message
@@ -43,6 +44,8 @@ mixin _$Message {
                 other.senderId == senderId) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality()
+                .equals(other.attachments, attachments) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
@@ -50,11 +53,18 @@ mixin _$Message {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, conversationId, senderId, type, message, createdAt);
+      runtimeType,
+      id,
+      conversationId,
+      senderId,
+      type,
+      message,
+      const DeepCollectionEquality().hash(attachments),
+      createdAt);
 
   @override
   String toString() {
-    return 'Message(id: $id, conversationId: $conversationId, senderId: $senderId, type: $type, message: $message, createdAt: $createdAt)';
+    return 'Message(id: $id, conversationId: $conversationId, senderId: $senderId, type: $type, message: $message, attachments: $attachments, createdAt: $createdAt)';
   }
 }
 
@@ -69,6 +79,7 @@ abstract mixin class $MessageCopyWith<$Res> {
       String senderId,
       MessageType type,
       String message,
+      List<Attachment> attachments,
       String createdAt});
 }
 
@@ -89,6 +100,7 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
     Object? senderId = null,
     Object? type = null,
     Object? message = null,
+    Object? attachments = null,
     Object? createdAt = null,
   }) {
     return _then(_self.copyWith(
@@ -112,6 +124,10 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      attachments: null == attachments
+          ? _self.attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<Attachment>,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -213,8 +229,14 @@ extension MessagePatterns on Message {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String id, String conversationId, String senderId,
-            MessageType type, String message, String createdAt)?
+    TResult Function(
+            String id,
+            String conversationId,
+            String senderId,
+            MessageType type,
+            String message,
+            List<Attachment> attachments,
+            String createdAt)?
         $default, {
     required TResult orElse(),
   }) {
@@ -222,7 +244,7 @@ extension MessagePatterns on Message {
     switch (_that) {
       case _Message() when $default != null:
         return $default(_that.id, _that.conversationId, _that.senderId,
-            _that.type, _that.message, _that.createdAt);
+            _that.type, _that.message, _that.attachments, _that.createdAt);
       case _:
         return orElse();
     }
@@ -243,15 +265,21 @@ extension MessagePatterns on Message {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String id, String conversationId, String senderId,
-            MessageType type, String message, String createdAt)
+    TResult Function(
+            String id,
+            String conversationId,
+            String senderId,
+            MessageType type,
+            String message,
+            List<Attachment> attachments,
+            String createdAt)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _Message():
         return $default(_that.id, _that.conversationId, _that.senderId,
-            _that.type, _that.message, _that.createdAt);
+            _that.type, _that.message, _that.attachments, _that.createdAt);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -271,15 +299,21 @@ extension MessagePatterns on Message {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String id, String conversationId, String senderId,
-            MessageType type, String message, String createdAt)?
+    TResult? Function(
+            String id,
+            String conversationId,
+            String senderId,
+            MessageType type,
+            String message,
+            List<Attachment> attachments,
+            String createdAt)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _Message() when $default != null:
         return $default(_that.id, _that.conversationId, _that.senderId,
-            _that.type, _that.message, _that.createdAt);
+            _that.type, _that.message, _that.attachments, _that.createdAt);
       case _:
         return null;
     }
@@ -295,7 +329,9 @@ class _Message implements Message {
       required this.senderId,
       required this.type,
       required this.message,
-      required this.createdAt});
+      required final List<Attachment> attachments,
+      required this.createdAt})
+      : _attachments = attachments;
   factory _Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);
 
@@ -309,6 +345,14 @@ class _Message implements Message {
   final MessageType type;
   @override
   final String message;
+  final List<Attachment> _attachments;
+  @override
+  List<Attachment> get attachments {
+    if (_attachments is EqualUnmodifiableListView) return _attachments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_attachments);
+  }
+
   @override
   final String createdAt;
 
@@ -339,6 +383,8 @@ class _Message implements Message {
                 other.senderId == senderId) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality()
+                .equals(other._attachments, _attachments) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
@@ -346,11 +392,18 @@ class _Message implements Message {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, conversationId, senderId, type, message, createdAt);
+      runtimeType,
+      id,
+      conversationId,
+      senderId,
+      type,
+      message,
+      const DeepCollectionEquality().hash(_attachments),
+      createdAt);
 
   @override
   String toString() {
-    return 'Message(id: $id, conversationId: $conversationId, senderId: $senderId, type: $type, message: $message, createdAt: $createdAt)';
+    return 'Message(id: $id, conversationId: $conversationId, senderId: $senderId, type: $type, message: $message, attachments: $attachments, createdAt: $createdAt)';
   }
 }
 
@@ -366,6 +419,7 @@ abstract mixin class _$MessageCopyWith<$Res> implements $MessageCopyWith<$Res> {
       String senderId,
       MessageType type,
       String message,
+      List<Attachment> attachments,
       String createdAt});
 }
 
@@ -386,6 +440,7 @@ class __$MessageCopyWithImpl<$Res> implements _$MessageCopyWith<$Res> {
     Object? senderId = null,
     Object? type = null,
     Object? message = null,
+    Object? attachments = null,
     Object? createdAt = null,
   }) {
     return _then(_Message(
@@ -409,6 +464,10 @@ class __$MessageCopyWithImpl<$Res> implements _$MessageCopyWith<$Res> {
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      attachments: null == attachments
+          ? _self._attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<Attachment>,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable

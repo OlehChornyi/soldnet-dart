@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:soldnet/models/entities/attachment.dart';
 import 'package:soldnet/models/utils/message_type.dart';
 
 part 'message.g.dart';
@@ -12,6 +13,7 @@ abstract class Message with _$Message {
     required String senderId,
     required MessageType type,
     required String message,
+    required List<Attachment> attachments,
     required String createdAt,
   }) = _Message;
 

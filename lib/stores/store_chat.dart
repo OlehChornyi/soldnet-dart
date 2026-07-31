@@ -169,6 +169,7 @@ class StoreChat extends _$StoreChat {
         senderId: state.chatUserId,
         type: MessageType.text,
         message: text,
+        attachments: [],
         createdAt: DateTime.now().toUtc().toIso8601String(),
       );
       ref.read(wsChatProvider.notifier).sendMessage(message);

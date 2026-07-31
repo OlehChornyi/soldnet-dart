@@ -31,13 +31,23 @@ class WsChat extends _$WsChat {
   }
 
   void sendMessage(Message message) {
-    print(message);
     state?.sink.add(jsonEncode({
       "id": message.id,
       "conversationId": message.conversationId,
       "senderId": message.senderId,
       "type": message.type.name,
       "message": message.message,
+      "attachments": message.attachments.map((a) {
+        return {
+          "id": a.id,
+          "messageId": a.messageId,
+          "name": a.name,
+          "url": a.url,
+          "mimeType": a.mimeType,
+          "size": a.size,
+          "createdAt": a.createdAt,
+        };
+      }).toList(),
       "createdAt": message.createdAt
     }));
   }

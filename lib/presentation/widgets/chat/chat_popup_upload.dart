@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,7 +14,6 @@ class ChatPopupUpload extends ConsumerWidget {
     final images = await ImagePicker().pickMultiImage();
 
     if (images.isNotEmpty) {
-      print(images);
       notifier.setFilesToUpload(images);
     }
 
@@ -30,8 +26,6 @@ class ChatPopupUpload extends ConsumerWidget {
     final videos = await ImagePicker().pickMultiVideo();
 
     if (videos.isNotEmpty) {
-      // final files = videos.map((e) => File(e.path)).toList();
-      print(videos);
       notifier.setFilesToUpload(videos);
     }
 
@@ -46,7 +40,6 @@ class ChatPopupUpload extends ConsumerWidget {
     );
 
     if (result != null) {
-      print(result.files);
       notifier.setFilesToUpload(result.files);
     }
 
