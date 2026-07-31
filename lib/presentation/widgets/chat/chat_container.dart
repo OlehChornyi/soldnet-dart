@@ -72,7 +72,7 @@ class _ChatContainerState extends ConsumerState<ChatContainer> {
         AnimatedPositioned(
             duration: Duration(milliseconds: 500),
             width: screenWidth - 32,
-            height: 48,
+            height: 88,
             right: _areActionButtonsVisible && chatState.tab == ChatTab.dialog
                 ? 16
                 : -screenWidth,

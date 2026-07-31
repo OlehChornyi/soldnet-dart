@@ -18,7 +18,7 @@ class _ProfileBodyImageState extends ConsumerState<ProfileBodyImage> {
   final picker = ImagePicker();
 
   Future<File?> _pickImage() async {
-    final image = await ImagePicker().pickImage(
+    final image = await picker.pickImage(
       source: ImageSource.gallery,
       imageQuality: 80,
       maxWidth: 1000,

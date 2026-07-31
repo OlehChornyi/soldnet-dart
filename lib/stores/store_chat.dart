@@ -18,14 +18,14 @@ part 'store_chat.freezed.dart';
 
 @freezed
 abstract class StoreChatModel with _$StoreChatModel {
-  const factory StoreChatModel({
-    required String chatUserId,
-    required ChatTab tab,
-    required DialogBg dialogBg,
-    required List<Conversation> conversations,
-    required Map<String, List<Message>> messagesByConversationId,
-    required Conversation? selectedConversation,
-  }) = _StoreChatModel;
+  const factory StoreChatModel(
+      {required String chatUserId,
+      required ChatTab tab,
+      required DialogBg dialogBg,
+      required List<Conversation> conversations,
+      required Map<String, List<Message>> messagesByConversationId,
+      required Conversation? selectedConversation,
+      required List<Object> filesToUpload}) = _StoreChatModel;
 }
 
 @Riverpod(keepAlive: true)
@@ -37,7 +37,8 @@ class StoreChat extends _$StoreChat {
       dialogBg: DialogBg.leaves,
       conversations: [],
       messagesByConversationId: {},
-      selectedConversation: null);
+      selectedConversation: null,
+      filesToUpload: []);
 
   void setChatUserId(String userId) {
     state = state.copyWith(chatUserId: userId);
@@ -192,5 +193,9 @@ class StoreChat extends _$StoreChat {
     ];
 
     return conversations.firstWhere((c) => c.members.contains(user.id));
+  }
+
+  void setFilesToUpload(List<Object> files) {
+    state = state.copyWith(filesToUpload: files);
   }
 }

@@ -20,6 +20,7 @@ mixin _$StoreChatModel {
   List<Conversation> get conversations;
   Map<String, List<Message>> get messagesByConversationId;
   Conversation? get selectedConversation;
+  List<Object> get filesToUpload;
 
   /// Create a copy of StoreChatModel
   /// with the given fields replaced by the non-null parameter values.
@@ -44,7 +45,9 @@ mixin _$StoreChatModel {
             const DeepCollectionEquality().equals(
                 other.messagesByConversationId, messagesByConversationId) &&
             (identical(other.selectedConversation, selectedConversation) ||
-                other.selectedConversation == selectedConversation));
+                other.selectedConversation == selectedConversation) &&
+            const DeepCollectionEquality()
+                .equals(other.filesToUpload, filesToUpload));
   }
 
   @override
@@ -55,11 +58,12 @@ mixin _$StoreChatModel {
       dialogBg,
       const DeepCollectionEquality().hash(conversations),
       const DeepCollectionEquality().hash(messagesByConversationId),
-      selectedConversation);
+      selectedConversation,
+      const DeepCollectionEquality().hash(filesToUpload));
 
   @override
   String toString() {
-    return 'StoreChatModel(chatUserId: $chatUserId, tab: $tab, dialogBg: $dialogBg, conversations: $conversations, messagesByConversationId: $messagesByConversationId, selectedConversation: $selectedConversation)';
+    return 'StoreChatModel(chatUserId: $chatUserId, tab: $tab, dialogBg: $dialogBg, conversations: $conversations, messagesByConversationId: $messagesByConversationId, selectedConversation: $selectedConversation, filesToUpload: $filesToUpload)';
   }
 }
 
@@ -75,7 +79,8 @@ abstract mixin class $StoreChatModelCopyWith<$Res> {
       DialogBg dialogBg,
       List<Conversation> conversations,
       Map<String, List<Message>> messagesByConversationId,
-      Conversation? selectedConversation});
+      Conversation? selectedConversation,
+      List<Object> filesToUpload});
 
   $ConversationCopyWith<$Res>? get selectedConversation;
 }
@@ -99,6 +104,7 @@ class _$StoreChatModelCopyWithImpl<$Res>
     Object? conversations = null,
     Object? messagesByConversationId = null,
     Object? selectedConversation = freezed,
+    Object? filesToUpload = null,
   }) {
     return _then(_self.copyWith(
       chatUserId: null == chatUserId
@@ -125,6 +131,10 @@ class _$StoreChatModelCopyWithImpl<$Res>
           ? _self.selectedConversation
           : selectedConversation // ignore: cast_nullable_to_non_nullable
               as Conversation?,
+      filesToUpload: null == filesToUpload
+          ? _self.filesToUpload
+          : filesToUpload // ignore: cast_nullable_to_non_nullable
+              as List<Object>,
     ));
   }
 
@@ -242,7 +252,8 @@ extension StoreChatModelPatterns on StoreChatModel {
             DialogBg dialogBg,
             List<Conversation> conversations,
             Map<String, List<Message>> messagesByConversationId,
-            Conversation? selectedConversation)?
+            Conversation? selectedConversation,
+            List<Object> filesToUpload)?
         $default, {
     required TResult orElse(),
   }) {
@@ -255,7 +266,8 @@ extension StoreChatModelPatterns on StoreChatModel {
             _that.dialogBg,
             _that.conversations,
             _that.messagesByConversationId,
-            _that.selectedConversation);
+            _that.selectedConversation,
+            _that.filesToUpload);
       case _:
         return orElse();
     }
@@ -282,7 +294,8 @@ extension StoreChatModelPatterns on StoreChatModel {
             DialogBg dialogBg,
             List<Conversation> conversations,
             Map<String, List<Message>> messagesByConversationId,
-            Conversation? selectedConversation)
+            Conversation? selectedConversation,
+            List<Object> filesToUpload)
         $default,
   ) {
     final _that = this;
@@ -294,7 +307,8 @@ extension StoreChatModelPatterns on StoreChatModel {
             _that.dialogBg,
             _that.conversations,
             _that.messagesByConversationId,
-            _that.selectedConversation);
+            _that.selectedConversation,
+            _that.filesToUpload);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -320,7 +334,8 @@ extension StoreChatModelPatterns on StoreChatModel {
             DialogBg dialogBg,
             List<Conversation> conversations,
             Map<String, List<Message>> messagesByConversationId,
-            Conversation? selectedConversation)?
+            Conversation? selectedConversation,
+            List<Object> filesToUpload)?
         $default,
   ) {
     final _that = this;
@@ -332,7 +347,8 @@ extension StoreChatModelPatterns on StoreChatModel {
             _that.dialogBg,
             _that.conversations,
             _that.messagesByConversationId,
-            _that.selectedConversation);
+            _that.selectedConversation,
+            _that.filesToUpload);
       case _:
         return null;
     }
@@ -348,9 +364,11 @@ class _StoreChatModel implements StoreChatModel {
       required this.dialogBg,
       required final List<Conversation> conversations,
       required final Map<String, List<Message>> messagesByConversationId,
-      required this.selectedConversation})
+      required this.selectedConversation,
+      required final List<Object> filesToUpload})
       : _conversations = conversations,
-        _messagesByConversationId = messagesByConversationId;
+        _messagesByConversationId = messagesByConversationId,
+        _filesToUpload = filesToUpload;
 
   @override
   final String chatUserId;
@@ -377,6 +395,13 @@ class _StoreChatModel implements StoreChatModel {
 
   @override
   final Conversation? selectedConversation;
+  final List<Object> _filesToUpload;
+  @override
+  List<Object> get filesToUpload {
+    if (_filesToUpload is EqualUnmodifiableListView) return _filesToUpload;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filesToUpload);
+  }
 
   /// Create a copy of StoreChatModel
   /// with the given fields replaced by the non-null parameter values.
@@ -401,7 +426,9 @@ class _StoreChatModel implements StoreChatModel {
             const DeepCollectionEquality().equals(
                 other._messagesByConversationId, _messagesByConversationId) &&
             (identical(other.selectedConversation, selectedConversation) ||
-                other.selectedConversation == selectedConversation));
+                other.selectedConversation == selectedConversation) &&
+            const DeepCollectionEquality()
+                .equals(other._filesToUpload, _filesToUpload));
   }
 
   @override
@@ -412,11 +439,12 @@ class _StoreChatModel implements StoreChatModel {
       dialogBg,
       const DeepCollectionEquality().hash(_conversations),
       const DeepCollectionEquality().hash(_messagesByConversationId),
-      selectedConversation);
+      selectedConversation,
+      const DeepCollectionEquality().hash(_filesToUpload));
 
   @override
   String toString() {
-    return 'StoreChatModel(chatUserId: $chatUserId, tab: $tab, dialogBg: $dialogBg, conversations: $conversations, messagesByConversationId: $messagesByConversationId, selectedConversation: $selectedConversation)';
+    return 'StoreChatModel(chatUserId: $chatUserId, tab: $tab, dialogBg: $dialogBg, conversations: $conversations, messagesByConversationId: $messagesByConversationId, selectedConversation: $selectedConversation, filesToUpload: $filesToUpload)';
   }
 }
 
@@ -434,7 +462,8 @@ abstract mixin class _$StoreChatModelCopyWith<$Res>
       DialogBg dialogBg,
       List<Conversation> conversations,
       Map<String, List<Message>> messagesByConversationId,
-      Conversation? selectedConversation});
+      Conversation? selectedConversation,
+      List<Object> filesToUpload});
 
   @override
   $ConversationCopyWith<$Res>? get selectedConversation;
@@ -459,6 +488,7 @@ class __$StoreChatModelCopyWithImpl<$Res>
     Object? conversations = null,
     Object? messagesByConversationId = null,
     Object? selectedConversation = freezed,
+    Object? filesToUpload = null,
   }) {
     return _then(_StoreChatModel(
       chatUserId: null == chatUserId
@@ -485,6 +515,10 @@ class __$StoreChatModelCopyWithImpl<$Res>
           ? _self.selectedConversation
           : selectedConversation // ignore: cast_nullable_to_non_nullable
               as Conversation?,
+      filesToUpload: null == filesToUpload
+          ? _self._filesToUpload
+          : filesToUpload // ignore: cast_nullable_to_non_nullable
+              as List<Object>,
     ));
   }
 
