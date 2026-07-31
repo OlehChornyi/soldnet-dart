@@ -37,17 +37,19 @@ class WsChat extends _$WsChat {
       "senderId": message.senderId,
       "type": message.type.name,
       "message": message.message,
-      "attachments": message.attachments.map((a) {
-        return {
-          "id": a.id,
-          "messageId": a.messageId,
-          "name": a.name,
-          "url": a.url,
-          "mimeType": a.mimeType,
-          "size": a.size,
-          "createdAt": a.createdAt,
-        };
-      }).toList(),
+      "attachments": message.attachments == null
+          ? []
+          : message.attachments!.map((a) {
+              return {
+                "id": a.id,
+                "messageId": a.messageId,
+                "name": a.name,
+                "url": a.url,
+                "mimeType": a.mimeType,
+                "size": a.size,
+                "createdAt": a.createdAt,
+              };
+            }).toList(),
       "createdAt": message.createdAt
     }));
   }

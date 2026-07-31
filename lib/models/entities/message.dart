@@ -13,7 +13,7 @@ abstract class Message with _$Message {
     required String senderId,
     required MessageType type,
     required String message,
-    required List<Attachment> attachments,
+    required List<Attachment>? attachments,
     required String createdAt,
   }) = _Message;
 

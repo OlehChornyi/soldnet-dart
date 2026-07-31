@@ -19,7 +19,7 @@ mixin _$Message {
   String get senderId;
   MessageType get type;
   String get message;
-  List<Attachment> get attachments;
+  List<Attachment>? get attachments;
   String get createdAt;
 
   /// Create a copy of Message
@@ -79,7 +79,7 @@ abstract mixin class $MessageCopyWith<$Res> {
       String senderId,
       MessageType type,
       String message,
-      List<Attachment> attachments,
+      List<Attachment>? attachments,
       String createdAt});
 }
 
@@ -100,7 +100,7 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
     Object? senderId = null,
     Object? type = null,
     Object? message = null,
-    Object? attachments = null,
+    Object? attachments = freezed,
     Object? createdAt = null,
   }) {
     return _then(_self.copyWith(
@@ -124,10 +124,10 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      attachments: null == attachments
+      attachments: freezed == attachments
           ? _self.attachments
           : attachments // ignore: cast_nullable_to_non_nullable
-              as List<Attachment>,
+              as List<Attachment>?,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -235,7 +235,7 @@ extension MessagePatterns on Message {
             String senderId,
             MessageType type,
             String message,
-            List<Attachment> attachments,
+            List<Attachment>? attachments,
             String createdAt)?
         $default, {
     required TResult orElse(),
@@ -271,7 +271,7 @@ extension MessagePatterns on Message {
             String senderId,
             MessageType type,
             String message,
-            List<Attachment> attachments,
+            List<Attachment>? attachments,
             String createdAt)
         $default,
   ) {
@@ -305,7 +305,7 @@ extension MessagePatterns on Message {
             String senderId,
             MessageType type,
             String message,
-            List<Attachment> attachments,
+            List<Attachment>? attachments,
             String createdAt)?
         $default,
   ) {
@@ -329,7 +329,7 @@ class _Message implements Message {
       required this.senderId,
       required this.type,
       required this.message,
-      required final List<Attachment> attachments,
+      required final List<Attachment>? attachments,
       required this.createdAt})
       : _attachments = attachments;
   factory _Message.fromJson(Map<String, dynamic> json) =>
@@ -345,12 +345,14 @@ class _Message implements Message {
   final MessageType type;
   @override
   final String message;
-  final List<Attachment> _attachments;
+  final List<Attachment>? _attachments;
   @override
-  List<Attachment> get attachments {
+  List<Attachment>? get attachments {
+    final value = _attachments;
+    if (value == null) return null;
     if (_attachments is EqualUnmodifiableListView) return _attachments;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_attachments);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -419,7 +421,7 @@ abstract mixin class _$MessageCopyWith<$Res> implements $MessageCopyWith<$Res> {
       String senderId,
       MessageType type,
       String message,
-      List<Attachment> attachments,
+      List<Attachment>? attachments,
       String createdAt});
 }
 
@@ -440,7 +442,7 @@ class __$MessageCopyWithImpl<$Res> implements _$MessageCopyWith<$Res> {
     Object? senderId = null,
     Object? type = null,
     Object? message = null,
-    Object? attachments = null,
+    Object? attachments = freezed,
     Object? createdAt = null,
   }) {
     return _then(_Message(
@@ -464,10 +466,10 @@ class __$MessageCopyWithImpl<$Res> implements _$MessageCopyWith<$Res> {
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      attachments: null == attachments
+      attachments: freezed == attachments
           ? _self._attachments
           : attachments // ignore: cast_nullable_to_non_nullable
-              as List<Attachment>,
+              as List<Attachment>?,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable

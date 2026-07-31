@@ -12,8 +12,8 @@ _Message _$MessageFromJson(Map<String, dynamic> json) => _Message(
       senderId: json['senderId'] as String,
       type: $enumDecode(_$MessageTypeEnumMap, json['type']),
       message: json['message'] as String,
-      attachments: (json['attachments'] as List<dynamic>)
-          .map((e) => Attachment.fromJson(e as Map<String, dynamic>))
+      attachments: (json['attachments'] as List<dynamic>?)
+          ?.map((e) => Attachment.fromJson(e as Map<String, dynamic>))
           .toList(),
       createdAt: json['createdAt'] as String,
     );
