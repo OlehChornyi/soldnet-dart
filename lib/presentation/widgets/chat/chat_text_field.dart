@@ -34,10 +34,15 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
 
   String _getFileName(List<Object> files) {
     if (files.isNotEmpty) {
-      if (files is List<XFile>) {
-        return files.first.name;
-      } else if (files is List<PlatformFile>) {
-        return files.first.name;
+      final end = files.length > 1 ? ', ...' : '';
+
+      if (files.first is XFile) {
+        final name = (files.first as XFile).name;
+        final subName = name.substring(name.length - 10);
+        return '$subName$end';
+      } else if (files.first is PlatformFile) {
+        final name = (files.first as PlatformFile).name;
+        return '$name$end';
       }
     }
     return '';
@@ -60,7 +65,7 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.only(left: 8),
+                padding: const EdgeInsets.only(left: 8, right: 8),
                 width: screenWidth - 72,
                 height: 32,
                 decoration: BoxDecoration(
@@ -71,6 +76,8 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
                   child: Text(
                     '${filesToUpload.length} прикріплено (${_getFileName(filesToUpload)})',
                     style: AppTextStyles.s12w500(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
