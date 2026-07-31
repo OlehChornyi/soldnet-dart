@@ -17,9 +17,8 @@ class ChatPopupUpload extends ConsumerWidget {
     final images = await ImagePicker().pickMultiImage();
 
     if (images.isNotEmpty) {
-      final files = images.map((e) => File(e.path)).toList();
-      print(files);
-      notifier.setFilesToUpload(files);
+      print(images);
+      notifier.setFilesToUpload(images);
     }
 
     if (context.mounted) {
@@ -31,9 +30,9 @@ class ChatPopupUpload extends ConsumerWidget {
     final videos = await ImagePicker().pickMultiVideo();
 
     if (videos.isNotEmpty) {
-      final files = videos.map((e) => File(e.path)).toList();
-      print(files);
-      notifier.setFilesToUpload(files);
+      // final files = videos.map((e) => File(e.path)).toList();
+      print(videos);
+      notifier.setFilesToUpload(videos);
     }
 
     if (context.mounted) {
