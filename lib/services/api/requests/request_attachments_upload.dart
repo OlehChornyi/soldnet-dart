@@ -12,11 +12,12 @@ part 'request_attachments_upload.freezed.dart';
 @riverpod
 Future<ResponseAttachmentUpload> requestUsetPhotoPost(
   Ref ref, {
-  required Object file,
+  required File file,
+  required String mimeType,
 }) async {
   final dio = ref.read(dioClientProvider);
-  
-dio.options.headers.addAll({'ContentType': });
+
+  dio.options.headers.addAll({'ContentType': mimeType});
   final body = FormData.fromMap({
     "photo": await MultipartFile.fromFile(
       file.path,
