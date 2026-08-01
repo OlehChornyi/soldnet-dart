@@ -29,18 +29,18 @@ Map<String, dynamic> _$ResponseAttachmentUploadToJson(
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(requestUsetPhotoPost)
-final requestUsetPhotoPostProvider = RequestUsetPhotoPostFamily._();
+@ProviderFor(requestAttachmentsUpload)
+final requestAttachmentsUploadProvider = RequestAttachmentsUploadFamily._();
 
-final class RequestUsetPhotoPostProvider extends $FunctionalProvider<
+final class RequestAttachmentsUploadProvider extends $FunctionalProvider<
         AsyncValue<ResponseAttachmentUpload>,
         ResponseAttachmentUpload,
         FutureOr<ResponseAttachmentUpload>>
     with
         $FutureModifier<ResponseAttachmentUpload>,
         $FutureProvider<ResponseAttachmentUpload> {
-  RequestUsetPhotoPostProvider._(
-      {required RequestUsetPhotoPostFamily super.from,
+  RequestAttachmentsUploadProvider._(
+      {required RequestAttachmentsUploadFamily super.from,
       required ({
         File file,
         String mimeType,
@@ -48,18 +48,18 @@ final class RequestUsetPhotoPostProvider extends $FunctionalProvider<
           super.argument})
       : super(
           retry: null,
-          name: r'requestUsetPhotoPostProvider',
+          name: r'requestAttachmentsUploadProvider',
           isAutoDispose: true,
           dependencies: null,
           $allTransitiveDependencies: null,
         );
 
   @override
-  String debugGetCreateSourceHash() => _$requestUsetPhotoPostHash();
+  String debugGetCreateSourceHash() => _$requestAttachmentsUploadHash();
 
   @override
   String toString() {
-    return r'requestUsetPhotoPostProvider'
+    return r'requestAttachmentsUploadProvider'
         ''
         '$argument';
   }
@@ -76,7 +76,7 @@ final class RequestUsetPhotoPostProvider extends $FunctionalProvider<
       File file,
       String mimeType,
     });
-    return requestUsetPhotoPost(
+    return requestAttachmentsUpload(
       ref,
       file: argument.file,
       mimeType: argument.mimeType,
@@ -85,7 +85,8 @@ final class RequestUsetPhotoPostProvider extends $FunctionalProvider<
 
   @override
   bool operator ==(Object other) {
-    return other is RequestUsetPhotoPostProvider && other.argument == argument;
+    return other is RequestAttachmentsUploadProvider &&
+        other.argument == argument;
   }
 
   @override
@@ -94,10 +95,10 @@ final class RequestUsetPhotoPostProvider extends $FunctionalProvider<
   }
 }
 
-String _$requestUsetPhotoPostHash() =>
-    r'a90ccd5ab9ecc4195bb6ba72a69d55e686603867';
+String _$requestAttachmentsUploadHash() =>
+    r'02562d72274f6cb23a55a3ae8ab49614e67ad8ae';
 
-final class RequestUsetPhotoPostFamily extends $Family
+final class RequestAttachmentsUploadFamily extends $Family
     with
         $FunctionalFamilyOverride<
             FutureOr<ResponseAttachmentUpload>,
@@ -105,24 +106,24 @@ final class RequestUsetPhotoPostFamily extends $Family
               File file,
               String mimeType,
             })> {
-  RequestUsetPhotoPostFamily._()
+  RequestAttachmentsUploadFamily._()
       : super(
           retry: null,
-          name: r'requestUsetPhotoPostProvider',
+          name: r'requestAttachmentsUploadProvider',
           dependencies: null,
           $allTransitiveDependencies: null,
           isAutoDispose: true,
         );
 
-  RequestUsetPhotoPostProvider call({
+  RequestAttachmentsUploadProvider call({
     required File file,
     required String mimeType,
   }) =>
-      RequestUsetPhotoPostProvider._(argument: (
+      RequestAttachmentsUploadProvider._(argument: (
         file: file,
         mimeType: mimeType,
       ), from: this);
 
   @override
-  String toString() => r'requestUsetPhotoPostProvider';
+  String toString() => r'requestAttachmentsUploadProvider';
 }

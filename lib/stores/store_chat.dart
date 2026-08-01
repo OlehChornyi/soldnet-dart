@@ -11,6 +11,7 @@ import 'package:soldnet/models/entities/user.dart';
 import 'package:soldnet/models/utils/chat_tab.dart';
 import 'package:soldnet/models/utils/dialog_bg.dart';
 import 'package:soldnet/models/utils/message_type.dart';
+import 'package:soldnet/services/api/requests/request_attachments_upload.dart';
 import 'package:soldnet/services/api/requests/request_conversations_create.dart';
 import 'package:soldnet/services/api/requests/request_conversations_get.dart';
 import 'package:soldnet/services/api/requests/request_conversations_messages_get.dart';
@@ -169,16 +170,25 @@ class StoreChat extends _$StoreChat {
 
     for (var file in state.filesToUpload) {
       File? fileToUpload;
+      String mimeType = '';
 
       if (file is XFile) {
         fileToUpload = File(file.path);
+        mimeType = file.mimeType ?? '';
       } else if (file is PlatformFile) {
         fileToUpload = File(file.path ?? '');
+        mimeType = file.xFile.mimeType ?? '';
       }
 
-      // if (fileToUpload != null) {
-      //   final attachment = ref.read(requestAttachments)
-      // }
+      if (fileToUpload != null) {
+        final response = await ref.read(requestAttachmentsUploadProvider(
+                file: fileToUpload, mimeType: mimeType)
+            .future);
+
+        if (response.attachment != null) {
+          atchs.add(response.attachment!);
+        }
+      }
     }
     return atchs;
   }
