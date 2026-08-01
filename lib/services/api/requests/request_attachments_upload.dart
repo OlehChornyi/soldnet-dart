@@ -10,7 +10,7 @@ part 'request_attachments_upload.g.dart';
 part 'request_attachments_upload.freezed.dart';
 
 @riverpod
-Future<ResponseAttachmentUpload> requestUsetPhotoPost(
+Future<ResponseAttachmentUpload> requestAttachmentsUpload(
   Ref ref, {
   required File file,
   required String mimeType,

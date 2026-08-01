@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soldnet/models/entities/attachment.dart';
 import 'package:soldnet/models/entities/conversation.dart';
@@ -163,8 +167,19 @@ class StoreChat extends _$StoreChat {
   Future<List<Attachment>> _createAttachments() async {
     List<Attachment> atchs = [];
 
-    for (var file in state.filesToUpload) {}
+    for (var file in state.filesToUpload) {
+      File? fileToUpload;
 
+      if (file is XFile) {
+        fileToUpload = File(file.path);
+      } else if (file is PlatformFile) {
+        fileToUpload = File(file.path ?? '');
+      }
+
+      // if (fileToUpload != null) {
+      //   final attachment = ref.read(requestAttachments)
+      // }
+    }
     return atchs;
   }
 
