@@ -51,3 +51,5 @@ void main() => runApp(ProviderScope(child: const App()));
 //            | Think about more sections in home.
 //            | Think about posts and it's types.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.07.27 | Debug app - then everything else.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
