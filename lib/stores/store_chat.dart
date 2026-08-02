@@ -203,17 +203,17 @@ class StoreChat extends _$StoreChat {
         atchs = await _createAttachments();
       }
 
-      // final message = Message(
-      //   id: messageId,
-      //   conversationId: state.selectedConversation!.id,
-      //   senderId: state.chatUserId,
-      //   type: MessageType.text,
-      //   message: text,
-      //   attachments: atchs,
-      //   createdAt: DateTime.now().toUtc().toIso8601String(),
-      // );
-      // ref.read(wsChatProvider.notifier).sendMessage(message);
-      // addMessageToConversation(message);
+      final message = Message(
+        id: messageId,
+        conversationId: state.selectedConversation!.id,
+        senderId: state.chatUserId,
+        type: MessageType.text,
+        message: text,
+        attachments: atchs,
+        createdAt: DateTime.now().toUtc().toIso8601String(),
+      );
+      ref.read(wsChatProvider.notifier).sendMessage(message);
+      addMessageToConversation(message);
     }
   }
 
