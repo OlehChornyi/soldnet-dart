@@ -20,7 +20,7 @@ Future<ResponseAttachmentUpload> requestAttachmentsUpload(
   dio.options.headers.addAll({'ContentType': mimeType});
 
   final body = FormData.fromMap({
-    "photo": await MultipartFile.fromFile(
+    "file": await MultipartFile.fromFile(
       file.path,
       filename: "profile.jpg",
     )
