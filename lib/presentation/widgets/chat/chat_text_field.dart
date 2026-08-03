@@ -24,6 +24,7 @@ class _ChatTextFieldState extends ConsumerState<ChatTextField> {
     ref
         .read(storeChatProvider.notifier)
         .sendMessageTextToWs(_textController.text);
+    _textController.clear();
   }
 
   void _deleteAttachments() {

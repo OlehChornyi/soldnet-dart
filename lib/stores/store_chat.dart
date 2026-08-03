@@ -213,6 +213,7 @@ class StoreChat extends _$StoreChat {
         createdAt: DateTime.now().toUtc().toIso8601String(),
       );
       ref.read(wsChatProvider.notifier).sendMessage(message);
+      setFilesToUpload([]);
       addMessageToConversation(message);
     }
   }
