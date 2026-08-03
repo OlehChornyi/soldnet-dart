@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Attachment {
   String get id;
-  String get messageId;
+  String? get messageId;
   String get name;
   String get url;
   String get mimeType;
@@ -68,7 +68,7 @@ abstract mixin class $AttachmentCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String messageId,
+      String? messageId,
       String name,
       String url,
       String mimeType,
@@ -89,7 +89,7 @@ class _$AttachmentCopyWithImpl<$Res> implements $AttachmentCopyWith<$Res> {
   @override
   $Res call({
     Object? id = null,
-    Object? messageId = null,
+    Object? messageId = freezed,
     Object? name = null,
     Object? url = null,
     Object? mimeType = null,
@@ -101,10 +101,10 @@ class _$AttachmentCopyWithImpl<$Res> implements $AttachmentCopyWith<$Res> {
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      messageId: null == messageId
+      messageId: freezed == messageId
           ? _self.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -222,7 +222,7 @@ extension AttachmentPatterns on Attachment {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String id, String messageId, String name, String url,
+    TResult Function(String id, String? messageId, String name, String url,
             String mimeType, int size, String createdAt)?
         $default, {
     required TResult orElse(),
@@ -252,7 +252,7 @@ extension AttachmentPatterns on Attachment {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String id, String messageId, String name, String url,
+    TResult Function(String id, String? messageId, String name, String url,
             String mimeType, int size, String createdAt)
         $default,
   ) {
@@ -280,7 +280,7 @@ extension AttachmentPatterns on Attachment {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String id, String messageId, String name, String url,
+    TResult? Function(String id, String? messageId, String name, String url,
             String mimeType, int size, String createdAt)?
         $default,
   ) {
@@ -312,7 +312,7 @@ class _Attachment implements Attachment {
   @override
   final String id;
   @override
-  final String messageId;
+  final String? messageId;
   @override
   final String name;
   @override
@@ -377,7 +377,7 @@ abstract mixin class _$AttachmentCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String messageId,
+      String? messageId,
       String name,
       String url,
       String mimeType,
@@ -398,7 +398,7 @@ class __$AttachmentCopyWithImpl<$Res> implements _$AttachmentCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? messageId = null,
+    Object? messageId = freezed,
     Object? name = null,
     Object? url = null,
     Object? mimeType = null,
@@ -410,10 +410,10 @@ class __$AttachmentCopyWithImpl<$Res> implements _$AttachmentCopyWith<$Res> {
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      messageId: null == messageId
+      messageId: freezed == messageId
           ? _self.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable

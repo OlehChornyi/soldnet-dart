@@ -7,7 +7,7 @@ part 'attachment.freezed.dart';
 abstract class Attachment with _$Attachment {
   const factory Attachment({
     required String id,
-    required String messageId,
+    required String? messageId,
     required String name,
     required String url,
     required String mimeType,

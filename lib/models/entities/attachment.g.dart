@@ -8,7 +8,7 @@ part of 'attachment.dart';
 
 _Attachment _$AttachmentFromJson(Map<String, dynamic> json) => _Attachment(
       id: json['id'] as String,
-      messageId: json['messageId'] as String,
+      messageId: json['messageId'] as String?,
       name: json['name'] as String,
       url: json['url'] as String,
       mimeType: json['mimeType'] as String,
