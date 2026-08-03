@@ -18,6 +18,7 @@ Future<ResponseAttachmentUpload> requestAttachmentsUpload(
   final dio = ref.read(dioClientProvider);
 
   dio.options.headers.addAll({'ContentType': mimeType});
+
   final body = FormData.fromMap({
     "photo": await MultipartFile.fromFile(
       file.path,
@@ -26,7 +27,8 @@ Future<ResponseAttachmentUpload> requestAttachmentsUpload(
   });
 
   try {
-    final Response response = await dio.post('/v1/user/photo', data: body);
+    final Response response =
+        await dio.post('/v1/attachments/upload', data: body);
     return ResponseAttachmentUpload.fromJson(response.data);
   } on DioException catch (e) {
     return ResponseAttachmentUpload.fromJson(e.response?.data);
