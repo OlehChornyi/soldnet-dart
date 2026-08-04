@@ -70,7 +70,7 @@ class _ChatDialogState extends ConsumerState<ChatDialog> {
           ),
           itemBuilder: (context, index) {
             return ChatDialogMessage(
-                text: messages[index].message,
+                message: messages[index],
                 isUser: messages[index].senderId == userId);
           },
         ));

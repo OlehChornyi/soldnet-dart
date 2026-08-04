@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:soldnet/models/entities/message.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
+import 'package:soldnet/presentation/widgets/chat/chat_dialog_message_attachment.dart';
 
 class ChatDialogMessage extends StatelessWidget {
   const ChatDialogMessage(
-      {super.key, required this.text, required this.isUser});
+      {super.key, required this.message, required this.isUser});
 
-  final String text;
+  final Message message;
   final bool isUser;
 
   @override
@@ -26,9 +28,17 @@ class ChatDialogMessage extends StatelessWidget {
                 topRight: Radius.circular(12),
                 bottomLeft: Radius.circular(isUser ? 12 : 0),
                 bottomRight: Radius.circular(isUser ? 0 : 12))),
-        child: Text(
-          text,
-          style: AppTextStyles.s16w400(),
+        child: Column(
+          children: [
+            if (message.attachments?.isNotEmpty ?? false) ...{
+              ChatDialogMessageAttachment(),
+            },
+            const SizedBox(height: 4),
+            Text(
+              message.message,
+              style: AppTextStyles.s16w400(),
+            ),
+          ],
         ),
       ),
     );
