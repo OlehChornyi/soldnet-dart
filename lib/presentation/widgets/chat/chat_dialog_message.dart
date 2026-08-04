@@ -17,28 +17,40 @@ class ChatDialogMessage extends StatelessWidget {
 
     return Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        constraints: BoxConstraints(maxWidth: screenWidth - 100),
-        decoration: BoxDecoration(
-            color: isUser ? AppColors.userMessage : AppColors.white,
-            border: Border.all(color: AppColors.active),
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-                bottomLeft: Radius.circular(isUser ? 12 : 0),
-                bottomRight: Radius.circular(isUser ? 0 : 12))),
-        child: Column(
-          children: [
-            if (message.attachments?.isNotEmpty ?? false) ...{
-              ChatDialogMessageAttachment(),
-            },
-            const SizedBox(height: 4),
-            Text(
-              message.message,
-              style: AppTextStyles.s16w400(),
-            ),
-          ],
+      child: IntrinsicWidth(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          constraints: BoxConstraints(maxWidth: screenWidth - 100),
+          decoration: BoxDecoration(
+              color: isUser ? AppColors.userMessage : AppColors.white,
+              border: Border.all(color: AppColors.active),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(12),
+                  topRight: Radius.circular(12),
+                  bottomLeft: Radius.circular(isUser ? 12 : 0),
+                  bottomRight: Radius.circular(isUser ? 0 : 12))),
+          child: Column(
+            children: [
+              if (message.attachments?.isNotEmpty ?? false) ...{
+                Align(
+                  alignment:
+                      isUser ? Alignment.centerRight : Alignment.centerLeft,
+                  child: ChatDialogMessageAttachment(
+                      atchms: message.attachments ?? []),
+                ),
+                const SizedBox(height: 4)
+              },
+              Align(
+                alignment:
+                    isUser ? Alignment.centerRight : Alignment.centerLeft,
+                child: Text(
+                  message.message,
+                  style: AppTextStyles.s16w400(),
+                  textAlign: isUser ? TextAlign.right : TextAlign.left,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
