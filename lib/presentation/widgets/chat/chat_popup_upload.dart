@@ -12,7 +12,9 @@ class ChatPopupUpload extends ConsumerWidget {
 
   Future<void> _uploadImage(BuildContext context, StoreChat notifier) async {
     final images = await ImagePicker().pickMultiImage();
-
+    for (var i in images) {
+      print(i.mimeType);
+    }
     if (images.isNotEmpty) {
       notifier.setFilesToUpload(images);
     }

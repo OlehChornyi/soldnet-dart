@@ -175,11 +175,13 @@ class StoreChat extends _$StoreChat {
       if (file is XFile) {
         fileToUpload = File(file.path);
         mimeType = file.mimeType ?? '';
+        print('😉 type: $mimeType');
       } else if (file is PlatformFile) {
         fileToUpload = File(file.path ?? '');
         mimeType = file.xFile.mimeType ?? '';
+        print('😉 type: $mimeType');
       }
-
+      print('😉 type: $mimeType');
       if (fileToUpload != null) {
         final response = await ref.read(requestAttachmentsUploadProvider(
                 file: fileToUpload, mimeType: mimeType)
