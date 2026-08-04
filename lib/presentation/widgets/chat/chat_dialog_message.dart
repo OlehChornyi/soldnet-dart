@@ -19,7 +19,6 @@ class ChatDialogMessage extends StatelessWidget {
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: IntrinsicWidth(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           constraints: BoxConstraints(maxWidth: screenWidth - 100),
           decoration: BoxDecoration(
               color: isUser ? AppColors.userMessage : AppColors.white,
@@ -31,22 +30,23 @@ class ChatDialogMessage extends StatelessWidget {
                   bottomRight: Radius.circular(isUser ? 0 : 12))),
           child: Column(
             children: [
-              if (message.attachments?.isNotEmpty ?? false) ...{
+              if (message.attachments?.isNotEmpty ?? false)
                 Align(
                   alignment:
                       isUser ? Alignment.centerRight : Alignment.centerLeft,
                   child: ChatDialogMessageAttachment(
                       atchms: message.attachments ?? []),
                 ),
-                const SizedBox(height: 4)
-              },
               Align(
                 alignment:
                     isUser ? Alignment.centerRight : Alignment.centerLeft,
-                child: Text(
-                  message.message,
-                  style: AppTextStyles.s16w400(),
-                  textAlign: isUser ? TextAlign.right : TextAlign.left,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 4, 12, 8),
+                  child: Text(
+                    message.message,
+                    style: AppTextStyles.s16w400(),
+                    textAlign: isUser ? TextAlign.right : TextAlign.left,
+                  ),
                 ),
               ),
             ],
