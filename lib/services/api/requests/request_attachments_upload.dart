@@ -22,7 +22,6 @@ Future<ResponseAttachmentUpload> requestAttachmentsUpload(
   final body = FormData.fromMap({
     "file": await MultipartFile.fromFile(
       file.path,
-      filename: "file",
     )
   });
 

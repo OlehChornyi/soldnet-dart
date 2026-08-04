@@ -15,6 +15,8 @@ import 'package:soldnet/services/api/requests/request_attachments_upload.dart';
 import 'package:soldnet/services/api/requests/request_conversations_create.dart';
 import 'package:soldnet/services/api/requests/request_conversations_get.dart';
 import 'package:soldnet/services/api/requests/request_conversations_messages_get.dart';
+import 'package:soldnet/services/utils/extention_get.dart';
+import 'package:soldnet/services/utils/mime_type_get.dart';
 import 'package:soldnet/services/ws/ws_chat.dart';
 import 'package:soldnet/stores/store_search.dart';
 import 'package:uuid/v7.dart';
@@ -170,19 +172,16 @@ class StoreChat extends _$StoreChat {
 
     for (var file in state.filesToUpload) {
       File? fileToUpload;
-      String mimeType = '';
 
       if (file is XFile) {
         fileToUpload = File(file.path);
-        mimeType = file.mimeType ?? '';
-        print('😉 type: $mimeType');
       } else if (file is PlatformFile) {
         fileToUpload = File(file.path ?? '');
-        mimeType = file.xFile.mimeType ?? '';
-        print('😉 type: $mimeType');
       }
-      print('😉 type: $mimeType');
+
       if (fileToUpload != null) {
+        final mimeType = mimeTypeGet(extentionGet(fileToUpload.path));
+
         final response = await ref.read(requestAttachmentsUploadProvider(
                 file: fileToUpload, mimeType: mimeType)
             .future);

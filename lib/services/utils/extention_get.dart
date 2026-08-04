@@ -1,5 +1,5 @@
 import 'package:path/path.dart' as p;
 
-String getExtension(String path) {
+String extentionGet(String path) {
   return p.extension(path).toLowerCase();
 }
