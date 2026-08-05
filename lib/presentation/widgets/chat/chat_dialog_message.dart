@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:soldnet/models/entities/attachment.dart';
 import 'package:soldnet/models/entities/message.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_dialog_message_attachment.dart';
+import 'package:soldnet/presentation/widgets/chat/chat_popup_image.dart';
 
 class ChatDialogMessage extends StatelessWidget {
   const ChatDialogMessage(
@@ -10,6 +12,20 @@ class ChatDialogMessage extends StatelessWidget {
 
   final Message message;
   final bool isUser;
+
+  void _openImageFullScreen(
+      BuildContext context, List<Attachment> attachments) {
+    if (attachments.isNotEmpty) {
+      final attachment = attachments.first;
+      if (attachment.mimeType.startsWith('image')) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return ChatPopupImage(attachments: attachments);
+            });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +50,12 @@ class ChatDialogMessage extends StatelessWidget {
                 Align(
                   alignment:
                       isUser ? Alignment.centerRight : Alignment.centerLeft,
-                  child: ChatDialogMessageAttachment(
-                      atchms: message.attachments ?? []),
+                  child: GestureDetector(
+                    onTap: () => _openImageFullScreen(
+                        context, message.attachments ?? []),
+                    child: ChatDialogMessageAttachment(
+                        atchms: message.attachments ?? []),
+                  ),
                 ),
               Align(
                 alignment:

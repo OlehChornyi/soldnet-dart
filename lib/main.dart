@@ -53,3 +53,4 @@ void main() => runApp(ProviderScope(child: const App()));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.07.27 | Debug app - then everything else.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//Chache images, videos and files and messages
