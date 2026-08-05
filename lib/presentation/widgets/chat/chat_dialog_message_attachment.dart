@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:open_file/open_file.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:soldnet/models/const/const_info.dart';
 import 'package:soldnet/models/entities/attachment.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
@@ -23,19 +23,29 @@ class ChatDialogMessageAttachment extends StatelessWidget {
     }
   }
 
+  Widget _getCachedNetworkImage(String url, double width, double height) {
+    return CachedNetworkImage(
+      imageUrl: url,
+      placeholder: (context, url) => Center(
+        child: CircularProgressIndicator(
+          color: AppColors.primary,
+        ),
+      ),
+      errorWidget: (context, url, error) => Icon(Icons.error),
+      width: width,
+      height: height,
+      fit: BoxFit.cover,
+    );
+  }
+
   Widget _buildOneItemUi(double size) {
     final atchm = atchms.first;
     if (atchm.mimeType.startsWith('image')) {
       return ClipRRect(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-        child: Image.network(
-          '${ConstInfo.baseUrl}${atchm.url}',
-          width: size * 2,
-          height: size * 2,
-          fit: BoxFit.cover,
-        ),
-      );
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+          child: _getCachedNetworkImage(
+              '${ConstInfo.baseUrl}${atchm.url}', size * 2, size * 2));
     } else if (atchm.mimeType.startsWith('application')) {
       return Padding(
         padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
@@ -81,22 +91,13 @@ class ChatDialogMessageAttachment extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.only(topLeft: Radius.circular(8)),
-            child: Image.network(
-              '${ConstInfo.baseUrl}${atchm.url}',
-              width: size,
-              height: size,
-              fit: BoxFit.cover,
-            ),
+            child: _getCachedNetworkImage(
+                '${ConstInfo.baseUrl}${atchm.url}', size, size),
           ),
           ClipRRect(
-            borderRadius: BorderRadius.only(topRight: Radius.circular(8)),
-            child: Image.network(
-              '${ConstInfo.baseUrl}${atchm2.url}',
-              width: size,
-              height: size,
-              fit: BoxFit.cover,
-            ),
-          ),
+              borderRadius: BorderRadius.only(topRight: Radius.circular(8)),
+              child: _getCachedNetworkImage(
+                  '${ConstInfo.baseUrl}${atchm2.url}', size, size)),
         ],
       );
     } else if (atchm.mimeType.startsWith('application')) {
@@ -115,30 +116,18 @@ class ChatDialogMessageAttachment extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.only(topLeft: Radius.circular(8)),
-            child: Image.network(
-              '${ConstInfo.baseUrl}${atchm.url}',
-              width: size,
-              height: size * 2,
-              fit: BoxFit.cover,
-            ),
+            child: _getCachedNetworkImage(
+                '${ConstInfo.baseUrl}${atchm.url}', size, size * 2),
           ),
           Column(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.only(topRight: Radius.circular(8)),
-                child: Image.network(
-                  '${ConstInfo.baseUrl}${atchm2.url}',
-                  width: size,
-                  height: size,
-                  fit: BoxFit.cover,
-                ),
+                child: _getCachedNetworkImage(
+                    '${ConstInfo.baseUrl}${atchm2.url}', size, size),
               ),
-              Image.network(
-                '${ConstInfo.baseUrl}${atchm3.url}',
-                width: size,
-                height: size,
-                fit: BoxFit.cover,
-              ),
+              _getCachedNetworkImage(
+                  '${ConstInfo.baseUrl}${atchm3.url}', size, size)
             ],
           ),
         ],
