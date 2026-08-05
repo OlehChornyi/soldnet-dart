@@ -65,6 +65,7 @@ flutter:
     - assets/icons/home/
     - assets/icons/common/
     - assets/icons/search/
+    - assets/icons/chat/
     - assets/sounds/guns/
 
 flutter_launcher_icons:
