@@ -59,7 +59,6 @@ class ChatDialogMessageAttachment extends StatelessWidget {
   }
 
   Widget _buildMultipleItemsUi(double size) {
-    print('😉😉😉');
     final atchm = atchms.first;
     final atchm2 = atchms[1];
     final atchm3 = atchms[2];

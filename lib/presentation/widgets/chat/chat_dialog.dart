@@ -41,11 +41,6 @@ class _ChatDialogState extends ConsumerState<ChatDialog> {
     final conversationId = chatState.selectedConversation?.id ?? '';
     final messages = chatState.messagesByConversationId[conversationId] ?? [];
 
-    for (var m in messages) {
-      if (m.attachments != null) {
-        print(m.attachments);
-      }
-    }
     ref.listen(storeChatProvider, (_, next) {
       _scrollToLastMessage();
     });
