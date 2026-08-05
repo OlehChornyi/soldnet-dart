@@ -20,6 +20,7 @@ class ChatDialogMessage extends StatelessWidget {
       if (attachment.mimeType.startsWith('image')) {
         showDialog(
             context: context,
+            fullscreenDialog: true,
             builder: (context) {
               return ChatPopupImage(attachments: attachments);
             });
