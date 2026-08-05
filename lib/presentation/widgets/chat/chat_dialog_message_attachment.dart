@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:open_file/open_file.dart';
 import 'package:soldnet/models/const/const_info.dart';
@@ -51,7 +52,10 @@ class ChatDialogMessageAttachment extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
         child: GestureDetector(
           onTap: () async {
-            await OpenFile.open('${ConstInfo.baseUrl}${atchm.url}');
+            final file = await DefaultCacheManager()
+                .getSingleFile('${ConstInfo.baseUrl}${atchm.url}');
+
+            await OpenFile.open(file.path);
           },
           child: Container(
             width: size * 2 - 24,
