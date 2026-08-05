@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:open_file/open_file.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:soldnet/models/const/const_info.dart';
 import 'package:soldnet/models/entities/attachment.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
@@ -37,26 +39,31 @@ class ChatDialogMessageAttachment extends StatelessWidget {
     } else if (atchm.mimeType.startsWith('application')) {
       return Padding(
         padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
-        child: Container(
-          width: size * 2 - 24,
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Row(
-            children: [
-              SvgPicture.asset(
-                _getSvgIconByMimeType(atchm.mimeType),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  atchm.name,
-                  overflow: TextOverflow.ellipsis,
+        child: GestureDetector(
+          onTap: () async {
+            await OpenFile.open('${ConstInfo.baseUrl}${atchm.url}');
+          },
+          child: Container(
+            width: size * 2 - 24,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  _getSvgIconByMimeType(atchm.mimeType),
                 ),
-              )
-            ],
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    atchm.name,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       );
