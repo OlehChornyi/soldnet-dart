@@ -1,28 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:open_file/open_file.dart';
 import 'package:soldnet/models/const/const_info.dart';
 import 'package:soldnet/models/entities/attachment.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
+import 'package:soldnet/presentation/widgets/chat/chat_dialog_message_attachment_file.dart';
 
 class ChatDialogMessageAttachment extends StatelessWidget {
   const ChatDialogMessageAttachment({super.key, required this.atchms});
 
   final List<Attachment> atchms;
-
-  String _getSvgIconByMimeType(String mimeType) {
-    if (mimeType.contains('pdf')) {
-      return 'assets/icons/chat/pdf.svg';
-    } else if (mimeType.contains('word')) {
-      return 'assets/icons/chat/word.svg';
-    } else if (mimeType.contains('excel') || mimeType.contains('spreads')) {
-      return 'assets/icons/chat/excel.svg';
-    } else {
-      return 'assets/icons/chat/file.svg';
-    }
-  }
 
   Widget _getCachedNetworkImage(String url, double width, double height) {
     return CachedNetworkImage(
@@ -48,39 +34,7 @@ class ChatDialogMessageAttachment extends StatelessWidget {
           child: _getCachedNetworkImage(
               '${ConstInfo.baseUrl}${atchm.url}', size * 2, size * 2));
     } else if (atchm.mimeType.startsWith('application')) {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
-        child: GestureDetector(
-          onTap: () async {
-            final file = await DefaultCacheManager()
-                .getSingleFile('${ConstInfo.baseUrl}${atchm.url}');
-
-            await OpenFile.open(file.path);
-          },
-          child: Container(
-            width: size * 2 - 24,
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                SvgPicture.asset(
-                  _getSvgIconByMimeType(atchm.mimeType),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    atchm.name,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
+      return ChatDialogMessageAttachmentFile(atchm: atchm);
     } else if (atchm.mimeType.startsWith('video')) {}
     return SizedBox.shrink();
   }
@@ -105,6 +59,13 @@ class ChatDialogMessageAttachment extends StatelessWidget {
         ],
       );
     } else if (atchm.mimeType.startsWith('application')) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ChatDialogMessageAttachmentFile(atchm: atchm),
+          ChatDialogMessageAttachmentFile(atchm: atchm2),
+        ],
+      );
     } else if (atchm.mimeType.startsWith('video')) {}
     return SizedBox.shrink();
   }
@@ -137,6 +98,13 @@ class ChatDialogMessageAttachment extends StatelessWidget {
         ],
       );
     } else if (atchm.mimeType.startsWith('application')) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (var atchm in atchms)
+            ChatDialogMessageAttachmentFile(atchm: atchm),
+        ],
+      );
     } else if (atchm.mimeType.startsWith('video')) {}
     return SizedBox.shrink();
   }
