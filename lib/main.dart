@@ -62,3 +62,5 @@ void main() => runApp(ProviderScope(child: const App()));
 //            | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //            | 5. Migrate db from SQLite to PostgreSQL.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.08.06 | 1. Create sqlite database for mobile app (cache data).
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
