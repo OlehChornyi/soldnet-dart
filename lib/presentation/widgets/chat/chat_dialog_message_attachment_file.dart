@@ -34,7 +34,6 @@ class ChatDialogMessageAttachmentFile extends StatelessWidget {
         onTap: () async {
           final file = await DefaultCacheManager()
               .getSingleFile('${ConstInfo.baseUrl}${atchm.url}');
-
           await OpenFile.open(file.path);
         },
         child: Container(

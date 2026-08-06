@@ -53,4 +53,10 @@ void main() => runApp(ProviderScope(child: const App()));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.07.27 | Debug app - then everything else.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//Chache images, videos and files and messages
+// 2026.08.05 | DONE | Pagination for requests and responses. (infinite scroll)
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.08.06 | 1. Delete and update conversation.
+//            | 2. Delete and update message.
+//            | 3. Delete and update attachment.
+//            | 4. Delete and update user profile.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
