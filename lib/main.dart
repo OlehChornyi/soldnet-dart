@@ -59,4 +59,6 @@ void main() => runApp(ProviderScope(child: const App()));
 //            | 2. Delete and update message.
 //            | 3. Delete and update attachment.
 //            | 4. Delete and update user profile.
+//            | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//            | 5. Migrate db from SQLite to PostgreSQL.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
