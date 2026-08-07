@@ -64,3 +64,5 @@ void main() => runApp(ProviderScope(child: const App()));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.08.06 | 1. Create sqlite database for mobile app (cache data).
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.08.07 | 1. Change interest in profile user to hobby to string.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -50,11 +50,6 @@ class ProfileBody extends ConsumerWidget {
               padding: EdgeInsets.zero,
               items: profileBodyItems,
               itemBuilder: (context, item, index) {
-                // Map<String, String> items = {
-                //   for (var item in profileBodyItems) item: '',
-                // };
-                // items['Електронна пошта'] = userState.user?.email ?? '';
-
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

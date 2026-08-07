@@ -17,6 +17,12 @@ class ProfileFooter extends ConsumerWidget {
     return Column(
       children: [
         ProfileFooterItem(
+          title: 'Редагувати профіль',
+          icon: Icons.edit_rounded,
+          onTap: () => context.push(ScreenPaths.profileEdit),
+        ),
+        const SizedBox(height: 1),
+        ProfileFooterItem(
           title: 'Вийти з акаунту',
           icon: Icons.logout_rounded,
           onTap: () {

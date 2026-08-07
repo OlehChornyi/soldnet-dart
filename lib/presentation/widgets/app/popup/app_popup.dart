@@ -21,7 +21,7 @@ class AppPopup extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: AppColors.bgLight,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
