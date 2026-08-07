@@ -80,7 +80,7 @@ final class RequestUserDeleteProvider extends $FunctionalProvider<
   }
 }
 
-String _$requestUserDeleteHash() => r'8d3ee1aa2905ddc65ba71028e2de3481be854ef6';
+String _$requestUserDeleteHash() => r'4481a577738e79ba46b199eb66c21754f58d50e2';
 
 final class RequestUserDeleteFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<ResponseUserDelete>, User> {

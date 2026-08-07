@@ -13,7 +13,7 @@ Future<ResponseUserDelete> requestUserDelete(Ref ref,
   final dio = ref.read(dioClientProvider);
 
   try {
-    final Response response = await dio.put('/v1/user/delete', data: body);
+    final Response response = await dio.delete('/v1/user/delete', data: body);
     return ResponseUserDelete.fromJson(response.data);
   } on DioException catch (e) {
     return ResponseUserDelete.fromJson(e.response?.data);
