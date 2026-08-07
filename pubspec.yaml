@@ -39,6 +39,7 @@ dependencies:
   open_file: ^4.0.0
   permission_handler: ^13.0.0
   flutter_cache_manager: ^3.4.2
+  intl: ^0.20.3
 
 dev_dependencies:
   flutter_test:

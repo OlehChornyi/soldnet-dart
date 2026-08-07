@@ -5,6 +5,7 @@ import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_dialog_message_attachment.dart';
 import 'package:soldnet/presentation/widgets/chat/chat_popup_image.dart';
+import 'package:soldnet/services/utils/formatted_date_get.dart';
 
 class ChatDialogMessage extends StatelessWidget {
   const ChatDialogMessage(
@@ -66,6 +67,18 @@ class ChatDialogMessage extends StatelessWidget {
                   child: Text(
                     message.message,
                     style: AppTextStyles.s16w400(),
+                    textAlign: isUser ? TextAlign.right : TextAlign.left,
+                  ),
+                ),
+              ),
+              Align(
+                alignment:
+                    isUser ? Alignment.centerRight : Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
+                  child: Text(
+                    formattedDateGet(message.createdAt),
+                    style: AppTextStyles.s12w500(color: AppColors.grey120),
                     textAlign: isUser ? TextAlign.right : TextAlign.left,
                   ),
                 ),
