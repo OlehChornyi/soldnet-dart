@@ -21,9 +21,9 @@ void main() => runApp(ProviderScope(child: const App()));
 //            | DONE | 1. Authorization (+Profile(User data)).
 //            | DONE | 2. Chat: find ws or rest api (web socket).
 //            | DONE | 3. Implement ws or rest api.
-//            | 4. Images: integrate to profile and chat.
+//            | DONE | 4. Images: integrate to profile and chat.
 //            | 5. Videos: integrate to chat.
-//            | 6. Share files through chat.
+//            | DONE | 6. Share files through chat.
 //            | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //            | AUDIO and VIDEO CALL (WEB RTC):
 //            | 1. Find how audio calls are done and ask OpenIA.
@@ -65,4 +65,6 @@ void main() => runApp(ProviderScope(child: const App()));
 // 2026.08.06 | 1. Create sqlite database for mobile app (cache data).
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.08.07 | 1. Change interest in profile user to hobby to string.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.08.08 | 1. First do calls, pushes and enctiptions.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
