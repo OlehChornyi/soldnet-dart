@@ -103,4 +103,14 @@ class WebrtcCall {
 
     tracks.first.enabled = enabled;
   }
+
+  Future<void> setMicrophoneEnabled(bool enabled) async {
+    final tracks = _localStream?.getAudioTracks();
+
+    if (tracks == null || tracks.isEmpty) {
+      return;
+    }
+
+    tracks.first.enabled = enabled;
+  }
 }
