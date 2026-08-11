@@ -29,6 +29,15 @@ class WebrtcCall {
         {
           'urls': 'stun:stun.l.google.com:19302',
         },
+        //TODO: develop own TURN server
+        // {
+        //   'urls': 'stun:your-stun-server:3478',
+        // },
+        // {
+        //   'urls': 'turn:your-turn-server:3478',
+        //   'username': '...',
+        //   'credential': '...',
+        // },
       ],
     };
 
@@ -45,5 +54,23 @@ class WebrtcCall {
         remoteRenderer.srcObject = event.streams[0];
       }
     };
+  }
+
+  Future<void> createLocalStream({
+    required bool video,
+  }) async {
+    _localStream = await navigator.mediaDevices.getUserMedia({
+      'audio': true,
+      'video': video,
+    });
+
+    localRenderer.srcObject = _localStream;
+
+    for (final track in _localStream!.getTracks()) {
+      await _peerConnection!.addTrack(
+        track,
+        _localStream!,
+      );
+    }
   }
 }
