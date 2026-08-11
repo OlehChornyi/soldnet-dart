@@ -23,6 +23,14 @@ class WebrtcCall {
     await remoteRenderer.dispose();
   }
 
+  Future<RTCSessionDescription> createOffer() async {
+    final offer = await _peerConnection!.createOffer();
+
+    await _peerConnection!.setLocalDescription(offer);
+
+    return offer;
+  }
+
   Future<void> createConnection() async {
     final configuration = {
       'iceServers': [
