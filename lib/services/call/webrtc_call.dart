@@ -56,12 +56,28 @@ class WebrtcCall {
     };
   }
 
-  Future<void> createLocalStream({
-    required bool video,
-  }) async {
+  // Future<void> createLocalStream({
+  //   required bool video,
+  // }) async {
+  //   _localStream = await navigator.mediaDevices.getUserMedia({
+  //     'audio': true,
+  //     'video': video,
+  //   });
+
+  //   localRenderer.srcObject = _localStream;
+
+  //   for (final track in _localStream!.getTracks()) {
+  //     await _peerConnection!.addTrack(
+  //       track,
+  //       _localStream!,
+  //     );
+  //   }
+  // }
+
+  Future<void> createLocalStream() async {
     _localStream = await navigator.mediaDevices.getUserMedia({
       'audio': true,
-      'video': video,
+      'video': true,
     });
 
     localRenderer.srcObject = _localStream;
@@ -72,5 +88,9 @@ class WebrtcCall {
         _localStream!,
       );
     }
+
+    final videoTrack = _localStream!.getVideoTracks().first;
+
+    videoTrack.enabled = false;
   }
 }
