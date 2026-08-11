@@ -93,4 +93,14 @@ class WebrtcCall {
 
     videoTrack.enabled = false;
   }
+
+  Future<void> setVideoEnabled(bool enabled) async {
+    final tracks = _localStream?.getVideoTracks();
+
+    if (tracks == null || tracks.isEmpty) {
+      return;
+    }
+
+    tracks.first.enabled = enabled;
+  }
 }
