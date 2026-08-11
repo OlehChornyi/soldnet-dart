@@ -47,7 +47,7 @@ void main() => runApp(ProviderScope(child: const App()));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.07.25 | DONE | Permanently post on LinkedIn.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// 2026.07.27 | Create search with parameters.
+// 2026.07.27 | DONE | Create search with parameters.
 //            | Think about more sections in home.
 //            | Think about posts and it's types.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
