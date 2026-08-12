@@ -2,6 +2,8 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:soldnet/app/app_router.dart';
 import 'package:soldnet/models/utils/chat_tab.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
@@ -21,9 +23,13 @@ class ChatHeader extends ConsumerStatefulWidget {
 class _ChatHeaderState extends ConsumerState<ChatHeader> {
   final flipController = FlipCardController();
 
-  void _makeVoiceCall() {}
+  void _makeVoiceCall(BuildContext context) {
+    context.push(ScreenPaths.call);
+  }
 
-  void _makeVideoCall() {}
+  void _makeVideoCall(BuildContext context) {
+    context.push(ScreenPaths.call);
+  }
 
   Future<void> _uploadFile() async {
     showDialog(
@@ -122,11 +128,11 @@ class _ChatHeaderState extends ConsumerState<ChatHeader> {
                   spacing: 4,
                   children: [
                     ChatHeaderButton(
-                      onTap: () => _makeVoiceCall(),
+                      onTap: () => _makeVoiceCall(context),
                       icon: Icons.call,
                     ),
                     ChatHeaderButton(
-                      onTap: () => _makeVideoCall(),
+                      onTap: () => _makeVideoCall(context),
                       icon: Icons.video_chat,
                     ),
                     ChatHeaderButton(

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:soldnet/app/app.dart';
+import 'package:soldnet/presentation/pages/call_page.dart';
 import 'package:soldnet/presentation/pages/chat_page.dart' show ChatPage;
 import 'package:soldnet/presentation/pages/home_page.dart';
 import 'package:soldnet/presentation/pages/login_page.dart';
@@ -25,6 +26,7 @@ class ScreenPaths {
   static String search = '/search';
   static String userDetails = '/userDetails';
   static String profileEdit = '/profileEdit';
+  static String call = '/call';
 }
 
 final GoRouter router = GoRouter(
@@ -53,6 +55,7 @@ final GoRouter router = GoRouter(
     AppRoute(ScreenPaths.userDetails, (_) => const UserDetailsPage()),
     AppRoute(ScreenPaths.userDetails, (_) => const UserDetailsPage()),
     AppRoute(ScreenPaths.profileEdit, (_) => const ProfileEditPage()),
+    AppRoute(ScreenPaths.call, (_) => const CallPage()),
   ],
 );
 
