@@ -68,3 +68,5 @@ void main() => runApp(ProviderScope(child: const App()));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.08.08 | 1. First do calls, pushes and enctiptions.
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.08.13 | 1. Colls are very complicated (study how it can be turned when phone is locked.)
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
