@@ -1,4 +1,5 @@
 import 'package:flutter_webrtc/flutter_webrtc.dart';
+import 'package:soldnet/services/ws/ws_chat.dart';
 
 class WebrtcCall {
   RTCPeerConnection? _peerConnection;
@@ -71,7 +72,8 @@ class WebrtcCall {
     videoTrack.enabled = false;
   }
 
-  Future<void> createOffer() async {
+  Future<void> createOffer(
+      WsChat wsNotifier, String callId, currentUserId, receiverId) async {
     final offer = await _peerConnection!.createOffer();
 
     await _peerConnection!.setLocalDescription(offer);
@@ -79,7 +81,18 @@ class WebrtcCall {
     print(offer.type);
     print(offer.sdp);
 
-    sendOfferToServer(offer);
+    final data = {
+      'type': 'call.offer',
+      'callId': callId,
+      'senderId': currentUserId,
+      'receiverId': receiverId,
+      'sdp': {
+        'type': offer.type,
+        'sdp': offer.sdp,
+      },
+    };
+
+    wsNotifier.sendOfferToServer(data);
   }
 
   Future<void> setVideoEnabled(bool enabled) async {
