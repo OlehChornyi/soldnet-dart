@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soldnet/models/const/const_info.dart';
 import 'package:soldnet/models/entities/message.dart';
