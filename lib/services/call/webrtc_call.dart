@@ -23,20 +23,10 @@ class WebrtcCall {
     await remoteRenderer.dispose();
   }
 
-  Future<RTCSessionDescription> createOffer() async {
-    final offer = await _peerConnection!.createOffer();
-
-    await _peerConnection!.setLocalDescription(offer);
-
-    return offer;
-  }
-
   Future<void> createConnection() async {
     final configuration = {
       'iceServers': [
-        {
-          'urls': 'stun:stun.l.google.com:19302',
-        },
+        {'urls': 'stun:stun.l.google.com:19302'},
         //TODO: develop own TURN server
         // {
         //   'urls': 'stun:your-stun-server:3478',
@@ -49,38 +39,18 @@ class WebrtcCall {
       ],
     };
 
-    _peerConnection = await createPeerConnection(
-      configuration,
-    );
+    _peerConnection = await createPeerConnection(configuration);
 
     _peerConnection!.onIceCandidate = (candidate) {
-      // Send candidate to Go through WebSocket
+      sendIceCandidate(candidate);
     };
 
     _peerConnection!.onTrack = (event) {
       if (event.streams.isNotEmpty) {
-        remoteRenderer.srcObject = event.streams[0];
+        remoteRenderer.srcObject = event.streams.first;
       }
     };
   }
-
-  // Future<void> createLocalStream({
-  //   required bool video,
-  // }) async {
-  //   _localStream = await navigator.mediaDevices.getUserMedia({
-  //     'audio': true,
-  //     'video': video,
-  //   });
-
-  //   localRenderer.srcObject = _localStream;
-
-  //   for (final track in _localStream!.getTracks()) {
-  //     await _peerConnection!.addTrack(
-  //       track,
-  //       _localStream!,
-  //     );
-  //   }
-  // }
 
   Future<void> createLocalStream() async {
     _localStream = await navigator.mediaDevices.getUserMedia({
@@ -98,8 +68,18 @@ class WebrtcCall {
     }
 
     final videoTrack = _localStream!.getVideoTracks().first;
-
     videoTrack.enabled = false;
+  }
+
+  Future<void> createOffer() async {
+    final offer = await _peerConnection!.createOffer();
+
+    await _peerConnection!.setLocalDescription(offer);
+
+    print(offer.type);
+    print(offer.sdp);
+
+    sendOfferToServer(offer);
   }
 
   Future<void> setVideoEnabled(bool enabled) async {

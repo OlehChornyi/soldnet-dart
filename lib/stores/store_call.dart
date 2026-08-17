@@ -8,5 +8,7 @@ class StoreCall extends _$StoreCall {
   @override
   WebrtcCall build() => WebrtcCall();
 
-  void createPeerConnection() {}
+  void createPeerConnection() {
+    state.createConnection();
+  }
 }
