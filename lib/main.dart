@@ -70,3 +70,5 @@ void main() => runApp(ProviderScope(child: const App()));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 2026.08.13 | 1. Colls are very complicated (study how it can be turned when phone is locked.)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 2026.08.19 | First read Go book - then everything else.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
