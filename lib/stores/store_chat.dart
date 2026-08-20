@@ -13,8 +13,10 @@ import 'package:soldnet/models/utils/dialog_bg.dart';
 import 'package:soldnet/models/utils/message_type.dart';
 import 'package:soldnet/services/api/requests/request_attachments_upload.dart';
 import 'package:soldnet/services/api/requests/request_conversations_create.dart';
+import 'package:soldnet/services/api/requests/request_conversations_delete.dart';
 import 'package:soldnet/services/api/requests/request_conversations_get.dart';
 import 'package:soldnet/services/api/requests/request_conversations_messages_get.dart';
+import 'package:soldnet/services/api/requests/request_conversations_update.dart';
 import 'package:soldnet/services/utils/extention_get.dart';
 import 'package:soldnet/services/utils/mime_type_get.dart';
 import 'package:soldnet/services/ws/ws_chat.dart';
@@ -240,5 +242,13 @@ class StoreChat extends _$StoreChat {
 
   void setFilesToUpload(List<Object> files) {
     state = state.copyWith(filesToUpload: files);
+  }
+
+  void conversationUpdate(Conversation cnvrn) async {
+    await ref.read(requestConversationsUpdateProvider(body: cnvrn).future);
+  }
+
+  void conversationDelete(Conversation cnvrn) async {
+    await ref.read(requestConversationsDeleteProvider(body: cnvrn).future);
   }
 }
