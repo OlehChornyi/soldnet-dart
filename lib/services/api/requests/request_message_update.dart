@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:dio/dio.dart';
-import 'package:soldnet/models/entities/user.dart';
+import 'package:soldnet/models/entities/message.dart';
 import 'package:soldnet/services/api/client/dio_client.dart';
 
 part 'request_message_update.g.dart';
@@ -9,7 +9,7 @@ part 'request_message_update.freezed.dart';
 
 @riverpod
 Future<ResponseMessageUpdate> requestMessageUpdate(Ref ref,
-    {required User body}) async {
+    {required Message body}) async {
   final dio = ref.read(dioClientProvider);
 
   try {

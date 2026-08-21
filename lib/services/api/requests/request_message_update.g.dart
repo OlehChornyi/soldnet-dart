@@ -37,7 +37,7 @@ final class RequestMessageUpdateProvider extends $FunctionalProvider<
         $FutureProvider<ResponseMessageUpdate> {
   RequestMessageUpdateProvider._(
       {required RequestMessageUpdateFamily super.from,
-      required User super.argument})
+      required Message super.argument})
       : super(
           retry: null,
           name: r'requestMessageUpdateProvider',
@@ -64,7 +64,7 @@ final class RequestMessageUpdateProvider extends $FunctionalProvider<
 
   @override
   FutureOr<ResponseMessageUpdate> create(Ref ref) {
-    final argument = this.argument as User;
+    final argument = this.argument as Message;
     return requestMessageUpdate(
       ref,
       body: argument,
@@ -83,10 +83,10 @@ final class RequestMessageUpdateProvider extends $FunctionalProvider<
 }
 
 String _$requestMessageUpdateHash() =>
-    r'80b44ba3c12c0410c472888ccd5d05b02dbe4670';
+    r'cf23ab71507942a56662295fb364e479a3f2ed04';
 
 final class RequestMessageUpdateFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<ResponseMessageUpdate>, User> {
+    with $FunctionalFamilyOverride<FutureOr<ResponseMessageUpdate>, Message> {
   RequestMessageUpdateFamily._()
       : super(
           retry: null,
@@ -97,7 +97,7 @@ final class RequestMessageUpdateFamily extends $Family
         );
 
   RequestMessageUpdateProvider call({
-    required User body,
+    required Message body,
   }) =>
       RequestMessageUpdateProvider._(argument: body, from: this);
 

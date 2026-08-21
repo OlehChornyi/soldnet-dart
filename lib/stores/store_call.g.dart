@@ -40,7 +40,7 @@ final class StoreCallProvider extends $NotifierProvider<StoreCall, WebrtcCall> {
   }
 }
 
-String _$storeCallHash() => r'668108cb269df9909332252403fda7a84e7650b1';
+String _$storeCallHash() => r'98b9c171f214220fd3a7ae948ec1f8b4a9f04965';
 
 abstract class _$StoreCall extends $Notifier<WebrtcCall> {
   WebrtcCall build();

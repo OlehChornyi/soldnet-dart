@@ -41,7 +41,7 @@ final class StoreChatProvider
   }
 }
 
-String _$storeChatHash() => r'13240bd3916675eedefe05f14ff1dfdf096a8678';
+String _$storeChatHash() => r'a6fb507bbb864c2602e94ba170eef68533a4f716';
 
 abstract class _$StoreChat extends $Notifier<StoreChatModel> {
   StoreChatModel build();

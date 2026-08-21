@@ -17,6 +17,8 @@ import 'package:soldnet/services/api/requests/request_conversations_delete.dart'
 import 'package:soldnet/services/api/requests/request_conversations_get.dart';
 import 'package:soldnet/services/api/requests/request_conversations_messages_get.dart';
 import 'package:soldnet/services/api/requests/request_conversations_update.dart';
+import 'package:soldnet/services/api/requests/request_message_delete.dart';
+import 'package:soldnet/services/api/requests/request_message_update.dart';
 import 'package:soldnet/services/utils/extention_get.dart';
 import 'package:soldnet/services/utils/mime_type_get.dart';
 import 'package:soldnet/services/ws/ws_chat.dart';
@@ -250,5 +252,13 @@ class StoreChat extends _$StoreChat {
 
   void conversationDelete(Conversation cnvrn) async {
     await ref.read(requestConversationsDeleteProvider(body: cnvrn).future);
+  }
+
+  void messageUpdate(Message msg) async {
+    await ref.read(requestMessageUpdateProvider(body: msg).future);
+  }
+
+  void messageDelete(Message msg) async {
+    await ref.read(requestMessageDeleteProvider(body: msg).future);
   }
 }
