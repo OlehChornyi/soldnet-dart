@@ -5,6 +5,7 @@ import 'package:soldnet/models/entities/conversation.dart';
 import 'package:soldnet/models/utils/chat_tab.dart';
 import 'package:soldnet/presentation/theme/app_colors.dart';
 import 'package:soldnet/presentation/theme/app_text_styles.dart';
+import 'package:soldnet/presentation/widgets/app/button/app_button_fade.dart';
 import 'package:soldnet/stores/store_chat.dart';
 
 class ChatGroupsItem extends ConsumerWidget {
@@ -79,9 +80,15 @@ class ChatGroupsItem extends ConsumerWidget {
               ),
             ),
             const Spacer(),
-            Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: AppColors.primary,
+            Align(
+              alignment: Alignment.bottomRight,
+              child: AppButtonFade(
+                onTap: () {},
+                child: Icon(
+                  Icons.more_rounded,
+                  color: AppColors.primary,
+                ),
+              ),
             )
           ],
         ),
