@@ -71,17 +71,26 @@ class ChatDialogMessage extends StatelessWidget {
                   ),
                 ),
               ),
-              Align(
-                alignment:
-                    isUser ? Alignment.centerRight : Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
-                  child: Text(
-                    formattedDateGet(message.createdAt),
-                    style: AppTextStyles.s12w500(color: AppColors.grey120),
-                    textAlign: isUser ? TextAlign.right : TextAlign.left,
+              Row(
+                children: [
+                  Align(
+                    alignment:
+                        isUser ? Alignment.centerRight : Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
+                      child: Text(
+                        formattedDateGet(message.createdAt),
+                        style: AppTextStyles.s12w500(color: AppColors.grey120),
+                        textAlign: isUser ? TextAlign.right : TextAlign.left,
+                      ),
+                    ),
                   ),
-                ),
+                  if (isUser)
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Icon(Icons.more_rounded),
+                    )
+                ],
               ),
             ],
           ),
